@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ಜೀವನ ಅಂದರೆ ಏನು? | What is Life? - 3D Deep Philosophical Guide</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts for Kannada typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@300;400;500;600;700;800&family=Tiro+Kannada:ital@0;1&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Three.js 3D Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        emeraldDark: '#041c15',
+                        emeraldDeep: '#082d23',
+                        emeraldAccent: '#10b981',
+                        goldWarm: '#f59e0b',
+                        goldDeep: '#d97706',
+                        goldLight: '#fef3c7',
+                        slateDark: '#0f172a'
+                    },
+                    fontFamily: {
+                        kannada: ['Noto Sans Kannada', 'sans-serif'],
+                        tiro: ['Tiro Kannada', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans Kannada', sans-serif;
+            background-color: #041c15;
+            color: #f1f5f9;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .font-tiro {
+            font-family: 'Tiro Kannada', serif;
+        }
+
+        /* Fixed 3D Canvas Background */
+        #canvas3d {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Glassmorphism Effect Cards */
+        .glass-card {
+            background: rgba(8, 45, 35, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+            border-radius: 1.25rem;
+        }
+
+        .glass-card-hover {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .glass-card-hover:hover {
+            transform: translateY(-6px) scale(1.01);
+            border-color: rgba(245, 158, 11, 0.5);
+            box-shadow: 0 20px 50px rgba(16, 185, 129, 0.25);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #041c15;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #10b981;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f59e0b;
+        }
+
+        /* Glowing text effects */
+        .text-glow-gold {
+            text-shadow: 0 0 15px rgba(245, 158, 11, 0.5);
+        }
+        .text-glow-emerald {
+            text-shadow: 0 0 15px rgba(16, 185, 129, 0.5);
+        }
+
+        /* 3D Tilt Card Container */
+        .tilt-container {
+            perspective: 1000px;
+        }
+    </style>
+</head>
+<body class="selection:bg-goldDeep selection:text-white">
+
+    <!-- 3D Interactive Canvas in Background -->
+    <canvas id="canvas3d"></canvas>
+
+    <!-- Content Overlay Wrapper -->
+    <div class="relative z-10">
+
+        <header class="sticky top-0 z-50 bg-emeraldDark/80 backdrop-blur-lg border-b border-goldWarm/20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-goldDeep to-emeraldAccent flex items-center justify-center text-emeraldDark shadow-lg font-bold text-xl font-tiro">
+                        ಜೀ
+                    </div>
+                    <div>
+                        <span class="font-tiro text-xl sm:text-2xl font-bold text-goldLight tracking-wide">ಜೀವನ ದರ್ಶನ</span>
+                        <span class="block text-[10px] sm:text-xs text-emeraldAccent tracking-widest font-mono uppercase">Deep Kannada 3D Philosophy</span>
+                    </div>
+                </div>
+
+                <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-300">
+                    <a href="#about" class="hover:text-goldWarm transition-colors">ಆಳವಾದ ಅರ್ಥ</a>
+                    <a href="#lessons" class="hover:text-goldWarm transition-colors">ಪ್ರಕೃತಿಯ ಪಾಠ</a>
+                    <a href="#quotes" class="hover:text-goldWarm transition-colors">ಚಿಂತನೆಗಳು</a>
+                    <a href="#reflection" class="hover:text-goldWarm transition-colors">ಆತ್ಮಾವಲೋಕನ</a>
+                    <a href="#journal" class="hover:text-goldWarm transition-colors">ದಿನಚರಿ</a>
+                </nav>
+
+                <!-- Audio Atmosphere Generator Button -->
+                <button id="ambientSoundBtn" onclick="toggleAmbientSound()" class="flex items-center gap-2 bg-emeraldDeep/80 hover:bg-emeraldAccent/20 border border-goldWarm/40 px-4 py-2 rounded-full text-xs sm:text-sm text-goldLight transition-all shadow-md">
+                    <i id="soundIcon" class="fa-solid fa-volume-xmark text-amber-400"></i>
+                    <span id="soundLabel">ಶಾಂತ ಸಂಗೀತ (Sound)</span>
+                </button>
+            </div>
+        </header>
+
+        <section class="min-h-[90vh] flex flex-col justify-center items-center text-center px-4 py-16 relative">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emeraldDeep/90 border border-goldWarm/40 text-goldWarm text-xs sm:text-sm font-medium mb-6 shadow-xl backdrop-blur-md">
+                <i class="fa-solid fa-sparkles text-amber-400"></i>
+                <span>3D ಇಂಟರಾಕ್ಟಿವ್ ತತ್ವಶಾಸ್ತ್ರ ಮತ್ತು ಮನೋಚಿಂತನೆ</span>
+            </div>
+
+            <h1 class="font-tiro text-4xl sm:text-6xl md:text-7xl font-extrabold text-goldLight text-glow-gold leading-tight max-w-4xl mb-6">
+                ಜೀವನ ಅಂದರೆ ಏನು?
+            </h1>
+
+            <p class="text-base sm:text-xl text-slate-300 max-w-2xl leading-relaxed font-light mb-10">
+                ಜೀವನ ಎನ್ನುವುದು ಕೇವಲ ಉಸಿರಾಡುವುದಲ್ಲ; ಅದು ಅನುಭವಗಳ, ಸವಾಲುಗಳ, ಪ್ರೀತಿಯ ಮತ್ತು ಆತ್ಮಾವಲೋಕನದ ಒಂದು ಅದ್ಭುತ 3D ಪ್ರಯಾಣ.
+            </p>
+
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#about" class="bg-gradient-to-r from-goldDeep to-goldWarm text-emeraldDark font-bold px-8 py-4 rounded-xl shadow-xl hover:shadow-2xl transition-all transform hover:-translate-y-1 flex items-center gap-2">
+                    <span>ಆಳವಾದ ಪಯಣ ಪ್ರಾರಂಭಿಸಿ</span>
+                    <i class="fa-solid fa-arrow-down"></i>
+                </a>
+                <a href="#reflection" class="bg-emeraldDeep/80 hover:bg-emeraldDeep border border-emeraldAccent/40 text-emeraldAccent font-semibold px-8 py-4 rounded-xl shadow-lg transition-all backdrop-blur-md">
+                    ನಿಮ್ಮ ಆಂತರ್ಯವನ್ನು ಅರಿಯಿರಿ
+                </a>
+            </div>
+
+            <div class="mt-12 text-xs text-slate-400 flex items-center gap-2">
+                <i class="fa-solid fa-hand-pointer text-goldWarm animate-bounce"></i>
+                <span>ಹಿನ್ನೆಲೆಯ 3D ಕಣಗಳನ್ನು ಮಾઉસ ಅಥವಾ ಟಚ್ ಮೂಲಕ ತಿರುಗಿಸಿ ಆಟವಾಡಿ</span>
+            </div>
+        </section>
+
+        <section id="about" class="py-20 max-w-6xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <span class="text-emeraldAccent text-sm font-semibold tracking-wider uppercase">ಆಳವಾದ ವಿಚಾರಣೆ</span>
+                <h2 class="font-tiro text-3xl sm:text-5xl font-bold text-goldLight mt-2 text-glow-emerald">
+                    ಜೀವನದ ಆಳವಾದ ಅರ್ಥ (Deep Essence of Life)
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Insight 1 -->
+                <div class="glass-card glass-card-hover p-8 border-l-4 border-l-goldWarm">
+                    <div class="w-12 h-12 rounded-xl bg-goldWarm/20 text-goldWarm flex items-center justify-center text-2xl mb-4">
+                        <i class="fa-solid fa-feather-pointed"></i>
+                    </div>
+                    <h3 class="font-tiro text-2xl font-bold text-goldLight mb-3">೧. ಕವಿಗಳ ಮತ್ತು ದಾರ್ಶನಿಕರ ದೃಷ್ಟಿಯಲ್ಲಿ</h3>
+                    <p class="text-slate-300 leading-relaxed text-sm sm:text-base">
+                        ಕನ್ನಡದ ಮಹಾನ್ ಕವಿ ಡಿ.ವಿ.ಜಿ ಅವರ 'ಮಂಕುತಿಮ್ಮನ ಕಗ್ಗ'ದಂತೆ, <strong>"ಹುಲ್ಲು ಹುಸಿಯಲ್ಲ, ಕಲ್ಲು ಕಠಿಣವಲ್ಲ, ಎಲ್ಲವೂ ಆ ಪರಬ್ರಹ್ಮನ ಲೀಲೆ"</strong>. ಬದುಕು ಎನ್ನುವುದು ಕೇವಲ ಸುಖ-ದುಃಖದ ಆಟವಲ್ಲ, ಅದೊಂದು ನಿರಂತರ ರಂಗಸ್ಥಳ. ಕಷ್ಟಗಳು ಬಂದಾಗ ಮುರಿಯದೆ, ಸುಖ ಬಂದಾಗ ಮೆರೆಯದೆ ಸಮಚಿತ್ತದಿಂದ ಬಾಳುವುದೇ ನಿಜವಾದ ಸುಜ್ಞಾನ.
+                    </p>
+                </div>
+
+                <!-- Insight 2 -->
+                <div class="glass-card glass-card-hover p-8 border-l-4 border-l-emeraldAccent">
+                    <div class="w-12 h-12 rounded-xl bg-emeraldAccent/20 text-emeraldAccent flex items-center justify-center text-2xl mb-4">
+                        <i class="fa-solid fa-seedling"></i>
+                    </div>
+                    <h3 class="font-tiro text-2xl font-bold text-goldLight mb-3">೨. ಪ್ರಕೃತಿ ಕಲಿಸುವ ನಿಶ್ಯಬ್ದ ಪಾಠಗಳು</h3>
+                    <p class="text-slate-300 leading-relaxed text-sm sm:text-base">
+                        ನದಿಯು ಸಮುದ್ರವನ್ನು ತಲುಪಲು ಕಲ್ಲು-ಬಂಡೆಗಳನ್ನು ಮೆಟ್ಟಿ ಹರಿಯುತ್ತದೆ, ವೃಕ್ಷವು ಬೇಸಿಗೆಯಲ್ಲಿ ಎಲೆಗಳನ್ನು ಕಳೆದುಕೊಂಡರೂ ವಸಂತದಲ್ಲಿ ಮತ್ತೆ ಚಿಗುರುತ್ತದೆ. ಪ್ರಕೃತಿಯು ನಮಗೆ ಕಲಿಸುವುದೇನೆಂದರೆ: <strong>ಬದಲಾವಣೆ ಶಶ್ವತ. ಯಾವುದೇ ಕಷ್ಟದ ಸಮಯವೂ ಶಾಶ್ವತವಲ್ಲ.</strong>
+                    </p>
+                </div>
+
+                <!-- Insight 3 -->
+                <div class="glass-card glass-card-hover p-8 border-l-4 border-l-goldWarm">
+                    <div class="w-12 h-12 rounded-xl bg-goldWarm/20 text-goldWarm flex items-center justify-center text-2xl mb-4">
+                        <i class="fa-solid fa-hands-holding-circle"></i>
+                    </div>
+                    <h3 class="font-tiro text-2xl font-bold text-goldLight mb-3">೩. ಸಂಬಂಧಗಳು ಮತ್ತು ಪ್ರೀತಿಯ ರಸಾಯನ</h3>
+                    <p class="text-slate-300 leading-relaxed text-sm sm:text-base">
+                        ಜೀವನ ಎನ್ನುವುದು ಏಕಾಂಗಿ ಪಯಣವಲ್ಲ. ಸ್ವಾರ್ಥವಿಲ್ಲದ ಪ್ರೀತಿ, ಕರುಣೆ ಹಾಗೂ ಇತರರಿಗೆ ಸಹಾಯ ಮಾಡುವ ಮನೋಭಾವವೇ ಬದುಕಿಗೆ ಪೂರ್ಣ ಸಾರ್ಥಕತೆ ನೀಡುತ್ತದೆ. ನಾವು ಜಗತ್ತಿಗೆ ಏನು ನೀಡುತ್ತೇವೋ, ಅದೇ ನಮಗೆ ಮರಳಿ ಸಿಗುತ್ತದೆ.
+                    </p>
+                </div>
+
+                <!-- Insight 4 -->
+                <div class="glass-card glass-card-hover p-8 border-l-4 border-l-emeraldAccent">
+                    <div class="w-12 h-12 rounded-xl bg-emeraldAccent/20 text-emeraldAccent flex items-center justify-center text-2xl mb-4">
+                        <i class="fa-solid fa-compass"></i>
+                    </div>
+                    <h3 class="font-tiro text-2xl font-bold text-goldLight mb-3">೪. ಸ್ವಯಂ-ಚಿಂತನೆ ಮತ್ತು ಪೂರ್ಣತೆ</h3>
+                    <p class="text-slate-300 leading-relaxed text-sm sm:text-base">
+                        "ನಾನು ಯಾರು?" ಎಂಬ ಪ್ರಶ್ನೆಗೆ ಉತ್ತರ ಹುಡುಕುವುದೇ ಬದುಕಿನ ಅಂತಿಮ ಗುರಿ. ಭೌತಿಕ ವಸ್ತುವಿನಲ್ಲಿ ಸಿಗದ ಶಾಂತಿ ನಮ್ಮ ಆಂತರ್ಯದ ಧ್ಯಾನ ಮತ್ತು ಆಲೋಚನೆಗಳಲ್ಲಿ ಸಿಗುತ್ತದೆ. ನಿಮ್ಮ ಶಾಂತಿ ನಿಮ್ಮೊಳಗೇ ಇದೆ.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="quotes" class="py-20 bg-emeraldDeep/40 border-y border-goldWarm/20">
+            <div class="max-w-4xl mx-auto px-4 text-center">
+                <span class="text-goldWarm text-sm font-semibold tracking-wider uppercase">ಜೀವನ ಚಿಂತನೆಗಳು</span>
+                <h2 class="font-tiro text-3xl sm:text-4xl font-bold text-goldLight mt-2 mb-10">
+                    ಪ್ರೇರಣಾತ್ಮಕ ನುಡಿಮುತ್ತುಗಳು (Philosophical Quotes)
+                </h2>
+
+                <div class="tilt-container">
+                    <div id="quoteBox" class="glass-card p-8 sm:p-12 relative overflow-hidden transition-all duration-500 border border-goldWarm/40">
+                        <i class="fa-solid fa-quote-left text-4xl text-goldWarm/30 absolute top-4 left-6"></i>
+                        <p id="quoteKannada" class="font-tiro text-2xl sm:text-3xl leading-relaxed font-semibold text-goldLight mb-6">
+                            "ಬದುಕು ಜಟಕಾ ಬಂಡಿ, ವಿಧಿ ಅದರ ಸಾಹೇಬ, ಕುದುರೆ ನೀನ್, ಅವನು ಹೇಳಿದತ್ತ ಪಯಣಿಸುವಿ."
+                        </p>
+                        <p id="quoteAuthor" class="text-emeraldAccent font-medium text-base sm:text-lg">
+                            — ಡಿ. ವಿ. ಗುಂಡಪ್ಪ (ಮಂಕುತಿಮ್ಮನ ಕಗ್ಗ)
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mt-8 flex justify-center gap-4">
+                    <button onclick="nextQuote()" class="bg-gradient-to-r from-emeraldAccent to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-emeraldDark font-bold px-6 py-3 rounded-xl shadow-lg transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-rotate"></i>
+                        <span>ಮತ್ತೊಂದು ಚಿಂತನೆ (Next Quote)</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="reflection" class="py-20 max-w-4xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <span class="text-emeraldAccent text-sm font-semibold tracking-wider uppercase">ಆಂತರಿಕ ಪರೀಕ್ಷೆ</span>
+                <h2 class="font-tiro text-3xl sm:text-4xl font-bold text-goldLight mt-2">
+                    ನನ್ನ ಜೀವನದ ಪ್ರತಿಬಿಂಬ (Self-Reflection Quiz)
+                </h2>
+                <p class="text-slate-300 text-sm mt-2">ನಿಮ್ಮ ಮನಸ್ಸಿನ ಪ್ರಸ್ತುತ ಸ್ಥಿತಿ ಮತ್ತು ಶಾಂತಿಯನ್ನು ಅಳೆಯಲು ಕೆಳಗಿನ ಸರಳ ಪ್ರಶ್ನೆಗಳಿಗೆ ಉತ್ತರಿಸಿ.</p>
+            </div>
+
+            <div class="glass-card p-6 sm:p-10 space-y-8">
+                <!-- Q1 -->
+                <div>
+                    <label class="block font-tiro text-lg text-goldLight font-medium mb-3">
+                        ೧. ಇಂದು ನಿಮ್ಮ ಮನಸ್ಸಿಗೆ ಅತ್ಯಂತ ಶಾಂತಿ ನೀಡಿದ ವಿಷಯ ಯಾವುದು?
+                    </label>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <button onclick="selectScore(1, 3, this)" class="quiz-btn border border-slate-700 bg-emeraldDark/80 hover:border-goldWarm p-3 rounded-xl text-xs sm:text-sm text-left transition-all">
+                            🌿 ಪ್ರಕೃತಿಯ ಸೌಂದರ್ಯ ಮತ್ತು ಶಾಂತಿ
+                        </button>
+                        <button onclick="selectScore(1, 2, this)" class="quiz-btn border border-slate-700 bg-emeraldDark/80 hover:border-goldWarm p-3 rounded-xl text-xs sm:text-sm text-left transition-all">
+                            🤝 ಪ್ರೀತಿಪಾತ್ರರೊಂದಿಗೆ ಕಳೆದ ಸಮಯ
+                        </button>
+                        <button onclick="selectScore(1, 1, this)" class="quiz-btn border border-slate-700 bg-emeraldDark/80 hover:border-goldWarm p-3 rounded-xl text-xs sm:text-sm text-left transition-all">
+                            🎯 ನನ್ನ ಕೆಲಸ ಸಾಧನೆಯ ತೃಪ್ತಿ
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Q2 -->
+                <div>
+                    <label class="block font-tiro text-lg text-goldLight font-medium mb-3">
+                        ೨. ಜೀವನದಲ್ಲಿ ಸವಾಲುಗಳು ಬಂದಾಗ ನಿಮ್ಮ ಪ್ರತಿಕ್ರಿಯೆ ಹೇಗಿರುತ್ತದೆ?
+                    </label>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <button onclick="selectScore(2, 3, this)" class="quiz-btn border border-slate-700 bg-emeraldDark/80 hover:border-goldWarm p-3 rounded-xl text-xs sm:text-sm text-left transition-all">
+                            🧘 ಸಮಚಿತ್ತದಿಂದ ಎದುರಿಸುತ್ತೇನೆ
+                        </button>
+                        <button onclick="selectScore(2, 2, this)" class="quiz-btn border border-slate-700 bg-emeraldDark/80 hover:border-goldWarm p-3 rounded-xl text-xs sm:text-sm text-left transition-all">
+                            ಸ್ವಲ್ಪ ಚಿಂತಿತನಾಗುತ್ತೇನೆ, ನಂತರ ಪರಿಹಾರ ಕಂಡುಕೊಳ್ಳುತ್ತೇನೆ
+                        </button>
+                        <button onclick="selectScore(2, 1, this)" class="quiz-btn border border-slate-700 bg-emeraldDark/80 hover:border-goldWarm p-3 rounded-xl text-xs sm:text-sm text-left transition-all">
+                            ⚡ ತಕ್ಷಣವೇ ಹೆದರಿಕೊಳ್ಳುತ್ತೇನೆ
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Q3 -->
+                <div>
+                    <label class="block font-tiro text-lg text-goldLight font-medium mb-3">
+                        ೩. ನಿಮ್ಮ ಪ್ರಕಾರ ಜೀವನದ ಅಂತಿಮ ಸಾರ್ಥಕತೆ ಯಾವುದು?
+                    </label>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <button onclick="selectScore(3, 3, this)" class="quiz-btn border border-slate-700 bg-emeraldDark/80 hover:border-goldWarm p-3 rounded-xl text-xs sm:text-sm text-left transition-all">
+                            ❤️ ಸದಾ ಕರುಣೆ ಮತ್ತು ಆಂತರಿಕ ನೆಮ್ಮದಿ
+                        </button>
+                        <button onclick="selectScore(3, 2, this)" class="quiz-btn border border-slate-700 bg-emeraldDark/80 hover:border-goldWarm p-3 rounded-xl text-xs sm:text-sm text-left transition-all">
+                            🏆 ಸಮಾಜದಲ್ಲಿ ದೊಡ್ಡ ಸಾಧನೆ ಮಾಡುವುದು
+                        </button>
+                        <button onclick="selectScore(3, 1, this)" class="quiz-btn border border-slate-700 bg-emeraldDark/80 hover:border-goldWarm p-3 rounded-xl text-xs sm:text-sm text-left transition-all">
+                            💰 ಧನ ಕನಕ ಸಂಪತ್ತು ಗಳಿಸುವುದು
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Result Box -->
+                <div id="quizResult" class="hidden p-6 rounded-2xl bg-emeraldDeep border border-emeraldAccent text-center">
+                    <h4 class="font-tiro text-2xl font-bold text-goldWarm mb-2" id="resultTitle">ನಿಮ್ಮ ಜೀವನ ದರ್ಶನ ಫಲಿತಾಂಶ</h4>
+                    <p class="text-slate-200 text-sm sm:text-base" id="resultText"></p>
+                </div>
+            </div>
+        </section>
+
+        <section id="journal" class="py-20 max-w-4xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <span class="text-goldWarm text-sm font-semibold tracking-wider uppercase">ಆಂತರಿಕ ದಾಖಲೆ</span>
+                <h2 class="font-tiro text-3xl sm:text-4xl font-bold text-goldLight mt-2">
+                    ದಿನಚರಿ ಮತ್ತು ಭಾವನೆಗಳ ದಾಖಲೆ (Personal Journal)
+                </h2>
+                <p class="text-slate-300 text-sm mt-2">ನಿಮ್ಮ ಇಂದಿನ ದಿನದ ಅನುಭವ ಹಾಗೂ ಆಲೋಚನೆಗಳನ್ನು ಸ್ಥಳೀಯವಾಗಿ ಸಂಗ್ರಹಿಸಿಡಿ.</p>
+            </div>
+
+            <div class="glass-card p-6 sm:p-8">
+                <!-- Mood selector -->
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-slate-300 mb-3">ಇಂದು ನಿಮ್ಮ ಭಾವನೆ ಹೇಗಿದೆ? (Choose Mood)</label>
+                    <div class="flex flex-wrap gap-4">
+                        <button onclick="setMood('ಶಾಂತ 🧘')" class="mood-btn px-4 py-2 rounded-xl bg-emeraldDark border border-slate-700 hover:border-goldWarm text-sm">🧘 ಶಾಂತ (Peaceful)</button>
+                        <button onclick="setMood('ಸಂತೋಷ 😊')" class="mood-btn px-4 py-2 rounded-xl bg-emeraldDark border border-slate-700 hover:border-goldWarm text-sm">😊 ಸಂತೋಷ (Happy)</button>
+                        <button onclick="setMood('ಚಿಂತಾಕ್ರಾಂತ 💭')" class="mood-btn px-4 py-2 rounded-xl bg-emeraldDark border border-slate-700 hover:border-goldWarm text-sm">💭 ಚಿಂತಾಕ್ರಾಂತ (Pensive)</button>
+                        <button onclick="setMood('ಕೃತಜ್ಞ 🙏')" class="mood-btn px-4 py-2 rounded-xl bg-emeraldDark border border-slate-700 hover:border-goldWarm text-sm">🙏 ಕೃತಜ್ಞ (Grateful)</button>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <textarea id="journalInput" rows="5" class="w-full bg-emeraldDark/90 border border-slate-700 rounded-xl p-4 text-slate-100 focus:border-goldWarm focus:outline-none transition-all placeholder:text-slate-500 text-sm sm:text-base" placeholder="ನಿಮ್ಮ ಇಂದಿನ ಬದುಕಿನ ವಿಚಾರಗಳು, ತಪ್ಪು-ಒಪ್ಪುಗಳು ಅಥವಾ ಶಾಂತಿಯ ಅನುಭವವನ್ನು ಇಲ್ಲಿ ಬರೆಯಿರಿ..."></textarea>
+                </div>
+
+                <div class="flex justify-between items-center">
+                    <button onclick="saveJournalEntry()" class="bg-goldDeep hover:bg-goldWarm text-emeraldDark font-bold px-6 py-3 rounded-xl transition-all shadow-md flex items-center gap-2">
+                        <i class="fa-solid fa-floppy-disk"></i>
+                        <span>ದಾಖಲಿಸಿ (Save Journal)</span>
+                    </button>
+                    <span id="saveStatus" class="text-xs text-emeraldAccent hidden">✓ ದಿನಚರಿಯು ಸ್ಥಳೀಯವಾಗಿ ಭದ್ರವಾಗಿದೆ</span>
+                </div>
+
+                <!-- Saved Entries display -->
+                <div id="journalHistory" class="mt-8 pt-6 border-t border-slate-800 space-y-4">
+                    <h4 class="font-tiro text-lg text-goldLight font-semibold mb-2">ನಿಮ್ಮ ಹಿಂದಿನ ದಿನಚರಿಗಳು:</h4>
+                    <div id="entriesList" class="space-y-3 text-sm">
+                        <!-- Entries will be loaded here dynamically -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="bg-emeraldDark/90 border-t border-goldWarm/20 py-10 text-center text-slate-400 text-xs sm:text-sm">
+            <div class="max-w-4xl mx-auto px-4 space-y-3">
+                <p class="font-tiro text-xl text-goldLight font-bold">"ಶಾಂತಿಯ ಬದುಕೇ ಸಾರ್ಥಕ ಬದುಕು"</p>
+                <p>© 2026 ಜೀವನ ದರ್ಶನ | Kannada 3D Philosophical Experience</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        /* =========================================================
+           1. THREE.JS 3D PARTICLES & FLOATING ORBS BACKGROUND
+           ========================================================= */
+        let scene, camera, renderer, particles, orbGroup;
+        let mouseX = 0, mouseY = 0;
+        let windowHalfX = window.innerWidth / 2;
+        let windowHalfY = window.innerHeight / 2;
+
+        function init3D() {
+            const canvas = document.getElementById('canvas3d');
+            
+            // Scene Setup
+            scene = new THREE.Scene();
+            scene.fog = new THREE.FogExp2(0x041c15, 0.0015);
+
+            // Camera Setup
+            camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 2000);
+            camera.position.z = 500;
+
+            // Renderer Setup
+            renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+            // Particle Constellation Geometry
+            const particleCount = 1200;
+            const geometry = new THREE.BufferGeometry();
+            const positions = new Float32Array(particleCount * 3);
+            const colors = new Float32Array(particleCount * 3);
+
+            const colorEmerald = new THREE.Color(0x10b981);
+            const colorGold = new THREE.Color(0xf59e0b);
+
+            for (let i = 0; i < particleCount * 3; i += 3) {
+                positions[i] = (Math.random() - 0.5) * 1500;
+                positions[i + 1] = (Math.random() - 0.5) * 1500;
+                positions[i + 2] = (Math.random() - 0.5) * 1500;
+
+                const mixedColor = Math.random() > 0.4 ? colorEmerald : colorGold;
+                colors[i] = mixedColor.r;
+                colors[i + 1] = mixedColor.g;
+                colors[i + 2] = mixedColor.b;
+            }
+
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+            // Particle Material
+            const material = new THREE.PointsMaterial({
+                size: 3.5,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.8
+            });
+
+            particles = new THREE.Points(geometry, material);
+            scene.add(particles);
+
+            // Floating Glowing Orbs Group
+            orbGroup = new THREE.Group();
+            const orbGeo = new THREE.IcosahedronGeometry(25, 2);
+            
+            for(let i = 0; i < 8; i++) {
+                const orbMat = new THREE.MeshBasicMaterial({
+                    color: i % 2 === 0 ? 0xf59e0b : 0x10b981,
+                    wireframe: true,
+                    transparent: true,
+                    opacity: 0.35
+                });
+                const mesh = new THREE.Mesh(orbGeo, orbMat);
+                mesh.position.set(
+                    (Math.random() - 0.5) * 800,
+                    (Math.random() - 0.5) * 800,
+                    (Math.random() - 0.5) * 600
+                );
+                mesh.rotation.x = Math.random() * Math.PI;
+                mesh.rotation.y = Math.random() * Math.PI;
+                orbGroup.add(mesh);
+            }
+            scene.add(orbGroup);
+
+            // Event Listeners for Interaction
+            document.addEventListener('mousemove', onDocumentMouseMove, false);
+            document.addEventListener('touchstart', onTouchStart, false);
+            document.addEventListener('touchmove', onTouchMove, false);
+            window.addEventListener('resize', onWindowResize, false);
+        }
+
+        function onWindowResize() {
+            windowHalfX = window.innerWidth / 2;
+            windowHalfY = window.innerHeight / 2;
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        function onDocumentMouseMove(event) {
+            mouseX = (event.clientX - windowHalfX) * 0.4;
+            mouseY = (event.clientY - windowHalfY) * 0.4;
+        }
+
+        function onTouchStart(event) {
+            if (event.touches.length === 1) {
+                mouseX = (event.touches[0].pageX - windowHalfX) * 0.4;
+                mouseY = (event.touches[0].pageY - windowHalfY) * 0.4;
+            }
+        }
+
+        function onTouchMove(event) {
+            if (event.touches.length === 1) {
+                mouseX = (event.touches[0].pageX - windowHalfX) * 0.4;
+                mouseY = (event.touches[0].pageY - windowHalfY) * 0.4;
+            }
+        }
+
+        function animate3D() {
+            requestAnimationFrame(animate3D);
+
+            // Smooth Camera Movement based on Mouse Interaction
+            camera.position.x += (mouseX - camera.position.x) * 0.03;
+            camera.position.y += (-mouseY - camera.position.y) * 0.03;
+            camera.lookAt(scene.position);
+
+            // Rotate Particles
+            if (particles) {
+                particles.rotation.y += 0.0008;
+                particles.rotation.x += 0.0004;
+            }
+
+            // Rotate Glowing Orbs
+            if (orbGroup) {
+                orbGroup.children.forEach((orb, idx) => {
+                    orb.rotation.x += 0.005 * (idx % 2 === 0 ? 1 : -1);
+                    orb.rotation.y += 0.007;
+                });
+            }
+
+            renderer.render(scene, camera);
+        }
+
+        /* =========================================================
+           2. WEB AUDIO API AMBIENT SOUND SYNTHESIZER
+           ========================================================= */
+        let audioCtx = null;
+        let isAudioPlaying = false;
+        let osc1, osc2, gainNode;
+
+        function toggleAmbientSound() {
+            const btnLabel = document.getElementById('soundLabel');
+            const btnIcon = document.getElementById('soundIcon');
+
+            if (!isAudioPlaying) {
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+
+                // Smooth Meditation Tone Synthesizer
+                osc1 = audioCtx.createOscillator();
+                osc2 = audioCtx.createOscillator();
+                gainNode = audioCtx.createGain();
+
+                osc1.type = 'sine';
+                osc2.type = 'sine';
+
+                // Soft 432Hz Healing scale frequency
+                osc1.frequency.setValueAtTime(108, audioCtx.currentTime); // A2 octave
+                osc2.frequency.setValueAtTime(216, audioCtx.currentTime); 
+
+                gainNode.gain.setValueAtTime(0.01, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.12, audioCtx.currentTime + 3);
+
+                osc1.connect(gainNode);
+                osc2.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+
+                osc1.start();
+                osc2.start();
+
+                isAudioPlaying = true;
+                btnLabel.textContent = "ಸಂಗೀತ ಚಾಲನೆಯಲ್ಲಿದೆ (Playing)";
+                btnIcon.className = "fa-solid fa-volume-high text-emeraldAccent animate-pulse";
+            } else {
+                if (gainNode) {
+                    gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1);
+                    setTimeout(() => {
+                        osc1.stop();
+                        osc2.stop();
+                    }, 1000);
+                }
+                isAudioPlaying = false;
+                btnLabel.textContent = "ಶಾಂತ ಸಂಗೀತ (Sound)";
+                btnIcon.className = "fa-solid fa-volume-xmark text-amber-400";
+            }
+        }
+
+        /* =========================================================
+           3. KANNADA PHILOSOPHICAL QUOTES SYSTEM
+           ========================================================= */
+        const quotesData = [
+            {
+                kannada: "ಬದುಕು ಜಟಕಾ ಬಂಡಿ, ವಿಧಿ ಅದರ ಸಾಹೇಬ, ಕುದುರೆ ನೀನ್, ಅವನು ಹೇಳಿದತ್ತ ಪಯಣಿಸುವಿ.",
+                author: "ಡಿ. ವಿ. ಗುಂಡಪ್ಪ (ಮಂಕುತಿಮ್ಮನ ಕಗ್ಗ)"
+            },
+            {
+                kannada: "ನಿನ್ನ ಶಕ್ತಿಯನ್ನು ನೀನು ನಂಬು, ಜಗತ್ತು ನಿನ್ನ ಕಾಲಡಿಗೆ ಬರುತ್ತದೆ.",
+                author: "ಸ್ವಾಮಿ ವಿವೇಕಾನಂದ"
+            },
+            {
+                kannada: "ಕಷ್ಟಗಳು ಬಂದಾಗ ಹೆದರಬೇಡ, ಅವು ನಿನ್ನಲ್ಲಿರುವ ಸುಪ್ತ ಶಕ್ತಿಯನ್ನು ಹೊರತರಲು ಬಂದ ಶಿಕ್ಷಕರು.",
+                author: "ಡಾ. ಎ.ಪಿ.ಜೆ. ಅಬ್ದುಲ್ ಕಲಾಂ"
+            },
+            {
+                kannada: "ನೆನ್ನೆ ಎಂಬುದು ಕಳೆದುಹೋದ ಕನಸು, ನಾಳೆ ಎಂಬುದು ಅನಿಶ್ಚಿತತೆ. ಇಂದು ಮಾತ್ರ ನಿನ್ನ ಕೈಯಲ್ಲಿರುವ ನಿಜವಾದ ಬಹುಮಾನ.",
+                author: "ಬಸವಣ್ಣನವರ ವಚನ ತತ್ವ"
+            },
+            {
+                kannada: "ಶಾಂತಿಯು ಹೊರಗಿನ ಪ್ರಪಂಚದಲ್ಲಿ ಸಿಗುವುದಿಲ್ಲ, ಅದು ನಿಮ್ಮ ಮನಸ್ಸಿನ ಮೌನದಲ್ಲಿದೆ.",
+                author: "ರಮಣ ಮಹರ್ಷಿ"
+            }
+        ];
+
+        let currentQuoteIndex = 0;
+
+        function nextQuote() {
+            const quoteBox = document.getElementById('quoteBox');
+            quoteBox.style.opacity = '0';
+            quoteBox.style.transform = 'translateY(10px)';
+
+            setTimeout(() => {
+                currentQuoteIndex = (currentQuoteIndex + 1) % quotesData.length;
+                document.getElementById('quoteKannada').textContent = `"${quotesData[currentQuoteIndex].kannada}"`;
+                document.getElementById('quoteAuthor').textContent = `— ${quotesData[currentQuoteIndex].author}`;
+
+                quoteBox.style.opacity = '1';
+                quoteBox.style.transform = 'translateY(0)';
+            }, 300);
+        }
+
+        /* =========================================================
+           4. SELF-REFLECTION QUIZ SYSTEM
+           ========================================================= */
+        let quizScores = { 1: 0, 2: 0, 3: 0 };
+
+        function selectScore(qId, score, btn) {
+            quizScores[qId] = score;
+            
+            // Highlight selected button in group
+            const parent = btn.parentElement;
+            parent.querySelectorAll('.quiz-btn').forEach(b => {
+                b.classList.remove('border-goldWarm', 'bg-emeraldAccent/20');
+            });
+            btn.classList.add('border-goldWarm', 'bg-emeraldAccent/20');
+
+            // Check if all answered
+            if(quizScores[1] > 0 && quizScores[2] > 0 && quizScores[3] > 0) {
+                showQuizResult();
+            }
+        }
+
+        function showQuizResult() {
+            const total = quizScores[1] + quizScores[2] + quizScores[3];
+            const resultBox = document.getElementById('quizResult');
+            const resultText = document.getElementById('resultText');
+
+            resultBox.classList.remove('hidden');
+
+            if (total >= 8) {
+                resultText.textContent = "ನಿಮ್ಮ ಆಂತರ್ಯವು ಅತ್ಯಂತ ಶಾಂತ ಹಾಗೂ ಸಕಾರಾತ್ಮಕತೆಯಿಂದ ಕೂಡಿದೆ. ನೀವು ಜೀವನವನ್ನು ಸಾರ್ಥಕವಾಗಿ ಅರ್ಥೈಸಿಕೊಂಡಿದ್ದೀರಿ! ✨";
+            } else if (total >= 5) {
+                resultText.textContent = "ನೀವು ಜೀವನದ ಉತ್ತಮ ಹಾದಿಯಲ್ಲಿದ್ದೀರಿ. ಸ್ವಲ್ಪ ಧ್ಯಾನ ಮತ್ತು ಸ್ವಯಂ-ಚಿಂತನೆಯಿಂದ ಇನ್ನು ಹೆಚ್ಚಿನ ನೆಮ್ಮದಿ ಪಡೆಯಬಹುದು. 🌿";
+            } else {
+                resultText.textContent = "ನಿಮ್ಮ ಮನಸ್ಸು ಪ್ರಸ್ತುತ ಒತ್ತಡದಲ್ಲಿದೆ. ಕಷ್ಟಗಳು ಬಂದಾಗ ಧೈರ್ಯಗೆಡದೆ, ಪ್ರಕೃತಿಯ ಶಾಂತಿಯನ್ನು ಪಡೆಯಲು ಪ್ರಯತ್ನಿಸಿ. 🧘";
+            }
+        }
+
+        /* =========================================================
+           5. PERSONAL JOURNAL & EMOTION TRACKER (LOCALSTORAGE)
+           ========================================================= */
+        let selectedMood = 'ಶಾಂತ 🧘';
+
+        function setMood(mood) {
+            selectedMood = mood;
+            document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('border-goldWarm', 'bg-goldWarm/20'));
+            event.target.classList.add('border-goldWarm', 'bg-goldWarm/20');
+        }
+
+        function saveJournalEntry() {
+            const text = document.getElementById('journalInput').value.trim();
+            if (!text) return;
+
+            const entry = {
+                id: Date.now(),
+                date: new Date().toLocaleDateString('kn-IN', { day: 'numeric', month: 'long', year: 'numeric' }),
+                mood: selectedMood,
+                content: text
+            };
+
+            let entries = JSON.parse(localStorage.getItem('kannada_3d_journal') || '[]');
+            entries.unshift(entry);
+            localStorage.setItem('kannada_3d_journal', JSON.stringify(entries));
+
+            document.getElementById('journalInput').value = '';
+            
+            const status = document.getElementById('saveStatus');
+            status.classList.remove('hidden');
+            setTimeout(() => status.classList.add('hidden'), 3000);
+
+            loadJournalHistory();
+        }
+
+        function loadJournalHistory() {
+            const container = document.getElementById('entriesList');
+            const entries = JSON.parse(localStorage.getItem('kannada_3d_journal') || '[]');
+
+            if (entries.length === 0) {
+                container.innerHTML = '<p class="text-slate-500 italic">ಇನ್ನೂ ಯಾವುದೇ ದಿನಚರಿ ದಾಖಲಾಗಿಲ್ಲ.</p>';
+                return;
+            }
+
+            container.innerHTML = entries.map(e => `
+                <div class="p-4 rounded-xl bg-emeraldDark border border-slate-800 space-y-1">
+                    <div class="flex justify-between items-center text-xs text-goldWarm">
+                        <span>📅 ${e.date}</span>
+                        <span>${e.mood}</span>
+                    </div>
+                    <p class="text-slate-200 leading-relaxed">${e.content}</p>
+                </div>
+            `).join('');
+        }
+
+        /* Initializer on Window Load */
+        window.onload = function() {
+            init3D();
+            animate3D();
+            loadJournalHistory();
+        };
+    </script>
+</body>
+</html>

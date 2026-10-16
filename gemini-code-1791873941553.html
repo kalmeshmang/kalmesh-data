@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub ಸಂಪೂರ್ಣ ಮಾರ್ಗದರ್ಶಿ - ಜಾವಾ ಪ್ರಾಜೆಕ್ಟ್ ಉದಾಹರಣೆ</title>
+    <style>
+        :root {
+            --primary: #2ea44f;
+            --secondary: #0969da;
+            --bg: #0d1117;
+            --card-bg: #161b22;
+            --text: #c9d1d9;
+            --text-heading: #f0f6fc;
+            --border: #30363d;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.7;
+        }
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 20px;
+        }
+        header h1 {
+            color: var(--text-heading);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        header p {
+            color: #8b949e;
+            font-size: 1.2rem;
+        }
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+        }
+        h2 {
+            color: var(--text-heading);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 8px;
+            margin-top: 0;
+        }
+        h3 {
+            color: var(--secondary);
+        }
+        .analogy {
+            background: rgba(9, 105, 218, 0.1);
+            border-left: 4px solid var(--secondary);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 6px 6px 0;
+        }
+        code {
+            background: #21262d;
+            color: #79c0ff;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        pre {
+            background: #21262d;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            border: 1px solid var(--border);
+            color: #e6edf3;
+        }
+        .command-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .command-list li {
+            background: #21262d;
+            margin-bottom: 8px;
+            padding: 10px 15px;
+            border-radius: 6px;
+            border-left: 4px solid var(--primary);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>GitHub ಸಂಪೂರ್ಣ ಕನ್ನಡ ನೋಟ್ಸ್</h1>
+        <p>ಜಾವಾ (Java) ಪ್ರಾಜೆಕ್ಟ್ ಉದಾಹರಣೆಯೊಂದಿಗೆ ಹಂತ-ಹಂತವಾದ ಮಾರ್ಗದರ್ಶಿ</p>
+    </header>
+
+    <!-- 1. Introduction -->
+    <div class="card">
+        <h2>1. Git ಮತ್ತು GitHub ಎಂದರೇನು?</h2>
+        <p><strong>Git</strong> ಎನ್ನುವುದು ನಿಮ್ಮ ಕಂಪ್ಯೂಟರ್‌ನಲ್ಲಿ ಕೋಡ್ ಬದಲಾವಣೆಗಳನ್ನು ಟ್ರ್ಯಾಕ್ ಮಾಡಲು ಬಳಸುವ <strong>Version Control System</strong> ಆಗಿದೆ. <strong>GitHub</strong> ಎನ್ನುವುದು ಆ ಕೋಡ್ ಅನ್ನು ಆನ್‌ಲೈನ್‌ನಲ್ಲಿ (Cloud ನಲ್ಲಿ) ಸುರಕ್ಷಿತವಾಗಿ ಶೇಖರಿಸಿಡಲು ಮತ್ತು ಇತರರೊಂದಿಗೆ ಹಂಚಿಕೊಳ್ಳಲು ಬಳಸುವ ವೆಬ್ ತಾಣವಾಗಿದೆ.</p>
+        
+        <div class="analogy">
+            <strong>ಉದಾಹರಣೆ:</strong> ನಿಮ್ಮ ಮೊಬೈಲ್‌ನಲ್ಲಿ ಫೋಟೋಗಳನ್ನು Google Drive ಅಥವಾ iCloud ನಲ್ಲಿ ಬ್ಯಾಕಪ್ ಮಾಡಿದಂತೆ, ನಿಮ್ಮ ಜಾವಾ ಪ್ರಾಜೆಕ್ಟ್ ಕೋಡ್ ಅನ್ನು GitHub ನಲ್ಲಿ ಬ್ಯಾಕಪ್ ಮಾಡಲಾಗುತ್ತದೆ.
+        </div>
+    </div>
+
+    <!-- 2. Workflow with Java Example -->
+    <div class="card">
+        <h2>2. ಜಾವಾ ಪ್ರಾಜೆಕ್ಟ್ ಉದಾಹರಣೆಯೊಂದಿಗೆ GitHub ವರ್ಕ್‌ಫ್ಲೋ</h2>
+        <p>ನೀವು ಒಂದು ಜಾವಾ ಪ್ರಾಜೆಕ್ಟ್ <code>Calculator.java</code> ಸಿದ್ಧಪಡಿಸಿದ್ದೀರಿ ಎಂದಟ್ಟುಕೊಳ್ಳಿ. ಅದನ್ನು GitHub ಗೆ ಹೇಗೆ ಕಳುಹಿಸುವುದು?</p>
+        
+        <h3>ಪ್ರಮುಖ ಹಂತಗಳು ಮತ್ತು ಕಮಾಂಡ್‌ಗಳು:</h3>
+        <ul class="command-list">
+            <li><strong>git init:</strong> ನಿಮ್ಮ ಪ್ರಾಜೆಕ್ಟ್ ಫೋಲ್ಡರ್‌ನಲ್ಲಿ Git ಅನ್ನು ಆಕ್ಟಿವೇಟ್ ಮಾಡಲು.
+                <pre><code>git init</code></pre>
+            </li>
+            <li><strong>git add:</strong> ಹೊಸ ಜಾವಾ ಫೈಲ್‌ಗಳನ್ನು ಟ್ರ್ಯಾಕಿಂಗ್‌ಗೆ ಸೇರಿಸಲು.
+                <pre><code>git add Calculator.java</code></pre>
+            </li>
+            <li><strong>git commit:</strong> ಬದಲಾವಣೆಗಳನ್ನು ಅಧಿಕೃತವಾಗಿ ಸೇವ್ ಮಾಡಲು (ಒಂದು ಮೆಸೇಜ್‌ನೊಂದಿಗೆ).
+                <pre><code>git commit -m "Added Calculator java file"</code></pre>
+            </li>
+            <li><strong>git branch:</strong> ಮುಖ್ಯ ಬ್ರ್ಯಾಂಚ್‌ಗೆ ಹೆಸರು ನೀಡಲು (ಸಾಮಾನ್ಯವಾಗಿ main).
+                <pre><code>git branch -M main</code></pre>
+            </li>
+            <li><strong>git remote add origin:</strong> ನಿಮ್ಮ ಲೋಕಲ್ ಕೋಡ್ ಅನ್ನು GitHub ಆನ್‌ಲೈನ್ ಲಿಂಕ್‌ಗೆ ಜೋಡಿಸಲು.
+                <pre><code>git remote add origin https://github.com/your-username/java-project.git</code></pre>
+            </li>
+            <li><strong>git push:</strong> ಕೋಡ್ ಅನ್ನು ಆನ್‌ಲೈನ್ GitHub ಗೆ ಅಪ್‌ಲೋಡ್ ಮಾಡಲು.
+                <pre><code>git push -u origin main</code></pre>
+            </li>
+        </ul>
+    </div>
+
+    <!-- 3. Collaboration & Branching -->
+    <div class="card">
+        <h2>3. ಬ್ರಾಂಚಿಂಗ್ (Branching) ಮತ್ತು ಕೊಲಾಬರೇಷನ್</h2>
+        <p>ಒಂದೇ ಪ್ರಾಜೆಕ್ಟ್‌ನಲ್ಲಿ ಅನೇಕ ಡೆವಲಪರ್‌ಗಳು ಕೆಲಸ ಮಾಡುವಾಗ <strong>Branch</strong> ಬಳಸುವುದು ಬಹಳ ಮುಖ್ಯ. ಮುಖ್ಯ ಕೋಡ್ ಹಾಳಾಗದಂತೆ ಹೊಸ ಫೀಚರ್‌ಗಳನ್ನು ಪ್ರತ್ಯೇಕ ಬ್ರ್ಯಾಂಚ್‌ನಲ್ಲಿ ಬರೆಯಬಹುದು.</p>
+        
+        <pre><code># ಹೊಸ ಬ್ರ್ಯಾಂಚ್ ರಚಿಸಲು ಮತ್ತು ಅದಕ್ಕೆ ಹೋಗಲು
+git checkout -b feature-login
+
+# ಬದಲಾವಣೆಗಳನ್ನು ಮಾಡಿ ಪುಷ್ ಮಾಡಲು
+git push origin feature-login</code></pre>
+
+        <h3>Pull Request (PR) ಎಂದರೇನು?</h3>
+        <p>ನೀವು ಮಾಡಿದ ಹೊಸ ಜಾವಾ ಕೋಡ್ ಬದಲಾವಣೆಗಳನ್ನು ಮೇನ್‌ ಬ್ರ್ಯಾಂಚ್‌ಗೆ ಸೇರಿಸುವಂತೆ ಪ್ರಾಜೆಕ್ಟ್ ಲೀಡರ್‌ಗೆ ವಿನಂತಿ ಮಾಡುವುದನ್ನು <strong>Pull Request</strong> ಎನ್ನಲಾಗುತ್ತದೆ. ಅವರು ಕೋಡ್ ಪರಿಶೀಲಿಸಿ (Review) ಅಪ್ರೂವ್ ಮಾಡುತ್ತಾರೆ.</p>
+    </div>
+
+    <!-- 4. Useful Commands -->
+    <div class="card">
+        <h2>4. ದಿನನಿತ್ಯ ಬಳಸುವ ಇತರ ಪ್ರಮುಖ ಕಮಾಂಡ್‌ಗಳು</h2>
+        <ul>
+            <li><code>git status</code> - ಪ್ರಸ್ತುತ ಫೈಲ್‌ಗಳ ಸ್ಥಿತಿ ತಿಳಿಯಲು.</li>
+            <li><code>git pull</code> - ಆನ್‌ಲೈನ್‌ನಲ್ಲಿರುವ ಇತ್ತೀಚಿನ ಕೋಡ್ ಅನ್ನು ನಿಮ್ಮ ಕಂಪ್ಯೂಟರ್‌ಗೆ ಡೌನ್‌ಲೋಡ್ ಮಾಡಿಕೊಳ್ಳಲು.</li>
+            <li><code>git clone [URL]</code> - GitHub ನಲ್ಲಿರುವ ಬೇರೆಯವರ ಪ್ರಾಜೆಕ್ಟ್ ಅನ್ನು ನಿಮ್ಮ ಕಂಪ್ಯೂಟರ್‌ಗೆ ಕಾಪಿ ಮಾಡಿಕೊಳ್ಳಲು.</li>
+        </ul>
+    </div>
+
+</div>
+
+</body>
+</html>

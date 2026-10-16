@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Spoken Masterclass - ಕನ್ನಡ ನೋಟ್ಸ್</title>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --secondary: #6366f1;
+            --accent: #f59e0b;
+            --bg-color: #f8fafc;
+            --text-color: #1e293b;
+            --card-bg: #ffffff;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        header {
+            background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%);
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        header p {
+            font-size: 1.2em;
+            max-width: 700px;
+            margin: 0 auto 20px auto;
+            opacity: 0.9;
+        }
+
+        .badge-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.95em;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: -30px auto 40px auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .nav-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .nav-card {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: bold;
+            font-size: 1.1em;
+            border-left: 5px solid var(--primary);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .nav-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(79, 70, 229, 0.15);
+            background: #fdfdfd;
+        }
+
+        section {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: var(--primary);
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            align-items: center;
+        }
+
+        @media(max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .illustration {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .steps-box {
+            background: #f8fafc;
+            border-left: 4px solid var(--accent);
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .phrase-card {
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.2s;
+        }
+
+        .phrase-card:hover {
+            background: #e2e8f0;
+        }
+
+        .audio-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background 0.2s;
+        }
+
+        .audio-btn:hover {
+            background: #4338ca;
+        }
+
+        /* SVO Diagram Styles */
+        .svo-diagram {
+            display: flex;
+            justify-content: space-around;
+            background: #eff6ff;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px 0;
+            border: 1px dashed #3b82f6;
+        }
+
+        .svo-box {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            flex: 1;
+            margin: 0 5px;
+        }
+
+        .svo-box h4 {
+            margin: 0 0 5px 0;
+            color: var(--primary);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #64748b;
+            font-size: 0.95em;
+            border-top: 1px solid #e2e8f0;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>English Spoken Masterclass</h1>
+        <p>ಕನ್ನಡದಲ್ಲೇ ಆಳವಾಗಿ ಇಂಗ್ಲಿಷ್ ಕಲಿಯಿರಿ - ಪರಿಪೂರ್ಣ ಕನ್ನಡ ಮಾರ್ಗದರ್ಶಿ</p>
+        <div class="badge-container">
+            <span class="badge">🔊 ಆಡಿಯೋ ಸೌಂಡ್</span>
+            <span class="badge">📊 SVO ವಾಕ್ಯ ನಿಯಮ</span>
+            <span class="badge">🎯 ಸುಲಭ ತಂತ್ರಗಳು</span>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Quick Nav Links -->
+        <div class="nav-links">
+            <a href="#speaking" class="nav-card">1. ಮಾತನಾಡುವುದು ಹೇಗೆ?</a>
+            <a href="#structure" class="nav-card">2. ವಾಕ್ಯ ರಚನೆ (Structure)</a>
+            <a href="#conversations" class="nav-card">3. ದೈನಂದಿನ ಸಂಭಾಷಣೆ</a>
+            <a href="#listening" class="nav-card">4. ಆಲಿಸಿ ಅರ್ಥಮಾಡಿಕೊಳ್ಳಿ</a>
+            <a href="#phrases" class="nav-card">5. 100+ ಅಗತ್ಯ ವಾಕ್ಯಗಳು</a>
+            <a href="#quiz" class="nav-card">6. ಅಭ್ಯಾಸ ಕ್ವಿಜ್ (Quiz)</a>
+        </div>
+
+        <!-- Section 1 -->
+        <section id="speaking">
+            <h2>🎙️ 1. ಮಾತನಾಡುವ ಕಲೆ (Speaking Mastery)</h2>
+            <div class="content-grid">
+                <div>
+                    <p style="font-size: 1.1em; font-weight: 500;">ಇಂಗ್ಲಿಷ್ ಭಯವನ್ನು ಬಿಟ್ಟು ಉಚ್ಚಾರಣೆ ಮಾಡುವುದು ಹೇಗೆ?</p>
+                    <p>ಇಂಗ್ಲಿಷ್ ಕಲಿಯಲು ಅತ್ಯಂತ ದೊಡ್ಡ ತಡೆಗೋಡೆ ಅಂದರೆ <strong>ತಪ್ಪಾಗಿ ಮಾತನಾಡಿಬಿಡುತ್ತೇನೆಯೋ ಎಂಬ ಭಯ</strong>. ಇಂಗ್ಲಿಷ್ ಎನ್ನುವುದು ಕೇವಲ ಒಂದು ಸಂವಹನ ಮಾಧ್ಯಮ (Communication Tool), ಜ್ಞಾನವಲ್ಲ.</p>
+                    
+                    <div class="steps-box">
+                        <strong>1. ತಪ್ಪುಗಳ ಬಗ್ಗೆ ಚಿಂತಿಸಬೇಡಿ:</strong> ಆರಂಭದಲ್ಲಿ ಗ್ರಾಮರ್ ತಪ್ಪುಗಳು ಸಾಮಾನ್ಯ. ಉದ್ದೇಶ ಎದುರಿನವರಿಗೆ ಅರ್ಥವಾದರೆ ಸಾಕು.
+                    </div>
+                    <div class="steps-box">
+                        <strong>2. Shadow Speaking Technique:</strong> ಇಂಗ್ಲಿಷ್ ಆಡಿಯೋ ಕೇಳಿ, ಅವರ ಹಿಂದೆಯೇ ಗಟ್ಟಿಯಾಗಿ ಮಿರರ್ ಪ್ರಾಕ್ಟೀಸ್ ಮಾಡಿ.
+                    </div>
+                </div>
+                <div>
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=80" alt="Speaking practice illustration" class="illustration">
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: SVO Diagram -->
+        <section id="structure">
+            <h2>📐 2. ವಾಕ್ಯ ರಚನೆಯ ರಹಸ್ಯ (SVO Pattern)</h2>
+            <p>ಕನ್ನಡ ಮತ್ತು ಇಂಗ್ಲಿಷ್ ವಾಕ್ಯ ರಚನಾ ಶೈಲಿ ಸಂಪೂರ್ಣ ಭಿನ್ನ. ಕನ್ನಡವು SOV (Subject-Object-Verb) ಆದರೆ ಇಂಗ್ಲಿಷ್ <strong>SVO (Subject-Verb-Object)</strong> ಶೈಲಿಯನ್ನು ಅನುಸರಿಸುತ್ತದೆ.</p>
+            
+            <div class="svo-diagram">
+                <div class="svo-box">
+                    <h4>1. Subject (ಕರ್ತೃ)</h4>
+                    <p>ಕೆಲಸ ಮಾಡುವವರು<br><em>(I, You, He, She)</em></p>
+                </div>
+                <div class="svo-box">
+                    <h4>2. Verb (ಕ್ರಿಯಾಪದ)</h4>
+                    <p>ನಡೆಯುವ ಕ್ರಿಯೆ<br><em>(Eat, Go, Learn, Speak)</em></p>
+                </div>
+                <div class="svo-box">
+                    <h4>3. Object (ಕರ್ಮಪದ)</h4>
+                    <p>ವಸ್ತು ಅಥವಾ ವಿಷಯ<br><em>(English, Food, Cricket)</em></p>
+                </div>
+            </div>
+            <p style="text-align: center; font-weight: bold; color: var(--primary);">ಉದಾಹರಣೆ: "I (Subject) learn (Verb) English (Object)."</p>
+        </section>
+
+        <!-- Section 3: Essential Phrases with Audio Sim -->
+        <section id="phrases">
+            <h2>💬 3. ಆರಂಭಿಕ ಹಂತದ ಪ್ರಮುಖ ವಾಕ್ಯಗಳ ಅಭ್ಯಾಸ</h2>
+            <p>ಈ ಕೆಳಗಿನ ವಾಕ್ಯಗಳನ್ನು ಗಟ್ಟಿಯಾಗಿ ಉಚ್ಚರಿಸಿ ಅಭ್ಯಾಸ ಮಾಡಿ:</p>
+
+            <div class="phrase-card">
+                <div>
+                    <strong>ಕನ್ನಡ:</strong> ನಾನು ಇಂಗ್ಲಿಷ್ ಕಲಿಯುತ್ತಿದ್ದೇನೆ.<br>
+                    <span style="color: var(--primary); font-size: 1.1em;">I am learning English.</span>
+                </div>
+                <button class="audio-btn" onclick="speakText('I am learning English')">🔊 ಕೇಳಿ</button>
+            </div>
+
+            <div class="phrase-card">
+                <div>
+                    <strong>ಕನ್ನಡ:</strong> ದಯವಿಟ್ಟು ನಿಧಾನವಾಗಿ ಮಾತನಾಡಿ.<br>
+                    <span style="color: var(--primary); font-size: 1.1em;">Please speak slowly.</span>
+                </div>
+                <button class="audio-btn" onclick="speakText('Please speak slowly')">🔊 ಕೇಳಿ</button>
+            </div>
+
+            <div class="phrase-card">
+                <div>
+                    <strong>ಕನ್ನಡ:</strong> ನನಗಿದು ಅರ್ಥವಾಯಿತು.<br>
+                    <span style="color: var(--primary); font-size: 1.1em;">I understood this.</span>
+                </div>
+                <button class="audio-btn" onclick="speakText('I understood this')">🔊 ಕೇಳಿ</button>
+            </div>
+
+            <div class="phrase-card">
+                <div>
+                    <strong>ಕನ್ನಡ:</strong> ಇನ್ನೊಮ್ಮೆ ಹೇಳಬಲ್ಲಿರಾ?<br>
+                    <span style="color: var(--primary); font-size: 1.1em;">Could you repeat that?</span>
+                </div>
+                <button class="audio-btn" onclick="speakText('Could you repeat that?')">🔊 ಕೇಳಿ</button>
+            </div>
+        </section>
+
+        <!-- Section 4: Listening Hacks -->
+        <section id="listening">
+            <h2>👂 4. ಆಲಿಸಿ ಅರ್ಥಮಾಡಿಕೊಳ್ಳುವ ತಂತ್ರಗಳು (Listening Hacks)</h2>
+            <div class="content-grid">
+                <div>
+                    <p>nativeElementಗಳು ಇಂಗ್ಲಿಷ್ ಮಾತನಾಡುವಾಗ ಶಬ್ದಗಳನ್ನು ಜೋಡಿಸಿ (Linking sounds) ವೇಗವಾಗಿ ಮಾತನಾಡುತ್ತಾರೆ. ಇದನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳಲು ಈ ಟಿಪ್ಸ್ ಅನುಸರಿಸಿ:</p>
+                    <ul>
+                        <li><strong>Want to</strong> ಬದಲಿಗೆ <code>Wanna</code> ಎನ್ನುತ್ತಾರೆ.</li>
+                        <li><strong>Going to</strong> ಬದಲಿಗೆ <code>Gonna</code> ಎನ್ನುತ್ತಾರೆ.</li>
+                        <li>ಪ್ರತಿದಿನ ಇಂಗ್ಲಿಷ್ ಪಾಡ್‌ಕಾಸ್ಟ್ ಅಥವಾ ಇಂಗ್ಲಿಷ್ ನ್ಯೂಸ್ ಕೇಳುವ ಅಭ್ಯಾಸ ಮಾಡಿ.</li>
+                    </ul>
+                </div>
+                <div>
+                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80" alt="Listening illustration" class="illustration">
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Quiz preview -->
+        <section id="quiz">
+            <h2>🎯 5. ನಿಮ್ಮ ಜ್ಞಾನ ಪರೀಕ್ಷಿಸಿ (Mini Quiz)</h2>
+            <p><strong>ಪ್ರಶ್ನೆ:</strong> "I am going to market" ಎನ್ನುವುದನ್ನು ಕನ್ನಡದಲ್ಲಿ ಸರಿಯಾಗಿ ಹೇಗೆ ಅರ್ಥೈಸಬಹುದು?</p>
+            <div style="margin-top: 15px;">
+                <button class="audio-btn" style="background:#059669; margin-right: 10px;" onclick="alert('ಸರಿ ಉತ್ತರ! 🎉 (ನಾನು ಮಾರುಕಟ್ಟೆಗೆ ಹೋಗುತ್ತಿದ್ದೇನೆ)')">ನಾನು ಮಾರುಕಟ್ಟೆಗೆ ಹೋಗುತ್ತಿದ್ದೇನೆ</button>
+                <button class="audio-btn" style="background:#dc2626;" onclick="alert('ತಪ್ಪು ಉತ್ತರ, ಒಮ್ಮೆ ಮತ್ತೊಮ್ಮೆ ಪ್ರಯತ್ನಿಸಿ!')">ನಾನು ಮಾರುಕಟ್ಟೆಯಿಂದ ಬಂದೆ</button>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>© 2026 Spoken English Kannada Masterclass. ಕಲಿಯಿರಿ, ಪ್ರಗತಿ ಹೊಂದಿರಿ! 🚀</p>
+    </footer>
+
+    <script>
+        // Text-to-Speech function for audio pronunciation simulation
+        function speakText(text) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-US';
+                utterance.rate = 0.9; // Slightly slower for clarity
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert('ನಿಮ್ಮ ಬ್ರೌಸರ್‌ನಲ್ಲಿ ಆಡಿಯೋ ಸೌಪೋರ್ಟ್ ಇಲ್ಲ.');
+            }
+        }
+    </script>
+</body>
+</html>

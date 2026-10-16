@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English 12 Tenses Masterclass - ಕನ್ನಡದಲ್ಲೇ ಇಂಗ್ಲಿಷ್ ಕಾಲಗಳು</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Noto Sans Kannada', 'Plus Jakarta Sans', sans-serif;
+            background-color: #0b0f19;
+            color: #f1f5f9;
+        }
+
+        .glass-card {
+            background: rgba(17, 24, 39, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+        }
+
+        .animate-pop {
+            transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .animate-pop:hover {
+            transform: translateY(-4px);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-blue-500 selection:text-white">
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-50 glass-card border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-purple-500 flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-blue-500/20">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                </div>
+                <div>
+                    <h1 class="font-extrabold text-lg sm:text-xl bg-gradient-to-r from-blue-400 via-cyan-300 to-indigo-300 bg-clip-text text-transparent">
+                        12 Tenses Masterclass
+                    </h1>
+                    <p class="text-xs text-slate-400">ಕನ್ನಡದಲ್ಲೇ ಸಂಪೂರ್ಣ 12 Tenses ಕಲಿಯಿರಿ</p>
+                </div>
+            </div>
+
+            <!-- Header Quick Audio Test -->
+            <button onclick="speak('Welcome to 12 Tenses Masterclass in Kannada')" class="hidden sm:flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-800/80 border border-slate-700/80 text-xs font-semibold text-blue-400 hover:bg-slate-700 transition-all">
+                <i class="fa-solid fa-volume-high"></i> ಉಚ್ಚಾರಣೆ ಪರೀಕ್ಷೆ (Audio Test)
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden pt-10 pb-14 bg-gradient-to-b from-slate-900 via-slate-900/80 to-slate-950">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-indigo-600/10 blur-[130px] rounded-full pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs sm:text-sm font-semibold mb-5">
+                <i class="fa-solid fa-graduation-cap"></i> Complete English Grammar Guide
+            </span>
+            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-white leading-tight mb-5">
+                ಇಂಗ್ಲಿಷ್ <span class="bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400 bg-clip-text text-transparent">12 Tenses Rules</span> <br class="hidden sm:inline">
+                ಕನ್ನಡದಲ್ಲೇ ಸುಲಭವಾಗಿ ಕಲಿಯಿರಿ
+            </h1>
+            <p class="text-slate-300 text-sm sm:text-base max-w-3xl mx-auto mb-8 font-normal leading-relaxed">
+                ಪ್ರತಿಯೊಂದು ಕಾಲದ ಸೂತ್ರ (Formulas), ಕನ್ನಡ ಉದಾಹರಣೆಗಳು, ಆಡಿಯೋ ಉಚ್ಚಾರಣೆ (Audio Pronunciation), ಮತ್ತು ಅಭ್ಯಾಸ ರಸಪ್ರಶ್ನೆ (Interactive Quiz) ಒಂದೇ ಕಡೆ ಲಭ್ಯವಿದೆ.
+            </p>
+
+            <!-- Badges -->
+            <div class="flex flex-wrap justify-center gap-3 text-xs sm:text-sm font-medium text-slate-300">
+                <div class="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-800/70 border border-slate-700/50">
+                    <i class="fa-solid fa-volume-high text-blue-400"></i> ಆಡಿಯೋ ಉಚ್ಚಾರಣೆ
+                </div>
+                <div class="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-800/70 border border-slate-700/50">
+                    <i class="fa-solid fa-calculator text-indigo-400"></i> ಸೂತ್ರಗಳು (Formulas)
+                </div>
+                <div class="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-800/70 border border-slate-700/50">
+                    <i class="fa-solid fa-gamepad text-green-400"></i> ಇಂಟರಾಕ್ಟಿವ್ ಕ್ವಿಜ್
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+
+        <!-- SECTION 1: SVO & TENSE FORMULA DIAGRAM -->
+        <section class="glass-card p-6 sm:p-8 rounded-3xl border border-slate-800">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-lg">
+                    <i class="fa-solid fa-sitemap"></i>
+                </div>
+                <div>
+                    <h2 class="text-xl sm:text-2xl font-bold text-white">SVO ನಿಯಮ ಮತ್ತು Tense ಚಾರ್ಟ್ ಡಯಾಗ್ರಾಮ್</h2>
+                    <p class="text-xs text-slate-400">ಇಂಗ್ಲಿಷ್ ವಾಕ್ಯ ರಚನೆಯ ಮೂಲ ಸೂತ್ರ</p>
+                </div>
+            </div>
+
+            <!-- Diagram Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                <div class="bg-slate-900/90 p-5 rounded-2xl border border-blue-500/30 text-center">
+                    <span class="text-xs bg-blue-500/20 text-blue-400 px-3 py-1 rounded-full font-bold uppercase tracking-wider">1. Subject (ಕರ್ತೃ)</span>
+                    <h3 class="text-lg font-bold text-white mt-3 mb-1">ಕೆಲಸ ಮಾಡುವವರು</h3>
+                    <p class="text-xs text-slate-400">I, You, We, They, He, She, It</p>
+                </div>
+                <div class="bg-slate-900/90 p-5 rounded-2xl border border-indigo-500/30 text-center">
+                    <span class="text-xs bg-indigo-500/20 text-indigo-400 px-3 py-1 rounded-full font-bold uppercase tracking-wider">2. Verb (ಕ್ರಿಯಾಪದ)</span>
+                    <h3 class="text-lg font-bold text-white mt-3 mb-1">ನಡೆಯುವ ಕೆಲಸ (Tense ಪರಿಣಾಮ)</h3>
+                    <p class="text-xs text-slate-400">V1 (play), V2 (played), V3 (played), V+ing</p>
+                </div>
+                <div class="bg-slate-900/90 p-5 rounded-2xl border border-purple-500/30 text-center">
+                    <span class="text-xs bg-purple-500/20 text-purple-400 px-3 py-1 rounded-full font-bold uppercase tracking-wider">3. Object (ಕರ್ಮಪದ)</span>
+                    <h3 class="text-lg font-bold text-white mt-3 mb-1">ವಿಷಯ ಅಥವಾ ವಸ್ತು</h3>
+                    <p class="text-xs text-slate-400">Cricket, English, Food, School</p>
+                </div>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-blue-600/10 border border-blue-500/20 text-blue-200 text-sm flex items-center gap-3">
+                <i class="fa-solid fa-lightbulb text-amber-400 text-xl flex-shrink-0"></i>
+                <div>
+                    <strong>ನೆನಪಿಡಿ:</strong> Tenses ಅಂದರೆ ಕ್ರಿಯಾಪದದ (Verb) ರೂಪ ಬದಲಾಯಿಸುವ ಮೂಲಕ ಕಾಲವನ್ನು (Present, Past, Future) ಸೂಚಿಸುವುದಾಗಿದೆ!
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: 12 TENSES DETAILED BREAKDOWN -->
+        <section class="space-y-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-2xl font-extrabold text-white">ಸಂಪೂರ್ಣ 12 Tenses ವಿವರಣೆ</h2>
+                    <p class="text-xs text-slate-400">ಸೂತ್ರಗಳು, ಕನ್ನಡ ಅರ್ಥ ಮತ್ತು ಆಡಿಯೋ ಜೊತೆ</p>
+                </div>
+
+                <!-- Tense Filter Switcher -->
+                <div class="flex flex-wrap gap-2 bg-slate-900 p-1.5 rounded-2xl border border-slate-800">
+                    <button onclick="filterTenses('all')" id="filter-all" class="filter-btn active px-4 py-2 rounded-xl text-xs font-semibold transition-all">ಎಲ್ಲವೂ (All 12)</button>
+                    <button onclick="filterTenses('present')" id="filter-present" class="filter-btn text-slate-400 hover:text-white px-4 py-2 rounded-xl text-xs font-semibold transition-all">Present (4)</button>
+                    <button onclick="filterTenses('past')" id="filter-past" class="filter-btn text-slate-400 hover:text-white px-4 py-2 rounded-xl text-xs font-semibold transition-all">Past (4)</button>
+                    <button onclick="filterTenses('future')" id="filter-future" class="filter-btn text-slate-400 hover:text-white px-4 py-2 rounded-xl text-xs font-semibold transition-all">Future (4)</button>
+                </div>
+            </div>
+
+            <!-- Tenses Cards Container -->
+            <div id="tensesGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Javascript will inject 12 tenses dynamically -->
+            </div>
+        </section>
+
+        <!-- SECTION 3: TENSES SUMMARY TABLE CHART -->
+        <section class="glass-card p-6 sm:p-8 rounded-3xl border border-slate-800">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-10 h-10 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center text-lg">
+                    <i class="fa-solid fa-table-cells"></i>
+                </div>
+                <div>
+                    <h2 class="text-xl sm:text-2xl font-bold text-white">12 Tenses Quick Summary Chart</h2>
+                    <p class="text-xs text-slate-400">ಒಂದೇ ನೋಟದಲ್ಲಿ ಎಲ್ಲಾ Verb ರೂಪಗಳ ಹೋಲಿಕೆ</p>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse text-xs sm:text-sm">
+                    <thead>
+                        <tr class="border-b border-slate-800 text-slate-400 bg-slate-900/80">
+                            <th class="p-3.5 font-bold">Tense Type</th>
+                            <th class="p-3.5 font-bold">Simple</th>
+                            <th class="p-3.5 font-bold">Continuous</th>
+                            <th class="p-3.5 font-bold">Perfect</th>
+                            <th class="p-3.5 font-bold">Perfect Continuous</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-800/60 text-slate-300">
+                        <tr class="hover:bg-slate-800/30">
+                            <td class="p-3.5 font-bold text-blue-400">Present</td>
+                            <td class="p-3.5">play / plays</td>
+                            <td class="p-3.5">am / is / are playing</td>
+                            <td class="p-3.5">have / has played</td>
+                            <td class="p-3.5">have / has been playing</td>
+                        </tr>
+                        <tr class="hover:bg-slate-800/30">
+                            <td class="p-3.5 font-bold text-indigo-400">Past</td>
+                            <td class="p-3.5">played</td>
+                            <td class="p-3.5">was / were playing</td>
+                            <td class="p-3.5">had played</td>
+                            <td class="p-3.5">had been playing</td>
+                        </tr>
+                        <tr class="hover:bg-slate-800/30">
+                            <td class="p-3.5 font-bold text-emerald-400">Future</td>
+                            <td class="p-3.5">will play</td>
+                            <td class="p-3.5">will be playing</td>
+                            <td class="p-3.5">will have played</td>
+                            <td class="p-3.5">will have been playing</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SECTION 4: INTERACTIVE PRACTICE QUIZ GAME -->
+        <section class="glass-card p-6 sm:p-8 rounded-3xl border border-slate-800 max-w-3xl mx-auto">
+            <div class="text-center mb-8">
+                <span class="text-xs bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-3.5 py-1 rounded-full font-bold uppercase tracking-wider">
+                    <i class="fa-solid fa-gamepad"></i> ಅಭ್ಯಾಸ ರಸಪ್ರಶ್ನೆ
+                </span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-2">12 Tenses Practice Quiz</h2>
+                <p class="text-xs text-slate-400 mt-1">ವಾಕ್ಯಗಳನ್ನು ಸರಿಯಾಗಿ ಗುರುತಿಸಿ ನಿಮ್ಮ ಜ್ಞಾನ ಪರೀಕ್ಷಿಸಿಕೊಳ್ಳಿ</p>
+            </div>
+
+            <div id="quizBox" class="bg-slate-900/90 p-6 sm:p-8 rounded-2xl border border-slate-800 shadow-xl">
+                <!-- Quiz dynamically loaded -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="glass-card border-t border-slate-800 mt-16 py-8">
+        <div class="max-w-7xl mx-auto px-4 text-center text-slate-400 text-xs sm:text-sm">
+            <p>© 2026 12 Tenses English Masterclass (Kannada Edition). ಕಲಿಯಿರಿ, ಪ್ರಗತಿ ಹೊಂದಿರಿ! 🚀</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // 12 Tenses Complete Dataset
+        const tensesData = [
+            // PRESENT TENSES
+            {
+                id: "pres_1",
+                category: "present",
+                title: "1. Simple Present Tense",
+                usage: "ದಿನನಿತ್ಯದ ಅಭ್ಯಾಸಗಳು, ಸತ್ಯ ಸಂಗತಿಗಳನ್ನು ಹೇಳಲು ಬಳಸಲಾಗುತ್ತದೆ.",
+                formula: "Subject + V1 (s/es) + Object",
+                en: "I play cricket every Sunday.",
+                kn: "ನಾನು ಪ್ರತಿ ಭಾನುವಾರ ಕ್ರಿಕೆಟ್ ಆಡುತ್ತೇನೆ.",
+                example2En: "The sun rises in the east.",
+                example2Kn: "ಸೂರ್ಯನು ಪೂರ್ವದಲ್ಲಿ ಉದಯಿಸುತ್ತಾನೆ."
+            },
+            {
+                id: "pres_2",
+                category: "present",
+                title: "2. Present Continuous Tense",
+                usage: "ಪ್ರಸ್ತುತ ಈ ಕ್ಷಣದಲ್ಲಿ ನಡೆಯುತ್ತಿರುವ ಕೆಲಸವನ್ನು ತಿಳಿಸಲು.",
+                formula: "Subject + am/is/are + V1 + ing + Object",
+                en: "She is reading a newspaper now.",
+                kn: "ಅವಳು ಈಗ ಪತ್ರಿಕೆ ಓದುತ್ತಿದ್ದಾಳೆ.",
+                example2En: "They are playing football.",
+                example2Kn: "ಅವರು ಫುಟ್‌ಬಾಲ್ ಆಡುತ್ತಿದ್ದಾರೆ."
+            },
+            {
+                id: "pres_3",
+                category: "present",
+                title: "3. Present Perfect Tense",
+                usage: "ಈಗ ತಾನೇ ಪೂರ್ಣಗೊಂಡ ಕೆಲಸಕ್ಕೆ (ಇದರ ಪರಿಣಾಮ ಈಗಲೂ ಇರುತ್ತದೆ).",
+                formula: "Subject + have/has + V3 + Object",
+                en: "I have completed my homework.",
+                kn: "ನಾನು ನನ್ನ ಮನೆಗೆಲಸವನ್ನು ಮುಗಿಸಿದ್ದೇನೆ.",
+                example2En: "He has gone to Bengaluru.",
+                example2Kn: "ಅವನು ಬೆಂಗಳೂರಿಗೆ ಹೋಗಿದ್ದಾನೆ."
+            },
+            {
+                id: "pres_4",
+                category: "present",
+                title: "4. Present Perfect Continuous Tense",
+                usage: "ಗತಕಾಲದಲ್ಲಿ ಪ್ರಾರಂಭವಾಗಿ ಈಗಲೂ ನಿರಂತರವಾಗಿ ಮುಂದುವರಿಯುತ್ತಿರುವ ಕೆಲಸಕ್ಕೆ.",
+                formula: "Subject + have/has + been + V1 + ing + Object",
+                en: "I have been working here for 5 years.",
+                kn: "ನಾನು 5 ವರ್ಷಗಳಿಂದ ಇಲ್ಲೇ ಕೆಲಸ ಮಾಡುತ್ತಿದ್ದೇನೆ.",
+                example2En: "It has been raining since morning.",
+                example2Kn: "ಬೆಳಿಗ್ಗೆಯಿಂದ ಮಳೆ ಬರುತ್ತಲೇ ಇದೆ."
+            },
+
+            // PAST TENSES
+            {
+                id: "past_1",
+                category: "past",
+                title: "5. Simple Past Tense",
+                usage: "ಗತಕಾಲದಲ್ಲಿ (ಹಿಂದೆ) ಪೂರ್ಣಗೊಂಡ ಕೆಲಸಕ್ಕೆ ಬಳಸಲಾಗುತ್ತದೆ.",
+                formula: "Subject + V2 + Object",
+                en: "He bought a new car yesterday.",
+                kn: "ಅವನು ನಿನ್ನೆ ಹೊಸ ಕಾರು ಕೊಂಡನು.",
+                example2En: "We visited Mysuru last week.",
+                example2Kn: "ನಾವು ಕಳೆದ ವಾರ ಮೈಸೂರಿಗೆ ಭೇಟಿ ನೀಡಿದೆವು."
+            },
+            {
+                id: "past_2",
+                category: "past",
+                title: "6. Past Continuous Tense",
+                usage: "ಗತಕಾಲದಲ್ಲಿ ಒಂದು ನಿರ್ದಿಷ್ಟ ಸಮಯದಲ್ಲಿ ನಡೆಯುತ್ತಿದ್ದ ಕೆಲಸಕ್ಕೆ.",
+                formula: "Subject + was/were + V1 + ing + Object",
+                en: "They were watching a movie yesterday evening.",
+                kn: "ಅವರು ನಿನ್ನೆ ಸಂಜೆ ಸಿನಿಮಾ ನೋಡುತ್ತಿದ್ದರು.",
+                example2En: "I was sleeping when you called.",
+                example2Kn: "ನೀನು ಕರೆ ಮಾಡಿದಾಗ ನಾನು ನಿದ್ರಿಸುತ್ತಿದ್ದೆ."
+            },
+            {
+                id: "past_3",
+                category: "past",
+                title: "7. Past Perfect Tense",
+                usage: "ಗತಕಾಲದ ಎರಡು ಕೆಲಸಗಳಲ್ಲಿ, ಮೊದಲೇ ಮುಗಿದಿದ್ದ ಕೆಲಸಕ್ಕೆ.",
+                formula: "Subject + had + V3 + Object",
+                en: "The train had left before I reached the station.",
+                kn: "ನಾನು ಸ್ಟೇಷನ್‌ಗೆ ತಲುಪುವಷ್ಟರಲ್ಲಿ ರೈಲು ಹೊರಟುಹೋಗಿತ್ತು.",
+                example2En: "She had finished cooking before guests arrived.",
+                example2Kn: "ಅತಿಥಿಗಳು ಬರುವಷ್ಟರಲ್ಲಿ ಅವಳು ಅಡುಗೆ ಮುಗಿಸಿದ್ದಳು."
+            },
+            {
+                id: "past_4",
+                category: "past",
+                title: "8. Past Perfect Continuous Tense",
+                usage: "ಗತಕಾಲದಲ್ಲಿ ಒಂದು ಅವಧಿಯವರೆಗೆ ನಿರಂತರವಾಗಿ ನಡೆದು ಮುಗಿದ ಕೆಲಸಕ್ಕೆ.",
+                formula: "Subject + had + been + V1 + ing + Object",
+                en: "They had been playing for two hours before it rained.",
+                kn: "ಮಳೆ ಬರುವ ಮೊದಲು ಅವರು ಎರಡು ಗಂಟೆಗಳಿಂದ ಆಡುತ್ತಿದ್ದರು.",
+                example2En: "He had been studying all night.",
+                example2Kn: "ಅವನು ಇಡೀ ರಾತ್ರಿ ಓದುತ್ತಿದ್ದನು."
+            },
+
+            // FUTURE TENSES
+            {
+                id: "fut_1",
+                category: "future",
+                title: "9. Simple Future Tense",
+                usage: "ಮುಂದೆ (ಭವಿಷ್ಯದಲ್ಲಿ) ನಡೆಯಲಿರುವ ಸಾಮಾನ್ಯ ಕೆಲಸಕ್ಕೆ.",
+                formula: "Subject + will + V1 + Object",
+                en: "I will call you tomorrow morning.",
+                kn: "ನಾನು ನಾಳೆ ಬೆಳಿಗ್ಗೆ ನಿನಗೆ ಕರೆ ಮಾಡುತ್ತೇನೆ.",
+                example2En: "We will attend the meeting.",
+                example2Kn: "ನಾವು ಸಭೆಯಲ್ಲಿ ಪಾಲ್ಗೊಳ್ಳುತ್ತೇವೆ."
+            },
+            {
+                id: "fut_2",
+                category: "future",
+                title: "10. Future Continuous Tense",
+                usage: "ಭವಿಷ್ಯದಲ್ಲಿ ಒಂದು ನಿರ್ದಿಷ್ಟ ಸಮಯದಲ್ಲಿ ನಡೆಯುತ್ತಿರುತ್ತದೆ ಎನ್ನಲಾಗುವ ಕೆಲಸಕ್ಕೆ.",
+                formula: "Subject + will be + V1 + ing + Object",
+                en: "She will be writing the exam at this time tomorrow.",
+                kn: "ನಾಳೆ ಈ ಸಮಯಕ್ಕೆ ಅವಳು ಪರೀಕ್ಷೆ ಬರೆಯುತ್ತಿರುತ್ತಾಳೆ.",
+                example2En: "They will be traveling to Delhi.",
+                example2Kn: "ಅವರು ದೆಹಲಿಗೆ ಪ್ರಯಾಣಿಸುತ್ತಿರುತ್ತಾರೆ."
+            },
+            {
+                id: "fut_3",
+                category: "future",
+                title: "11. Future Perfect Tense",
+                usage: "ಭವಿಷ್ಯದ ನಿರ್ದಿಷ್ಟ ಸಮಯದೊಳಗೆ ಪೂರ್ಣಗೊಳ್ಳುವ ಕೆಲಸಕ್ಕೆ.",
+                formula: "Subject + will have + V3 + Object",
+                en: "I will have completed this course by next month.",
+                kn: "ಮುಂದಿನ ತಿಂಗಳಿನೊಳಗೆ ನಾನು ಈ ಕೋರ್ಸ್ ಮುಗಿಸಿರುತ್ತೇನೆ.",
+                example2En: "He will have reached home by 8 PM.",
+                example2Kn: "ರಾತ್ರಿ 8 ಗಂಟೆಯೊಳಗೆ ಅವನು ಮನೆ ತಲುಪಿರುತ್ತಾನೆ."
+            },
+            {
+                id: "fut_4",
+                category: "future",
+                title: "12. Future Perfect Continuous Tense",
+                usage: "ಭವಿಷ್ಯದಲ್ಲಿ ಒಂದು ನಿಗದಿತ ಸಮಯದವರೆಗೂ ನಿರಂತರವಾಗಿ ನಡೆಯುತ್ತಿರುತ್ತದೆ ಎನ್ನಲಾಗುವ ಕೆಲಸಕ್ಕೆ.",
+                formula: "Subject + will have been + V1 + ing + Object",
+                en: "By next year, I will have been living here for 10 years.",
+                kn: "ಮುಂದಿನ ವರ್ಷಕ್ಕೆ ನಾನು ಇಲ್ಲಿ ವಾಸಿಸಲು 10 ವರ್ಷಗಳಾಗುತ್ತವೆ.",
+                example2En: "By 5 PM, she will have been teaching for 4 hours.",
+                example2Kn: "ಸಂಜೆ 5 ಗಂಟೆಗೆ ಅವಳು ಬೋಧನೆ ಆರಂಭಿಸಿ 4 ಗಂಟೆಗಳಾಗುತ್ತವೆ."
+            }
+        ];
+
+        // Quiz Questions Dataset
+        const quizQuestions = [
+            {
+                question: "ಕನ್ನಡ ಅರ್ಥ: 'ಅವಳು ಈಗ ಪುಸ್ತಕ ಓದುತ್ತಿದ್ದಾಳೆ.' ಇದಕ್ಕೆ ಸರಿಯಾದ Tense ಯಾವುದು?",
+                options: [
+                    "Simple Present Tense",
+                    "Present Continuous Tense (She is reading...)",
+                    "Present Perfect Tense"
+                ],
+                correct: 1
+            },
+            {
+                question: "'I will call you tomorrow.' ಈ ವಾಕ್ಯವು ಯಾವ Tense ಗೆ ಸೇರಿದೆ?",
+                options: [
+                    "Simple Future Tense",
+                    "Future Continuous Tense",
+                    "Simple Past Tense"
+                ],
+                correct: 0
+            },
+            {
+                question: "Present Perfect Tense ನ ಸರಿಯಾದ ಸೂತ್ರ (Formula) ಯಾವುದು?",
+                options: [
+                    "Subject + was/were + V1 + ing",
+                    "Subject + have/has + V3 + Object",
+                    "Subject + will + V1 + Object"
+                ],
+                correct: 1
+            },
+            {
+                question: "'He bought a car yesterday.' ಇದರಲ್ಲಿ ಯಾವ Verb ರೂಪ ಬಳಸಲಾಗಿದೆ?",
+                options: [
+                    "V1 (Buy)",
+                    "V2 (Bought) - Simple Past",
+                    "V3 (Bought) - Present Perfect"
+                ],
+                correct: 1
+            }
+        ];
+
+        let currentQuizIndex = 0;
+        let quizScore = 0;
+
+        // -------------------------------------------------------------
+        // Web Speech API (Text To Speech)
+        // -------------------------------------------------------------
+        function speak(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel(); // Stop ongoing audio
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-US';
+                utterance.rate = 0.88; // Slower for clear understanding
+                utterance.pitch = 1.0;
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert("ನಿಮ್ಮ ಬ್ರೌಸರ್‌ನಲ್ಲಿ ಆಡಿಯೋ ಉಚ್ಚಾರಣೆ ಸೌಲಭ್ಯವಿಲ್ಲ.");
+            }
+        }
+
+        // -------------------------------------------------------------
+        // Render 12 Tenses Cards
+        // -------------------------------------------------------------
+        function renderTenses(filter = 'all') {
+            const container = document.getElementById('tensesGrid');
+            if (!container) return;
+
+            const filteredData = filter === 'all' 
+                ? tensesData 
+                : tensesData.filter(item => item.category === filter);
+
+            container.innerHTML = filteredData.map(item => `
+                <div class="glass-card p-6 rounded-3xl border border-slate-800 animate-pop flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-xs px-3 py-1 rounded-full font-bold uppercase ${
+                                item.category === 'present' ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30' :
+                                item.category === 'past' ? 'bg-indigo-500/20 text-indigo-400 border border-indigo-500/30' :
+                                'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
+                            }">
+                                ${item.category.toUpperCase()}
+                            </span>
+                            <button onclick="speak('${item.en.replace(/'/g, "\\'")}')" class="text-xs bg-blue-600/20 hover:bg-blue-600 text-blue-400 hover:text-white px-3 py-1.5 rounded-xl flex items-center gap-1.5 transition-all">
+                                <i class="fa-solid fa-volume-high"></i> ಆಲಿಸಿ
+                            </button>
+                        </div>
+
+                        <h3 class="text-lg font-bold text-white mb-2">${item.title}</h3>
+                        <p class="text-xs text-slate-300 mb-4 leading-relaxed">${item.usage}</p>
+
+                        <!-- Formula Box -->
+                        <div class="p-3 bg-slate-900/90 rounded-xl border border-slate-800 mb-4">
+                            <span class="text-[10px] text-amber-400 font-bold uppercase tracking-wider block mb-1">📐 Rule / Formula:</span>
+                            <code class="text-xs font-mono font-bold text-indigo-300">${item.formula}</code>
+                        </div>
+
+                        <!-- Examples -->
+                        <div class="space-y-3">
+                            <div class="p-3 bg-slate-800/50 rounded-xl border border-slate-700/50">
+                                <p class="text-xs text-slate-400">ಉದಾಹರಣೆ 1:</p>
+                                <p class="text-sm font-bold text-blue-300">"${item.en}"</p>
+                                <p class="text-xs text-slate-300 mt-0.5">ಕನ್ನಡ: ${item.kn}</p>
+                            </div>
+                            <div class="p-3 bg-slate-800/50 rounded-xl border border-slate-700/50">
+                                <p class="text-xs text-slate-400">ಉದಾಹರಣೆ 2:</p>
+                                <p class="text-sm font-bold text-blue-300">"${item.example2En}"</p>
+                                <p class="text-xs text-slate-300 mt-0.5">ಕನ್ನಡ: ${item.example2Kn}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // -------------------------------------------------------------
+        // Filter Tenses Switcher
+        // -------------------------------------------------------------
+        function filterTenses(category) {
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active', 'text-white');
+                btn.classList.add('text-slate-400');
+            });
+
+            const activeBtn = document.getElementById('filter-' + category);
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+                activeBtn.classList.remove('text-slate-400');
+            }
+
+            renderTenses(category);
+        }
+
+        // -------------------------------------------------------------
+        // Quiz Engine
+        // -------------------------------------------------------------
+        function loadQuiz() {
+            const container = document.getElementById('quizBox');
+            if (!container) return;
+
+            if (currentQuizIndex >= quizQuestions.length) {
+                container.innerHTML = `
+                    <div class="text-center py-6">
+                        <div class="w-16 h-16 rounded-full bg-amber-500/20 text-amber-400 mx-auto flex items-center justify-center text-3xl mb-4">
+                            <i class="fa-solid fa-trophy"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-2">ಅಭಿನಂದನೆಗಳು! (Quiz Completed)</h3>
+                        <p class="text-slate-300 text-sm mb-6">ನಿಮ್ಮ ಒಟ್ಟು ಅಂಕಗಳು: <span class="text-blue-400 font-bold text-xl">${quizScore} / ${quizQuestions.length}</span></p>
+                        <button onclick="resetQuiz()" class="bg-blue-600 hover:bg-blue-500 text-white px-6 py-2.5 rounded-xl font-semibold text-sm transition-all shadow-lg shadow-blue-500/30">
+                            ಇನ್ನೊಮ್ಮೆ ಪ್ರಯತ್ನಿಸಿ (Restart Quiz)
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+
+            const q = quizQuestions[currentQuizIndex];
+            container.innerHTML = `
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-xs text-slate-400 font-medium">ಪ್ರಶ್ನೆ ${currentQuizIndex + 1} / ${quizQuestions.length}</span>
+                    <span class="text-xs bg-blue-500/20 text-blue-400 px-3 py-1 rounded-full font-bold">Score: ${quizScore}</span>
+                </div>
+                <h3 class="text-base sm:text-lg font-bold text-white mb-6">${q.question}</h3>
+                <div class="space-y-3">
+                    ${q.options.map((opt, idx) => `
+                        <button onclick="handleAnswer(${idx})" class="w-full text-left p-4 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-200 border border-slate-700 hover:border-blue-500 text-xs sm:text-sm font-medium transition-all flex items-center justify-between">
+                            <span>${opt}</span>
+                            <i class="fa-solid fa-circle-chevron-right text-slate-500"></i>
+                        </button>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function handleAnswer(selectedIndex) {
+            const q = quizQuestions[currentQuizIndex];
+            if (selectedIndex === q.correct) {
+                quizScore++;
+                speak("Correct Answer!");
+            } else {
+                speak("Wrong Answer!");
+            }
+            currentQuizIndex++;
+            loadQuiz();
+        }
+
+        function resetQuiz() {
+            currentQuizIndex = 0;
+            quizScore = 0;
+            loadQuiz();
+        }
+
+        // Initialize App on Load
+        window.onload = function() {
+            renderTenses('all');
+            loadQuiz();
+        };
+    </script>
+</body>
+</html>

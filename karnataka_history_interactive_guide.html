@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ಕರ್ನಾಟಕದ ಸಂಪೂರ್ಣ ಇತಿಹಾಸ | Complete History of Karnataka (Interactive 3D Experience)</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts for Kannada typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@300;400;500;600;700;800&family=Tiro+Kannada:ital@0;1&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Three.js 3D Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        karnatakaRed: '#8B0000',
+                        karnatakaGold: '#DAA520',
+                        karnatakaYellow: '#FFD700',
+                        royalMaroon: '#4A0404',
+                        royalGold: '#F59E0B',
+                        sandstone: '#E8D8C8',
+                        darkBg: '#0F0505',
+                        darkCard: '#1C0A0A'
+                    },
+                    fontFamily: {
+                        kannada: ['Noto Sans Kannada', 'sans-serif'],
+                        tiro: ['Tiro Kannada', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Noto Sans Kannada', sans-serif;
+            background-color: #0F0505;
+            color: #F8FAFC;
+            overflow-x: hidden;
+        }
+
+        .font-tiro {
+            font-family: 'Tiro Kannada', serif;
+        }
+
+        /* 3D Canvas Background */
+        #canvas3d {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Glassmorphism Cards */
+        .glass-card {
+            background: rgba(28, 10, 10, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(218, 165, 32, 0.25);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+            border-radius: 1.25rem;
+        }
+
+        .glass-card-hover {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .glass-card-hover:hover {
+            transform: translateY(-6px) scale(1.01);
+            border-color: rgba(255, 215, 0, 0.6);
+            box-shadow: 0 20px 50px rgba(218, 165, 32, 0.25);
+        }
+
+        /* Gold Gradient Borders */
+        .border-gold-gradient {
+            border-image: linear-gradient(to right, #DAA520, #FFD700, #DAA520) 1;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0F0505;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #8B0000;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #DAA520;
+        }
+
+        /* Text Glow Effects */
+        .text-glow-gold {
+            text-shadow: 0 0 15px rgba(218, 165, 32, 0.6);
+        }
+        .text-glow-red {
+            text-shadow: 0 0 15px rgba(139, 0, 0, 0.7);
+        }
+
+        /* Tab active state */
+        .tab-btn.active {
+            background: linear-gradient(135deg, #8B0000, #4A0404);
+            border-color: #FFD700;
+            color: #FFD700;
+            box-shadow: 0 0 15px rgba(218, 165, 32, 0.4);
+        }
+
+        /* Timeline Connector */
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, #8B0000, #DAA520, #8B0000);
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+        @media (max-width: 768px) {
+            .timeline-line::before {
+                left: 20px;
+            }
+        }
+    </style>
+</head>
+<body class="selection:bg-karnatakaRed selection:text-karnatakaYellow">
+
+    <!-- 3D Interactive Canvas in Background -->
+    <canvas id="canvas3d"></canvas>
+
+    <!-- Content Overlay Wrapper -->
+    <div class="relative z-10">
+
+        <!-- Navigation Header -->
+        <header class="sticky top-0 z-50 bg-darkBg/90 backdrop-blur-md border-b border-karnatakaGold/30 shadow-2xl">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
+                <!-- Flag Symbol & Title -->
+                <div class="flex items-center gap-3">
+                    <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-red-600 via-yellow-500 to-amber-600 p-0.5 shadow-lg flex items-center justify-center font-bold text-darkBg">
+                        <div class="w-full h-full bg-darkBg rounded-[10px] flex items-center justify-center text-karnatakaYellow font-tiro text-xl font-bold">
+                            ಕರ್
+                        </div>
+                    </div>
+                    <div>
+                        <h1 class="font-tiro text-lg sm:text-2xl font-bold text-karnatakaYellow tracking-wide flex items-center gap-2">
+                            ಕರ್ನಾಟಕದ ಸಂಪೂರ್ಣ ಇತಿಹಾಸ
+                        </h1>
+                        <span class="block text-[10px] sm:text-xs text-amber-300/80 tracking-widest font-mono uppercase">Heritage & History of Karnataka</span>
+                    </div>
+                </div>
+
+                <!-- Navigation Links -->
+                <nav class="hidden lg:flex items-center gap-6 text-sm font-medium text-slate-300">
+                    <a href="#overview" class="hover:text-karnatakaYellow transition-colors">ಪೀಠಿಕೆ</a>
+                    <a href="#flowchart" class="hover:text-karnatakaYellow transition-colors">ಸಾಮ್ರಾಜ್ಯಗಳ ನಕ್ಷೆ</a>
+                    <a href="#timeline" class="hover:text-karnatakaYellow transition-colors">ಕಾಲಕ್ರಮ</a>
+                    <a href="#architecture" class="hover:text-karnatakaYellow transition-colors">ವಾಸ್ತುಶಿಲ್ಪ</a>
+                    <a href="#quiz" class="hover:text-karnatakaYellow transition-colors">ರಸಪ್ರಶ್ನೆ</a>
+                </nav>
+
+                <!-- Audio Atmosphere Button -->
+                <button id="ambientSoundBtn" onclick="toggleAmbientSound()" class="flex items-center gap-2 bg-royalMaroon/80 hover:bg-karnatakaRed border border-karnatakaGold/50 px-3.5 py-1.5 rounded-full text-xs sm:text-sm text-karnatakaYellow transition-all shadow-lg">
+                    <i id="soundIcon" class="fa-solid fa-volume-xmark text-yellow-400"></i>
+                    <span id="soundLabel">ರಾಜಕೀಯ ಸಂಗೀತ</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section id="overview" class="min-h-[85vh] flex flex-col justify-center items-center text-center px-4 py-12 relative">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-royalMaroon/90 border border-karnatakaGold/40 text-karnatakaYellow text-xs sm:text-sm font-medium mb-6 shadow-xl backdrop-blur-md">
+                <i class="fa-solid fa-crown text-amber-400"></i>
+                <span>೨೦೦೦+ ವರ್ಷಗಳ ಭವ್ಯ ರಾಜಪರಂಪರೆ ಹಾಗೂ ಸಂಸ್ಕೃತಿ</span>
+            </div>
+
+            <h1 class="font-tiro text-4xl sm:text-6xl md:text-7xl font-extrabold text-karnatakaYellow text-glow-gold leading-tight max-w-5xl mb-6">
+                ಸಿರಿಗನ್ನಡಂ ಗೆಲ್ಗೆ, ಸಿರಿಗನ್ನಡಂ ಬಾಳ್ಗೆ!
+            </h1>
+
+            <p class="text-base sm:text-xl text-sandstone/90 max-w-3xl leading-relaxed font-light mb-8">
+                ಪ್ರಾಚೀನ ಕದಂಬರಿಂದ ಹಿಡಿದು ವಿಜಯನಗರದ ಸ್ವರ್ಣಯುಗ, ಮೈಸೂರು ಸಂಸ್ಥಾನ ಹಾಗೂ ಏಕೀಕರಣ ಚಳುವಳಿಯವರೆಗಿನ ಕರ್ನಾಟಕದ ಅದ್ಭುತ ಇತಿಹಾಸದ ಸಂಪೂರ್ಣ ಚಿತ್ರಣ.
+            </p>
+
+            <!-- Key Quick Stats -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-4xl w-full mb-10">
+                <div class="glass-card p-4 text-center border-b-2 border-b-karnatakaGold">
+                    <span class="block text-2xl sm:text-3xl font-bold text-karnatakaYellow font-tiro">೨೦೦೦+</span>
+                    <span class="text-xs text-slate-300">ವರ್ಷಗಳ ಲಿಖಿತ ಇತಿಹಾಸ</span>
+                </div>
+                <div class="glass-card p-4 text-center border-b-2 border-b-karnatakaRed">
+                    <span class="block text-2xl sm:text-3xl font-bold text-karnatakaYellow font-tiro">೮</span>
+                    <span class="text-xs text-slate-300">ಜ್ಞಾನಪೀಠ ಪ್ರಶಸ್ತಿಗಳು</span>
+                </div>
+                <div class="glass-card p-4 text-center border-b-2 border-b-karnatakaGold">
+                    <span class="block text-2xl sm:text-3xl font-bold text-karnatakaYellow font-tiro">೧೦+</span>
+                    <span class="text-xs text-slate-300">ಮಹಾನ್ ಸಾಮ್ರಾಜ್ಯಗಳು</span>
+                </div>
+                <div class="glass-card p-4 text-center border-b-2 border-b-karnatakaRed">
+                    <span class="block text-2xl sm:text-3xl font-bold text-karnatakaYellow font-tiro">UNESCO</span>
+                    <span class="text-xs text-slate-300">ವಿಶ್ವ ಪರಂಪರೆಯ ತಾಣಗಳು</span>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#timeline" class="bg-gradient-to-r from-karnatakaRed via-red-800 to-royalMaroon hover:from-red-700 hover:to-karnatakaRed text-karnatakaYellow font-bold px-8 py-3.5 rounded-xl border border-karnatakaGold/50 shadow-xl transition-all transform hover:-translate-y-1 flex items-center gap-2">
+                    <span>ಕಾಲಕ್ರಮದಲ್ಲಿ ಪಯಣಿಸಿ</span>
+                    <i class="fa-solid fa-arrow-down"></i>
+                </a>
+                <a href="#essayModalBtn" onclick="openEssayModal()" class="bg-royalMaroon/80 hover:bg-darkCard border border-karnatakaGold/50 text-sandstone font-semibold px-8 py-3.5 rounded-xl shadow-lg transition-all backdrop-blur-md flex items-center gap-2">
+                    <i class="fa-solid fa-book-open text-karnatakaGold"></i>
+                    <span>ಸಂಪೂರ್ಣ ಪ್ರಬಂಧ ಓದಿ (Full Essay)</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Section: Interactive Dynasty Flowchart Diagram -->
+        <section id="flowchart" class="py-16 max-w-6xl mx-auto px-4">
+            <div class="text-center mb-10">
+                <span class="text-karnatakaGold text-sm font-semibold tracking-wider uppercase">ಸಾಮ್ರಾಜ್ಯಗಳ ನಕ್ಷೆ</span>
+                <h2 class="font-tiro text-3xl sm:text-5xl font-bold text-karnatakaYellow mt-1 text-glow-gold">
+                    ಕರ್ನಾಟಕ ಆಳಿದ ಪ್ರಮುಖ ರಾಜಮನೆತನಗಳು
+                </h2>
+                <p class="text-slate-300 text-sm sm:text-base mt-2">ಕರ್ನಾಟಕವನ್ನು ಆಳಿದ ಪ್ರಮುಖ ಸಾಮ್ರಾಜ್ಯಗಳ ಕಾಲಾನುಕ್ರಮದ ನಕ್ಷೆ (Flowchart)</p>
+            </div>
+
+            <div class="glass-card p-6 sm:p-8 overflow-x-auto">
+                <div class="min-w-[700px]">
+                    <svg viewBox="0 0 900 380" class="w-full h-auto drop-shadow-xl font-kannada">
+                        <!-- Background Glows -->
+                        <defs>
+                            <linearGradient id="gradRed" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#8B0000;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#4A0404;stop-opacity:1" />
+                            </linearGradient>
+                            <linearGradient id="gradGold" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#DAA520;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#B8860B;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+
+                        <!-- Timeline Main Horizontal Axis -->
+                        <line x1="50" y1="190" x2="850" y2="190" stroke="#DAA520" stroke-width="4" stroke-dasharray="6,6" />
+
+                        <!-- Flow Nodes -->
+                        <!-- 1. Kadambas & Gangas -->
+                        <g transform="translate(60, 110)" class="cursor-pointer" onclick="scrollToEra('era-1')">
+                            <rect width="140" height="70" rx="12" fill="url(#gradRed)" stroke="#DAA520" stroke-width="2"/>
+                            <text x="70" y="30" fill="#FFD700" font-weight="bold" font-size="14" text-anchor="middle">ಕದಂಬರು & ಗಂಗರು</text>
+                            <text x="70" y="52" fill="#E8D8C8" font-size="11" text-anchor="middle">ಕ್ರಿ.ಶ. ೩೪೫ - ೧೦೦೪</text>
+                        </g>
+
+                        <!-- Connector 1 -->
+                        <path d="M 200 145 L 230 145 L 230 235 L 250 235" fill="none" stroke="#DAA520" stroke-width="2"/>
+
+                        <!-- 2. Badami Chalukyas -->
+                        <g transform="translate(250, 200)" class="cursor-pointer" onclick="scrollToEra('era-2')">
+                            <rect width="140" height="70" rx="12" fill="url(#gradGold)" stroke="#8B0000" stroke-width="2"/>
+                            <text x="70" y="30" fill="#0F0505" font-weight="bold" font-size="14" text-anchor="middle">ಬಾದಾಮಿ ಚಾಲುಕ್ಯರು</text>
+                            <text x="70" y="52" fill="#2A0808" font-size="11" text-anchor="middle">ಕ್ರಿ.ಶ. ೫೪೩ - ೭೫೩</text>
+                        </g>
+
+                        <!-- Connector 2 -->
+                        <path d="M 390 235 L 420 235 L 420 145 L 440 145" fill="none" stroke="#DAA520" stroke-width="2"/>
+
+                        <!-- 3. Rashtrakutas & Kalyani Chalukyas -->
+                        <g transform="translate(440, 110)" class="cursor-pointer" onclick="scrollToEra('era-2')">
+                            <rect width="150" height="70" rx="12" fill="url(#gradRed)" stroke="#DAA520" stroke-width="2"/>
+                            <text x="75" y="30" fill="#FFD700" font-weight="bold" font-size="13" text-anchor="middle">ರಾಷ್ಟ್ರಕೂಟರು & ಹೊಯ್ಸಳರು</text>
+                            <text x="75" y="52" fill="#E8D8C8" font-size="11" text-anchor="middle">ಕ್ರಿ.ಶ. ೭೫೩ - ೧೩೪೩</text>
+                        </g>
+
+                        <!-- Connector 3 -->
+                        <path d="M 590 145 L 620 145 L 620 235 L 640 235" fill="none" stroke="#DAA520" stroke-width="2"/>
+
+                        <!-- 4. Vijayanagara Empire -->
+                        <g transform="translate(640, 200)" class="cursor-pointer" onclick="scrollToEra('era-3')">
+                            <rect width="150" height="70" rx="12" fill="url(#gradGold)" stroke="#8B0000" stroke-width="2"/>
+                            <text x="75" y="30" fill="#0F0505" font-weight="bold" font-size="14" text-anchor="middle">ವಿಜಯನಗರ ಸಾಮ್ರಾಜ್ಯ</text>
+                            <text x="75" y="52" fill="#2A0808" font-size="11" text-anchor="middle">ಕ್ರಿ.ಶ. ೧೩೩೬ - ೧೬೪೬</text>
+                        </g>
+
+                        <!-- Connector 4 -->
+                        <line x1="715" y1="270" x2="715" y2="310" stroke="#DAA520" stroke-width="2" />
+
+                        <!-- 5. Mysore Wodeyars & Modern Karnataka -->
+                        <g transform="translate(620, 310)" class="cursor-pointer" onclick="scrollToEra('era-4')">
+                            <rect width="190" height="60" rx="12" fill="url(#gradRed)" stroke="#DAA520" stroke-width="2"/>
+                            <text x="95" y="28" fill="#FFD700" font-weight="bold" font-size="13" text-anchor="middle">ಮೈಸೂರು ಒಡೆಯರು & ಏಕೀಕರಣ</text>
+                            <text x="95" y="48" fill="#E8D8C8" font-size="11" text-anchor="middle">ಕ್ರಿ.ಶ. ೧೩೯೯ - ೧೯೭೩ (ಪ್ರಸ್ತುತ)</text>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Filterable Timeline / Era Switcher -->
+        <section id="timeline" class="py-16 max-w-6xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <span class="text-karnatakaGold text-sm font-semibold tracking-wider uppercase">ಕಾಲಾನುಕ್ರಮ ಇತಿಹಾಸ</span>
+                <h2 class="font-tiro text-3xl sm:text-5xl font-bold text-karnatakaYellow mt-1">
+                    ಕರ್ನಾಟಕದ ಇತಿಹಾಸದ ವಿವಿಧ ಕಾಲಘಟ್ಟಗಳು
+                </h2>
+                <p class="text-slate-300 text-sm sm:text-base mt-2">ಯಾವುದೇ ಕಾಲಘಟ್ಟದ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡಿ ಆ ಯುಗದ ಇತಿಹಾಸವನ್ನು ವಿವರವಾಗಿ ಓದಿ.</p>
+            </div>
+
+            <!-- Era Switcher Tabs -->
+            <div class="flex flex-wrap justify-center gap-2 sm:gap-4 mb-12">
+                <button onclick="switchTimelineTab('era-1')" id="tab-era-1" class="tab-btn active border border-karnatakaGold/40 bg-darkCard text-slate-300 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all">
+                    ೧. ಪ್ರಾಚೀನ ಯುಗ (ಕದಂಬರು & ಗಂಗರು)
+                </button>
+                <button onclick="switchTimelineTab('era-2')" id="tab-era-2" class="tab-btn border border-karnatakaGold/40 bg-darkCard text-slate-300 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all">
+                    ೨. ಚಾಲುಕ್ಯ, ರಾಷ್ಟ್ರಕೂಟ & ಹೊಯ್ಸಳರು
+                </button>
+                <button onclick="switchTimelineTab('era-3')" id="tab-era-3" class="tab-btn border border-karnatakaGold/40 bg-darkCard text-slate-300 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all">
+                    ೩. ವಿಜಯನಗರ & ಶರಣ ಕ್ರಾಂತಿ
+                </button>
+                <button onclick="switchTimelineTab('era-4')" id="tab-era-4" class="tab-btn border border-karnatakaGold/40 bg-darkCard text-slate-300 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all">
+                    ೪. ಮೈಸೂರು ಒಡೆಯರು & ಏಕೀಕರಣ
+                </button>
+            </div>
+
+            <!-- Era Cards Content Container -->
+            <div class="space-y-12">
+
+                <!-- ERA 1: Ancient Era -->
+                <div id="era-1" class="era-content glass-card p-6 sm:p-10 border-l-4 border-l-karnatakaGold">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                        <div class="lg:col-span-7 space-y-4">
+                            <div class="inline-block px-3 py-1 rounded-md bg-karnatakaRed text-karnatakaYellow text-xs font-bold">
+                                ಕ್ರಿ.ಶ. ೩೪೫ - ೧೦೦೪
+                            </div>
+                            <h3 class="font-tiro text-2xl sm:text-4xl font-bold text-karnatakaYellow">
+                                ಪ್ರಾಚೀನ ಯುಗ: ಕದಂಬರು ಮತ್ತು ತಲಕಾಡಿನ ಗಂಗರು
+                            </h3>
+                            <p class="text-slate-300 leading-relaxed text-sm sm:text-base">
+                                <strong>ಕದಂಬ ಸಾಮ್ರಾಜ್ಯ (ಮಯೂರಶರ್ಮ):</strong> ಬನವಾಸಿಯನ್ನು ರಾಜಧಾನಿಯಾಗಿ ಮಾಡಿಕೊಂಡು ಆಳಿದ ಕದಂಬರು ಕನ್ನಡದ ಪ್ರಥಮ ಸ್ವತಂತ್ರ ರಾಜವಂಶ. ಮಯೂರಶರ್ಮನು ಈ ಸಾಮ್ರಾಜ್ಯವನ್ನು ಸ್ಥಾಪಿಸಿದನು. ಕ್ರಿ.ಶ. ೪೫೦ರ <strong>ಹಲ್ಮಿಡಿ ಶಾಸನವು</strong> ಲಭ್ಯವಿರುವ ಅತ್ಯಂತ ಪ್ರಾಚೀನ ಕನ್ನಡ ಶಾಸನವಾಗಿದೆ.
+                            </p>
+                            <p class="text-slate-300 leading-relaxed text-sm sm:text-base">
+                                <strong>ತಲಕಾಡಿನ ಗಂಗರು:</strong> ದಕ್ಷಿಣ ಕರ್ನಾಟಕವನ್ನು ಆಳಿದ ಗಂಗರು ಜೈನ ಧರ್ಮ ಮತ್ತು ವಾಸ್ತುಶಿಲ್ಪಕ್ಕೆ ಅಪಾರ ಕೊಡುಗೆ ನೀಡಿದರು. ಶ್ರವಣಬೆಳಗೊಳದ ೫೭ ಅಡಿ ಎತ್ತರದ <strong>ಗೊಮ್ಮಟೇಶ್ವರ (ಬಾಹುಬಲಿ) ಏಕಶಿಲಾ ಪ್ರತಿಮೆ</strong> ಚಾವುಂಡರಾಯನ ಮೇಲ್ವಿಚಾರಣೆಯಲ್ಲಿ ನಿರ್ಮಾಣವಾಯಿತು.
+                            </p>
+                            <div class="pt-2 flex flex-wrap gap-2 text-xs">
+                                <span class="px-3 py-1 bg-royalMaroon/80 border border-karnatakaGold/30 rounded-lg text-amber-200">ಮಯೂರಶರ್ಮ</span>
+                                <span class="px-3 py-1 bg-royalMaroon/80 border border-karnatakaGold/30 rounded-lg text-amber-200">ಹಲ್ಮಿಡಿ ಶಾಸನ</span>
+                                <span class="px-3 py-1 bg-royalMaroon/80 border border-karnatakaGold/30 rounded-lg text-amber-200">ಶ್ರವಣಬೆಳಗೊಳ ಬಾಹುಬಲಿ</span>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-5">
+                            <div class="relative rounded-2xl overflow-hidden border-2 border-karnatakaGold/40 shadow-2xl group">
+                                <img src="https://images.unsplash.com/photo-1600100397608-f010e423b971?auto=format&fit=crop&w=800&q=80" alt="Gommateshwara Shravanabelagola" class="w-full h-64 sm:h-80 object-cover transform group-hover:scale-105 transition-all duration-500" onerror="this.src='https://placehold.co/800x600/4A0404/FFD700?text=Gommateshwara+Shravanabelagola'">
+                                <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-darkBg p-4">
+                                    <p class="text-xs text-karnatakaYellow font-bold">ಶ್ರವಣಬೆಳಗೊಳದ ಭಗವಾನ್ ಬಾಹುಬಲಿ ಮೂರ್ತಿ</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ERA 2: Golden Era -->
+                <div id="era-2" class="era-content glass-card p-6 sm:p-10 border-l-4 border-l-karnatakaRed hidden">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                        <div class="lg:col-span-7 space-y-4">
+                            <div class="inline-block px-3 py-1 rounded-md bg-karnatakaGold text-darkBg text-xs font-bold">
+                                ಕ್ರಿ.ಶ. ೫೪೩ - ೧೩೪೩
+                            </div>
+                            <h3 class="font-tiro text-2xl sm:text-4xl font-bold text-karnatakaYellow">
+                                ಚಾಲುಕ್ಯ, ರಾಷ್ಟ್ರಕೂಟ ಹಾಗೂ ಹೊಯ್ಸಳರ ಸುವರ್ಣಯುಗ
+                            </h3>
+                            <p class="text-slate-300 leading-relaxed text-sm sm:text-base">
+                                <strong>ಬಾದಾಮಿ ಚಾಲುಕ್ಯರು & ಇಮ್ಮಡಿ ಪುಲಿಕೇಶಿ:</strong> ಇಮ್ಮಡಿ ಪುಲಿಕೇಶಿಯು ಉತ್ತರ ಭಾರತದ ಚಕ್ರವರ್ತಿ ಹರ್ಷವರ್ಧನನನ್ನು ನರ್ಮದಾ ನದಿ ತೀರದಲ್ಲಿ ಸೋಲಿಸಿ 'ಪರಮೇಶ್ವರ' ಬಿರುದು ಪಡೆದನು. ಪಟ್ಟದಕಲ್ಲು ಮತ್ತು ಐಹೊಳೆ ದೇವಾಲಯಗಳ ವಾಸ್ತುಶಿಲ್ಪದ ತೊಟ್ಟಿಲಾದವು.
+                            </p>
+                            <p class="text-slate-300 leading-relaxed text-sm sm:text-base">
+                                <strong>ರಾಷ್ಟ್ರಕೂಟರು & ಕವಿರಾಜಮಾರ್ಗ:</strong> ನೃಪತುಂಗ ಅಮೋಘವರ್ಷನ ಕಾಲದಲ್ಲಿ ಕನ್ನಡದ ಪ್ರಥಮ ಲಭ್ಯ ಗ್ರಂಥ <strong>'ಕವಿರಾಜಮಾರ್ಗ'</strong> ರಚನೆಯಾಯಿತು. ಎಲ್ಲೋರದ ಕೈಲಾಸನಾಥ ದೇವಾಲಯ ಇವರ ಶಿಲ್ಪಕಲೆಗೆ ಮಕುಟಪ್ರಾಯ.
+                            </p>
+                            <p class="text-slate-300 leading-relaxed text-sm sm:text-base">
+                                <strong>ಹೊಯ್ಸಳರು:</strong> ಬೇಲೂರು, ಹಳೇಬೀಡು ಹಾಗೂ ಸೋಮನಾಥಪುರದ ನಕ್ಷತ್ರಾಕಾರದ ದೇವಾಲಯಗಳ ಅದ್ಭುತ ಕಲ್ಲಿನ ಕೆತ್ತನೆಗಳು ಹೊಯ್ಸಳರ ಕೊಡುಗೆ.
+                            </p>
+                        </div>
+                        <div class="lg:col-span-5">
+                            <div class="relative rounded-2xl overflow-hidden border-2 border-karnatakaGold/40 shadow-2xl group">
+                                <img src="https://images.unsplash.com/photo-1627894483216-2138af692e32?auto=format&fit=crop&w=800&q=80" alt="Belur Chennakesava Temple" class="w-full h-64 sm:h-80 object-cover transform group-hover:scale-105 transition-all duration-500" onerror="this.src='https://placehold.co/800x600/8B0000/FFD700?text=Belur+Halebidu+Architecture'">
+                                <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-darkBg p-4">
+                                    <p class="text-xs text-karnatakaYellow font-bold">ಬೇಲೂರಿನ ಚನ್ನಕೇಶವ ದೇವಾಲಯ - ಹೊಯ್ಸಳ ವಾಸ್ತುಶಿಲ್ಪ</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ERA 3: Vijayanagara & Sharana Era -->
+                <div id="era-3" class="era-content glass-card p-6 sm:p-10 border-l-4 border-l-karnatakaGold hidden">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                        <div class="lg:col-span-7 space-y-4">
+                            <div class="inline-block px-3 py-1 rounded-md bg-karnatakaRed text-karnatakaYellow text-xs font-bold">
+                                ೧೨ನೇ ಶತಮಾನ - ಕ್ರಿ.ಶ. ೧೬೪೬
+                            </div>
+                            <h3 class="font-tiro text-2xl sm:text-4xl font-bold text-karnatakaYellow">
+                                ಶರಣ ಕ್ರಾಂತಿ ಮತ್ತು ವಿಜಯನಗರ ಸಾಮ್ರಾಜ್ಯ ವೈಭವ
+                            </h3>
+                            <p class="text-slate-300 leading-relaxed text-sm sm:text-base">
+                                <strong>೧೨ನೇ ಶತಮಾನದ ಶರಣ ಚಳುವಳಿ:</strong> ಜಗಜ್ಯೋತಿ ಬಸವಣ್ಣ, ಅಲ್ಲಮಪ್ರಭು, ಅಕ್ಕಮಹಾದೇವಿ ನೇತೃತ್ವದಲ್ಲಿ ಅನುಭವ ಮಂಟಪದ ಮೂಲಕ ಸಾಮಾಜಿಕ ಸಮಾನತೆ ಮತ್ತು ವಚನ ಸಾಹಿತ್ಯದ ಕ್ರಾಂತಿಯಾಯಿತು. "ಕಾಯಕವೇ ಕೈಲಾಸ" ಎಂಬ ತತ್ವ ಜಗತ್ತಿಗೆ ತಲುಪಿತು.
+                            </p>
+                            <p class="text-slate-300 leading-relaxed text-sm sm:text-base">
+                                <strong>ವಿಜಯನಗರ ಸಾಮ್ರಾಜ್ಯ:</strong> ಹರಿಹರ ಮತ್ತು ಬುಕ್ಕರಾಯರಿಂದ ಸ್ಥಾಪಿತವಾದ ಈ ಸಾಮ್ರಾಜ್ಯವು <strong>ಶ್ರೀ ಕೃಷ್ಣದೇವರಾಯರ</strong> ಆಳ್ವಿಕೆಯಲ್ಲಿ ಸ್ವರ್ಣಯುಗ ಕಂಡಿತು. ಹಂಪಿಯ ವಿರೂಪಾಕ್ಷ ದೇವಾಲಯ, ವಿಜಯ ವಿಠಲ ದೇವಾಲಯದ ಕಲ್ಲಿನ ರಥ ಮತ್ತು ಸಂಗೀತ ಕಂಬಗಳು ಜಗತ್ಪ್ರಸಿದ್ದ.
+                            </p>
+                        </div>
+                        <div class="lg:col-span-5">
+                            <div class="relative rounded-2xl overflow-hidden border-2 border-karnatakaGold/40 shadow-2xl group">
+                                <img src="https://images.unsplash.com/photo-1589308078059-be1415eab4c3?auto=format&fit=crop&w=800&q=80" alt="Hampi Chariot" class="w-full h-64 sm:h-80 object-cover transform group-hover:scale-105 transition-all duration-500" onerror="this.src='https://placehold.co/800x600/4A0404/FFD700?text=Hampi+Stone+Chariot'">
+                                <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-darkBg p-4">
+                                    <p class="text-xs text-karnatakaYellow font-bold">ಹಂಪಿಯ ವಿಜಯ ವಿಠಲ ದೇವಾಲಯದ ಕಲ್ಲಿನ ರಥ</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ERA 4: Sultanates, Mysore & Unification -->
+                <div id="era-4" class="era-content glass-card p-6 sm:p-10 border-l-4 border-l-karnatakaRed hidden">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                        <div class="lg:col-span-7 space-y-4">
+                            <div class="inline-block px-3 py-1 rounded-md bg-karnatakaGold text-darkBg text-xs font-bold">
+                                ಕ್ರಿ.ಶ. ೧೩೯೯ - ೧೯೭೩
+                            </div>
+                            <h3 class="font-tiro text-2xl sm:text-4xl font-bold text-karnatakaYellow">
+                                ಮೈಸೂರು ಸಂಸ್ಥಾನ, ಸ್ವಾತಂತ್ರ್ಯ ಸಂಗ್ರಾಮ ಮತ್ತು ಏಕೀಕರಣ
+                            </h3>
+                            <p class="text-slate-300 leading-relaxed text-sm sm:text-base">
+                                <strong>ಬಹುಮನಿ/ಬಿಜಾಪುರ ಸುಲ್ತಾನರು & ಮೈಸೂರು:</strong> ಬಿಜಾಪುರದ ಗೋಲ್ ಗುಂಬಜ್ ವಿಶ್ವದ ಎರಡನೇ ಅತಿ ದೊಡ್ಡ ಗಮ್ಮಟ. ಹೈದರಾಲಿ ಮತ್ತು ಟಿಪ್ಪು ಸುಲ್ತಾನ್ ಆಂಗ್ಲೋ-ಮೈಸೂರು ಯುದ್ಧಗಳಲ್ಲಿ ಬ್ರಿಟಿಷರ ವಿರುದ್ಧ ಹೋರಾಡಿದರು.
+                            </p>
+                            <p class="text-slate-300 leading-relaxed text-sm sm:text-base">
+                                <strong>ಮೈಸೂರು ಒಡೆಯರು:</strong> ನಾಲ್ವಡಿ ಕೃಷ್ಣರಾಜ ಒಡೆಯರ್ ಮತ್ತು ಸರ್ ಎಂ. ವಿಶ್ವೇಶ್ವರಯ್ಯ ಅವರ ದೂರದೃಷ್ಟಿಯಿಂದ ಮೈಸೂರು ಮಾದರಿ ರಾಜ್ಯವಾಯಿತು.
+                            </p>
+                            <p class="text-slate-300 leading-relaxed text-sm sm:text-base">
+                                <strong>ಕರ್ನಾಟಕ ಏಕೀಕರಣ:</strong> ಕಿತ್ತೂರು ರಾಣಿ ಚೆನ್ನಮ್ಮ, ಸಂಗೊಳ್ಳಿ ರಾಯಣ್ಣ ಅವರ ವೀರಾವೇಶದ ಹೋರಾಟದ ನಂತರ, ಆಲೂರು ವೆಂಕಟರಾಯರ ಶ್ರಮದಿಂದ ೧೯೫೬ ನವೆಂಬರ್ ೧ ರಂದು ಮೈಸೂರು ರಾಜ್ಯ ಉದಯವಾಯಿತು. <strong>೧೯೭೩ ನವೆಂಬರ್ ೧ ರಂದು ಡಿ. ದೇವರಾಜ ಅರಸು ಅವರು 'ಕರ್ನಾಟಕ' ಎಂದು ಮರುನಾಮಕರಣ ಮಾಡಿದರು.</strong>
+                            </p>
+                        </div>
+                        <div class="lg:col-span-5">
+                            <div class="relative rounded-2xl overflow-hidden border-2 border-karnatakaGold/40 shadow-2xl group">
+                                <img src="https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=800&q=80" alt="Mysore Palace" class="w-full h-64 sm:h-80 object-cover transform group-hover:scale-105 transition-all duration-500" onerror="this.src='https://placehold.co/800x600/8B0000/FFD700?text=Mysore+Palace+Illumination'">
+                                <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-darkBg p-4">
+                                    <p class="text-xs text-karnatakaYellow font-bold">ಮೈಸೂರು ಅರಮನೆ - ರಾಜಮನೆತನದ ವೈಭವ</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Section: Visual Architectural Wonders of Karnataka -->
+        <section id="architecture" class="py-16 max-w-6xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <span class="text-karnatakaGold text-sm font-semibold tracking-wider uppercase">ವಾಸ್ತುಶಿಲ್ಪ ಪರಂಪರೆ</span>
+                <h2 class="font-tiro text-3xl sm:text-5xl font-bold text-karnatakaYellow mt-1">
+                    ಕರ್ನಾಟಕದ ಪ್ರಸಿದ್ಧ ಐತಿಹಾಸಿಕ ಸ್ಮಾರಕಗಳು
+                </h2>
+                <p class="text-slate-300 text-sm sm:text-base mt-2">ನಾಡಿನ ಕಲಾಕೌಶಲ್ಯ ಮತ್ತು ವಾಸ್ತುಶಿಲ್ಪದ ಶಿಖರಗಳು</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Monument 1 -->
+                <div class="glass-card glass-card-hover overflow-hidden group border border-karnatakaGold/30">
+                    <div class="h-52 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1600100397608-f010e423b971?auto=format&fit=crop&w=600&q=80" alt="Hampi Virupaksha" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/8B0000/FFD700?text=Virupaksha+Temple+Hampi'">
+                        <span class="absolute top-3 right-3 bg-karnatakaRed text-karnatakaYellow text-[10px] font-bold px-2.5 py-1 rounded-full shadow">ಹಂಪಿ</span>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-tiro text-xl font-bold text-karnatakaYellow mb-2">ವಿರೂಪಾಕ್ಷ ದೇವಾಲಯ, ಹಂಪಿ</h4>
+                        <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+                            ವಿಜಯನಗರ ಸಾಮ್ರಾಜ್ಯದ ಶ್ರೇಷ್ಠ ರಾಜಗೋಪುರ ಮತ್ತು ನಿರಂತರ ಪೂಜೆ ನಡೆಯುತ್ತಿರುವ ಜಗತ್ಪ್ರಸಿದ್ದ ಪುರಾತನ ದೇವಾಲಯ.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Monument 2 -->
+                <div class="glass-card glass-card-hover overflow-hidden group border border-karnatakaGold/30">
+                    <div class="h-52 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=600&q=80" alt="Mysore Palace" class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/4A0404/FFD700?text=Mysore+Palace'">
+                        <span class="absolute top-3 right-3 bg-karnatakaRed text-karnatakaYellow text-[10px] font-bold px-2.5 py-1 rounded-full shadow">ಮೈಸೂರು</span>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-tiro text-xl font-bold text-karnatakaYellow mb-2">ಅಂಬಾವಿಲಾಸ ಅರಮನೆ, ಮೈಸೂರು</h4>
+                        <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+                            ಇಂಡೋ-ಸಾರ್ಸೆನಿಕ್ ಶೈಲಿಯ ಭವ್ಯ ಅರಮನೆ. ದಸರಾ ಮಹೋತ್ಸವದ ಸಮಯದಲ್ಲಿ ೧ ಲಕ್ಷ ದೀಪಗಳಿಂದ ಕಂಗೊಳಿಸುತ್ತದೆ.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Monument 3 -->
+                <div class="glass-card glass-card-hover overflow-hidden group border border-karnatakaGold/30">
+                    <div class="h-52 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=600&q=80" alt="Gol Gumbaz Bijapur" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/8B0000/FFD700?text=Gol+Gumbaz+Vijayapura'">
+                        <span class="absolute top-3 right-3 bg-karnatakaRed text-karnatakaYellow text-[10px] font-bold px-2.5 py-1 rounded-full shadow">ವಿಜಯಪುರ</span>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-tiro text-xl font-bold text-karnatakaYellow mb-2">ಗೋಲ್ ಗುಂಬಜ್, ವಿಜಯಪುರ</h4>
+                        <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+                            ಮಹಮ್ಮದ್ ಆದಿಲ್ ಶಾ ನಿರ್ಮಿಸಿದ ಜಗತ್ತಿನ ಎರಡನೇ ಅತಿದೊಡ್ಡ ಗಮ್ಮಟ ಹಾಗೂ ವಿಸ್ಪರಿಂಗ್ ಗ್ಯಾಲರಿ (ಪ್ರತಿಧ್ವನಿ ಮಂಟಪ).
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Interactive Quiz -->
+        <section id="quiz" class="py-16 max-w-4xl mx-auto px-4">
+            <div class="text-center mb-10">
+                <span class="text-karnatakaGold text-sm font-semibold tracking-wider uppercase">ಜ್ಞಾನ ಪರೀಕ್ಷೆ</span>
+                <h2 class="font-tiro text-3xl sm:text-4xl font-bold text-karnatakaYellow mt-1">
+                    ಕರ್ನಾಟಕ ಇತಿಹಾಸ ರಸಪ್ರಶ್ನೆ (History Quiz)
+                </h2>
+                <p class="text-slate-300 text-sm mt-1">ನಿಮ್ಮ ಕರ್ನಾಟಕ ಇತಿಹಾಸದ ಜ್ಞಾನವನ್ನು ಪರೀಕ್ಷಿಸಿಕೊಳ್ಳಿ!</p>
+            </div>
+
+            <div class="glass-card p-6 sm:p-10 relative">
+                <div id="quizContainer">
+                    <div class="flex justify-between items-center mb-6 border-b border-karnatakaGold/20 pb-4">
+                        <span class="text-xs text-karnatakaYellow font-bold" id="questionTracker">ಪ್ರಶ್ನೆ ೧/೪</span>
+                        <span class="text-xs bg-royalMaroon px-3 py-1 rounded-full text-amber-200 border border-karnatakaGold/40" id="scoreDisplay">ಅಂಕಗಳು: ೦</span>
+                    </div>
+
+                    <h3 class="font-tiro text-xl sm:text-2xl font-bold text-karnatakaYellow mb-6" id="quizQuestion">
+                        ಪ್ರಶ್ನೆ ಇಲ್ಲಿದೆ...
+                    </h3>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6" id="quizOptions">
+                        <!-- Options injected via JS -->
+                    </div>
+
+                    <div id="quizFeedback" class="hidden p-4 rounded-xl text-center font-bold text-sm"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Detailed Essay Modal -->
+        <div id="essayModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+            <div class="glass-card max-w-4xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-10 border border-karnatakaGold relative">
+                <button onclick="closeEssayModal()" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-karnatakaRed text-karnatakaYellow flex items-center justify-center text-xl hover:bg-red-700 transition-all">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
+                <div class="space-y-6 text-slate-200">
+                    <div class="text-center border-b border-karnatakaGold/30 pb-4">
+                        <span class="text-xs text-karnatakaGold uppercase font-bold tracking-widest">ಸಂಪೂರ್ಣ ಲೇಖನ</span>
+                        <h2 class="font-tiro text-2xl sm:text-4xl font-bold text-karnatakaYellow mt-1">
+                            ಕರ್ನಾಟಕದ ವೈಭವಯುತ ಇತಿಹಾಸದ ಸುದೀರ್ಘ ಪ್ರಬಂಧ
+                        </h2>
+                    </div>
+
+                    <div class="space-y-4 leading-relaxed text-sm sm:text-base">
+                        <h3 class="font-tiro text-xl font-bold text-karnatakaYellow">೧. ಉಪಕ್ರಮ ಮತ್ತು ಪ್ರಾಚೀನ ಹಿನ್ನೆಲೆ</h3>
+                        <p>
+                            'ಕರ್ನಾಟಕ' ಎಂಬ ಹೆಸರು 'ಕರುನಾಡು' (ಎತ್ತರದ ನಾಡು) ಅಥವಾ 'ಕರು-ನಾಡು' (ಸೌಂದರ್ಯದ ನಾಡು) ಎಂಬ ಪದದಿಂದ ಬಂದಿದೆ. ದಕ್ಷಿಣ ಭಾರತದ ಮಧ್ಯಭಾಗದಲ್ಲಿರುವ ಈ ನಾಡು ಕಲೆ, ಸಾಹಿತ್ಯ, ಧರ್ಮ ಹಾಗೂ ವಾಸ್ತುಶಿಲ್ಪಕ್ಕೆ ತವರೂರಾಗಿದೆ. ಕ್ರಿ.ಪೂ. ೩ನೇ ಶತಮಾನದಲ್ಲಿ ಮೌರ್ಯ ಚಕ್ರವರ್ತಿ ಚಂದ್ರಗುಪ್ತ ಮೌರ್ಯನು ಶ್ರವಣಬೆಳಗೊಳಕ್ಕೆ ಆಗಮಿಸಿ ಸನ್ಯಾಸ ಸ್ವೀಕರಿಸಿದ ಉಲ್ಲೇಖಗಳಿವೆ.
+                        </p>
+
+                        <h3 class="font-tiro text-xl font-bold text-karnatakaYellow">೨. ಕದಂಬರು ಮತ್ತು ಗಂಗ ಸಾಮ್ರಾಜ್ಯ</h3>
+                        <p>
+                            ಕ್ರಿ.ಶ. ೩೪೫ ರಲ್ಲಿ ಮಯೂರಶರ್ಮನು ಸ್ಥಾಪಿಸಿದ ಕದಂಬ ಸಾಮ್ರಾಜ್ಯವು ಪ್ರಥಮ ಕನ್ನಡ ರಾಜವಂಶ. ಬನವಾಸಿ ಇವರ ರಾಜಧಾನಿಯಾಗಿತ್ತು. ಇವರ ಕಾಲದ ಹಲ್ಮಿಡಿ ಶಾಸನವು ಕನ್ನಡ ಭಾಷೆಯ ಇತಿಹಾಸಕ್ಕೆ ದಿಕ್ಸೂಚಿಯಾಗಿದೆ. ತಲಕಾಡಿನ ಗಂಗರು ಶ್ರವಣಬೆಳಗೊಳದಲ್ಲಿ ಬಾಹುಬಲಿ ಪ್ರತಿಮೆಯನ್ನು ಸ್ಥಾಪಿಸುವ ಮೂಲಕ ಜಗತ್ತಿಗೆ ಶಾಂತಿಯ ಸಂದೇಶ ಸಾರಿದರು.
+                        </p>
+
+                        <h3 class="font-tiro text-xl font-bold text-karnatakaYellow">೩. ಬಾದಾಮಿ ಚಾಲುಕ್ಯರು, ರಾಷ್ಟ್ರಕೂಟರು ಮತ್ತು ಹೊಯ್ಸಳರು</h3>
+                        <p>
+                            ಬಾದಾಮಿ ಚಾಲುಕ್ಯರ ಪ್ರಸಿದ್ಧ ದೊರೆ ಇಮ್ಮಡಿ ಪುಲಿಕೇಶಿಯು ಉತ್ತರ ಭಾರತದ ಹರ್ಷವರ್ಧನನನ್ನು ನರ್ಮದಾ ತೀರದಲ್ಲಿ ತಡೆದು 'ದಕ್ಷಿಣಾಪಥೇಶ್ವರ' ಎನಿಸಿಕೊಂಡನು. ಪಟ್ಟದಕಲ್ಲು ಯುನೆಸ್ಕೋ ವಿಶ್ವ ಪರಂಪರೆಯ ತಾಣವಾಗಿದೆ. ರಾಷ್ಟ್ರಕೂಟರ ಆಳ್ವಿಕೆಯಲ್ಲಿ ನೃಪತುಂಗ ಅಮೋಘವರ್ಷನು 'ಕವಿರಾಜಮಾರ್ಗ'ದ ಮೂಲಕ ಕನ್ನಡ ಸಾಹಿತ್ಯದ ಗಡಿಗಳನ್ನು ನಿರ್ವಚಿಸಿದನು. ಹೊಯ್ಸಳರ ಬೇಲೂರು-ಹಳೇಬೀಡು ದೇವಾಲಯಗಳು ಜಗತ್ತಿನ ವಿಸ್ಮಯ ಶಿಲ್ಪಕಲೆಗಳಲ್ಲಿ ಒಂದಾಗಿವೆ.
+                        </p>
+
+                        <h3 class="font-tiro text-xl font-bold text-karnatakaYellow">೪. ೧೨ನೇ ಶತಮಾನದ ಶರಣ ಕ್ರಾಂತಿ</h3>
+                        <p>
+                            ಬಸವಣ್ಣನವರ ನೇತೃತ್ವದಲ್ಲಿ ಕಲ್ಯಾಣದಲ್ಲಿ ನಡೆದ ಶರಣ ಚಳುವಳಿಯು ಜಗತ್ತಿನ ಪ್ರಥಮ ಪ್ರಜಾಪ್ರಭುತ್ವದ ಮಾದರಿಯಾದ 'ಅನುಭವ ಮಂಟಪ'ವನ್ನು ಸೃಷ್ಟಿಸಿತು. ಜಾತೀರಹಿತ, ಸಮಾನತೆಯ ವಚನ ಸಾಹಿತ್ಯವು ಸಮಾಜದಲ್ಲೊಂದು ಮಹತ್ತರ ಬದಲಾವಣೆ ತಂದಿತು.
+                        </p>
+
+                        <h3 class="font-tiro text-xl font-bold text-karnatakaYellow">೫. ವಿಜಯನಗರ ಸಾಮ್ರಾಜ್ಯದ ಸ್ವರ್ಣಯುಗ</h3>
+                        <p>
+                            ಕ್ರಿ.ಶ. ೧೩೩೬ ರಲ್ಲಿ ಹರಿಹರ ಮತ್ತು ಬುಕ್ಕರಾಯರಿಂದ ಸ್ಥಾಪಿತವಾದ ವಿಜಯನಗರ ಸಾಮ್ರಾಜ್ಯವು ತುಂಗಭದ್ರಾ ನದಿ ತೀರದಲ್ಲಿ ದಕ್ಷಿಣ ಭಾರತದ ಸಂಸ್ಕೃತಿಯನ್ನು ರಕ್ಷಿಸಿತು. ಶ್ರೀ ಕೃಷ್ಣದೇವರಾಯರ ಕಾಲದಲ್ಲಿ ವಿದೇಶಿ ರಾಯಭಾರಿಗಳು ಹಂಪಿಯನ್ನು 'ರತ್ನ-ಜವಾಹಿರಿಗಳನ್ನು ಬೀದಿಯಲ್ಲಿ ಮಾರುವ ನಗರ' ಎಂದು ಬಣ್ಣಿಸಿದರು.
+                        </p>
+
+                        <h3 class="font-tiro text-xl font-bold text-karnatakaYellow">೬. ಮೈಸೂರು ಸಂಸ್ಥಾನ, ಸ್ವಾತಂತ್ರ್ಯ ಸಂಗ್ರಾಮ ಮತ್ತು ಏಕೀಕರಣ</h3>
+                        <p>
+                            ಮೈಸೂರು ಒಡೆಯರ ಕಾಲದಲ್ಲಿ ನಾಲ್ವಡಿ ಕೃಷ್ಣರಾಜ ಒಡೆಯರ್ ಮತ್ತು ಸರ್ ಎಂ. ವಿಶ್ವೇಶ್ವರಯ್ಯ ಅವರು ಕೆಆರ್‌ಎಸ್ ಅಣೆಕಟ್ಟು, ಐಐಎಸ್‌ಸಿ ಸಂಸ್ಥೆ, ಬ್ಯಾಂಕ್ ಆಫ್ ಮೈಸೂರು ಸ್ಥಾಪಿಸಿ ಆಧುನಿಕ ಕರ್ನಾಟಕಕ್ಕೆ ಬಡಿಪಾಯ ಹಾಕಿದರು. ಕಿತ್ತೂರು ಚೆನ್ನಮ್ಮ, ಸಂಗೊಳ್ಳಿ ರಾಯಣ್ಣ ಅವರ ಸಶಸ್ತ್ರ ಹೋರಾಟ ಹಾಗೂ ೧೯೫೬ ರ ಏಕೀಕರಣದ ಫಲವಾಗಿ ೧೯೭೩ ರಲ್ಲಿ 'ಕರ್ನಾಟಕ' ಎಂದು ನಾಮಕರಣವಾಯಿತು.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-darkBg border-t border-karnatakaGold/30 py-10 text-center text-slate-400 text-xs sm:text-sm">
+            <div class="max-w-4xl mx-auto px-4 space-y-3">
+                <p class="font-tiro text-xl text-karnatakaYellow font-bold">"ಎಲ್ಲಾದರು ಇರು ಎಂತಾದರು ಇರು ಎಂದೆಂದಿಗೂ ನೀ ಕನ್ನಡವಾಗಿರು"</p>
+                <p>© 2026 ಕರ್ನಾಟಕದ ಸಂಪೂರ್ಣ ಇತಿಹಾಸ ಡಿಜಿಟಲ್ ಮಾರ್ಗದರ್ಶಿ | Created with passion for Kannada Heritage</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        /* =========================================================
+           1. THREE.JS 3D BACKGROUND (Floating Golden Coins & Pillars)
+           ========================================================= */
+        let scene, camera, renderer, coinGroup, starParticles;
+        let mouseX = 0, mouseY = 0;
+
+        function init3D() {
+            const canvas = document.getElementById('canvas3d');
+            
+            scene = new THREE.Scene();
+            scene.fog = new THREE.FogExp2(0x0F0505, 0.0018);
+
+            camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 2000);
+            camera.position.z = 600;
+
+            renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+            // Starfield particle effect
+            const particleCount = 1000;
+            const geometry = new THREE.BufferGeometry();
+            const positions = new Float32Array(particleCount * 3);
+            const colors = new Float32Array(particleCount * 3);
+
+            const colorRed = new THREE.Color(0x8B0000);
+            const colorGold = new THREE.Color(0xFFD700);
+
+            for (let i = 0; i < particleCount * 3; i += 3) {
+                positions[i] = (Math.random() - 0.5) * 1600;
+                positions[i + 1] = (Math.random() - 0.5) * 1600;
+                positions[i + 2] = (Math.random() - 0.5) * 1600;
+
+                const c = Math.random() > 0.5 ? colorGold : colorRed;
+                colors[i] = c.r;
+                colors[i + 1] = c.g;
+                colors[i + 2] = c.b;
+            }
+
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+            const material = new THREE.PointsMaterial({
+                size: 3,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.75
+            });
+
+            starParticles = new THREE.Points(geometry, material);
+            scene.add(starParticles);
+
+            // Floating 3D Golden Coins / Emblems
+            coinGroup = new THREE.Group();
+            const coinGeo = new THREE.CylinderGeometry(20, 20, 4, 24);
+            const coinMat = new THREE.MeshStandardMaterial({
+                color: 0xDAA520,
+                metalness: 0.8,
+                roughness: 0.2,
+                wireframe: true
+            });
+
+            for (let i = 0; i < 12; i++) {
+                const coin = new THREE.Mesh(coinGeo, coinMat);
+                coin.position.set(
+                    (Math.random() - 0.5) * 900,
+                    (Math.random() - 0.5) * 900,
+                    (Math.random() - 0.5) * 700
+                );
+                coin.rotation.x = Math.random() * Math.PI;
+                coin.rotation.y = Math.random() * Math.PI;
+                coinGroup.add(coin);
+            }
+            scene.add(coinGroup);
+
+            // Ambient Light
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+            scene.add(ambientLight);
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = (e.clientX - window.innerWidth / 2) * 0.3;
+                mouseY = (e.clientY - window.innerHeight / 2) * 0.3;
+            });
+
+            window.addEventListener('resize', onWindowResize);
+        }
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        function animate3D() {
+            requestAnimationFrame(animate3D);
+
+            camera.position.x += (mouseX - camera.position.x) * 0.02;
+            camera.position.y += (-mouseY - camera.position.y) * 0.02;
+            camera.lookAt(scene.position);
+
+            if (starParticles) {
+                starParticles.rotation.y += 0.0006;
+            }
+
+            if (coinGroup) {
+                coinGroup.children.forEach((c, idx) => {
+                    c.rotation.x += 0.01;
+                    c.rotation.y += 0.015;
+                });
+            }
+
+            renderer.render(scene, camera);
+        }
+
+        /* =========================================================
+           2. WEB AUDIO API ROYAL AMBIENT SOUND
+           ========================================================= */
+        let audioCtx = null;
+        let isAudioPlaying = false;
+        let osc1, osc2, gainNode;
+
+        function toggleAmbientSound() {
+            const btnLabel = document.getElementById('soundLabel');
+            const btnIcon = document.getElementById('soundIcon');
+
+            if (!isAudioPlaying) {
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+
+                osc1 = audioCtx.createOscillator();
+                osc2 = audioCtx.createOscillator();
+                gainNode = audioCtx.createGain();
+
+                osc1.type = 'triangle';
+                osc2.type = 'sine';
+
+                // Indian Royal Tanpura style drone simulation frequencies
+                osc1.frequency.setValueAtTime(146.83, audioCtx.currentTime); // D3
+                osc2.frequency.setValueAtTime(220.00, audioCtx.currentTime); // A3
+
+                gainNode.gain.setValueAtTime(0.01, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.1, audioCtx.currentTime + 2);
+
+                osc1.connect(gainNode);
+                osc2.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+
+                osc1.start();
+                osc2.start();
+
+                isAudioPlaying = true;
+                btnLabel.textContent = "ಸಂಗೀತ ಚಾಲನೆಯಲ್ಲಿದೆ";
+                btnIcon.className = "fa-solid fa-volume-high text-karnatakaYellow animate-pulse";
+            } else {
+                if (gainNode) {
+                    gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1);
+                    setTimeout(() => {
+                        osc1.stop();
+                        osc2.stop();
+                    }, 1000);
+                }
+                isAudioPlaying = false;
+                btnLabel.textContent = "ರಾಜಕೀಯ ಸಂಗೀತ";
+                btnIcon.className = "fa-solid fa-volume-xmark text-yellow-400";
+            }
+        }
+
+        /* =========================================================
+           3. INTERACTIVE TIMELINE ERA SWITCHER
+           ========================================================= */
+        function switchTimelineTab(eraId) {
+            // Hide all era cards
+            document.querySelectorAll('.era-content').forEach(el => el.classList.add('hidden'));
+            
+            // Remove active style from all tab buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+
+            // Show selected era card and activate button
+            document.getElementById(eraId).classList.remove('hidden');
+            document.getElementById('tab-' + eraId).classList.add('active');
+        }
+
+        function scrollToEra(eraId) {
+            switchTimelineTab(eraId);
+            document.getElementById('timeline').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        /* =========================================================
+           4. ESSAY MODAL LOGIC
+           ========================================================= */
+        function openEssayModal() {
+            document.getElementById('essayModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeEssayModal() {
+            document.getElementById('essayModal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        /* =========================================================
+           5. INTERACTIVE QUIZ LOGIC
+           ========================================================= */
+        const quizData = [
+            {
+                question: "ಕನ್ನಡದ ಪ್ರಥಮ ಲಭ್ಯ ಶಾಸನ 'ಹಲ್ಮಿಡಿ ಶಾಸನ' ಯಾವ ರಾಜವಂಶದ ಕಾಲದ್ದು?",
+                options: ["ಗಂಗರು", "ಕದಂಬರು", "ಚಾಲುಕ್ಯರು", "ರಾಷ್ಟ್ರಕೂಟರು"],
+                correct: 1
+            },
+            {
+                question: "ಉತ್ತರ ಭಾರತದ ಚಕ್ರವರ್ತಿ ಹರ್ಷವರ್ಧನನನ್ನು ಸೋಲಿಸಿದ ಬಾದಾಮಿ ಚಾಲುಕ್ಯ ದೊರೆ ಯಾರು?",
+                options: ["ಮಯೂರಶರ್ಮ", "ಇಮ್ಮಡಿ പുಲಿಕೇಶಿ", "ವಿಜಯಾದಿತ್ಯ", "ವಿಕ್ರಮಾದಿತ್ಯ"],
+                correct: 1
+            },
+            {
+                question: "೧೨ನೇ ಶತಮಾನದಲ್ಲಿ ಅನುಭವ ಮಂಟಪವನ್ನು ಸ್ಥಾಪಿಸಿದ ಸಾಮಾಜಿಕ ಕ್ರಾಂತಿಕಾರಿ ಯಾರು?",
+                options: ["ಬಸವಣ್ಣ", "ಕನಕದಾಸರು", "ಪುರಂದರದಾಸರು", "ಕುಮಾರವ್ಯಾಸ"],
+                correct: 0
+            },
+            {
+                question: "ಮೈಸೂರು ರಾಜ್ಯಕ್ಕೆ 'ಕರ್ನಾಟಕ' ಎಂದು ಮರುನಾಮಕರಣ ಮಾಡಿದ ವರ್ಷ ಯಾವುದು?",
+                options: ["೧೯೪೭", "೧೯೫೬", "೧೯೭೩", "೧೯೮೫"],
+                correct: 2
+            }
+        ];
+
+        let currentQuizIndex = 0;
+        let quizScore = 0;
+
+        function loadQuizQuestion() {
+            const q = quizData[currentQuizIndex];
+            document.getElementById('questionTracker').textContent = `ಪ್ರಶ್ನೆ ${currentQuizIndex + 1}/${quizData.length}`;
+            document.getElementById('quizQuestion').textContent = q.question;
+
+            const optionsContainer = document.getElementById('quizOptions');
+            optionsContainer.innerHTML = '';
+
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = "p-4 rounded-xl border border-slate-700 bg-darkBg hover:border-karnatakaGold text-left text-sm font-semibold transition-all";
+                btn.textContent = `${idx + 1}. ${opt}`;
+                btn.onclick = () => checkQuizAnswer(idx);
+                optionsContainer.appendChild(btn);
+            });
+
+            document.getElementById('quizFeedback').classList.add('hidden');
+        }
+
+        function checkQuizAnswer(selectedIndex) {
+            const q = quizData[currentQuizIndex];
+            const feedback = document.getElementById('quizFeedback');
+            feedback.classList.remove('hidden');
+
+            if (selectedIndex === q.correct) {
+                quizScore += 10;
+                feedback.className = "p-4 rounded-xl text-center font-bold text-sm bg-emerald-900/80 text-emerald-200 border border-emerald-500 mb-4";
+                feedback.textContent = "✓ ಸರಿಯಾದ ಉತ್ತರ! ಅತ್ಯುತ್ತಮ.";
+            } else {
+                feedback.className = "p-4 rounded-xl text-center font-bold text-sm bg-red-900/80 text-red-200 border border-red-500 mb-4";
+                feedback.textContent = `✗ ತಪ್ಪು ಉತ್ತರ. ಸರಿಯಾದ ಉತ್ತರ: ${q.options[q.correct]}`;
+            }
+
+            document.getElementById('scoreDisplay').textContent = `ಅಂಕಗಳು: ${quizScore}`;
+
+            setTimeout(() => {
+                currentQuizIndex++;
+                if (currentQuizIndex < quizData.length) {
+                    loadQuizQuestion();
+                } else {
+                    showFinalQuizScore();
+                }
+            }, 1800);
+        }
+
+        function showFinalQuizScore() {
+            const container = document.getElementById('quizContainer');
+            container.innerHTML = `
+                <div class="text-center space-y-4 py-8">
+                    <i class="fa-solid fa-trophy text-5xl text-karnatakaYellow animate-bounce"></i>
+                    <h3 class="font-tiro text-3xl font-bold text-karnatakaYellow">ರಸಪ್ರಶ್ನೆ ಪೂರ್ಣಗೊಂಡಿದೆ!</h3>
+                    <p class="text-lg text-slate-200">ನಿಮ್ಮ ಒಟ್ಟು ಅಂಕಗಳು: <strong class="text-karnatakaGold font-bold">${quizScore} / ${quizData.length * 10}</strong></p>
+                    <button onclick="resetQuiz()" class="bg-karnatakaRed hover:bg-red-800 text-karnatakaYellow px-6 py-3 rounded-xl font-bold transition-all border border-karnatakaGold/40">
+                        ಮತ್ತೊಮ್ಮೆ ಪ್ರಯತ್ನಿಸಿ (Restart Quiz)
+                    </button>
+                </div>
+            `;
+        }
+
+        function resetQuiz() {
+            currentQuizIndex = 0;
+            quizScore = 0;
+            location.reload();
+        }
+
+        /* Initializer */
+        window.onload = function() {
+            init3D();
+            animate3D();
+            loadQuizQuestion();
+        };
+    </script>
+</body>
+</html>

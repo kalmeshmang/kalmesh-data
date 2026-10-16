@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ಜೀವನ ಅಂದರೆ ಏನು? | What is Life?</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@300;400;600;700;800&family=Tiro+Kannada:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        amberGold: '#d97706',
+                        sunsetAmber: '#f59e0b',
+                        midnightNavy: '#0f172a',
+                        deepNavy: '#1e293b',
+                        softCream: '#fdfbf7',
+                        warmSand: '#f7f3e9',
+                        slateBorder: '#cbd5e1'
+                    },
+                    fontFamily: {
+                        kannada: ['Noto Sans Kannada', 'sans-serif'],
+                        tiro: ['Tiro Kannada', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Noto Sans Kannada', sans-serif;
+            background-color: #fdfbf7;
+            color: #1e293b;
+            scroll-behavior: smooth;
+        }
+
+        .heading-font {
+            font-family: 'Tiro Kannada', serif;
+        }
+
+        /* Custom Glassmorphism */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(217, 119, 6, 0.15);
+            box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.05);
+        }
+
+        .glass-dark {
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+        }
+
+        /* Subtle Glow Animations */
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(245, 158, 11, 0.2); }
+            50% { box-shadow: 0 0 35px rgba(245, 158, 11, 0.4); }
+        }
+
+        .glow-effect {
+            animation: pulseGlow 4s infinite ease-in-out;
+        }
+
+        /* Floating Animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .float-element {
+            animation: float 6s infinite ease-in-out;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f7f3e9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #d97706;
+        }
+    </style>
+</head>
+<body class="bg-softCream text-slate-800 antialiased selection:bg-amberGold selection:text-white">
+
+    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-amberGold/10">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-amberGold to-sunsetAmber flex items-center justify-center text-white shadow-md">
+                    <i class="fa-solid font-bold text-lg">ಜ</i>
+                </div>
+                <span class="heading-font text-xl md:text-2xl font-bold text-midnightNavy">ಜೀವನ ದರ್ಶನ</span>
+            </div>
+            <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600">
+                <a href="#intro" class="hover:text-amberGold transition-colors">ಪೀಠಿಕೆ</a>
+                <a href="#pillars" class="hover:text-amberGold transition-colors">ಮುಖ್ಯ ಸ್ತಂಭಗಳು</a>
+                <a href="#philosophy" class="hover:text-amberGold transition-colors">ಆಳವಾದ ತತ್ವಜ್ಞಾನ</a>
+                <a href="#reflection" class="hover:text-amberGold transition-colors">ಆತ್ಮಾವಲೋಕನ</a>
+            </nav>
+            <a href="#quotes" class="bg-amberGold hover:bg-amber-700 text-white px-4 py-2 rounded-full text-xs md:text-sm font-semibold transition-all shadow-md hover:shadow-lg">
+                <i class="fa-solid fa-lightbulb mr-1.5"></i> ಪ್ರೇರಣೆ ಪಡೆ
+            </a>
+        </div>
+    </header>
+
+    <section class="relative overflow-hidden py-16 md:py-24 bg-gradient-to-b from-warmSand/60 to-softCream">
+        <!-- Background Decorative Orbs -->
+        <div class="absolute top-10 left-10 w-72 h-72 bg-amberGold/10 rounded-full blur-3xl -z-10 float-element"></div>
+        <div class="absolute bottom-10 right-10 w-96 h-96 bg-sunsetAmber/10 rounded-full blur-3xl -z-10 float-element" style="animation-delay: -3s;"></div>
+
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <span class="inline-block px-4 py-1.5 rounded-full bg-amberGold/10 text-amberGold text-xs md:text-sm font-semibold tracking-wide mb-4">
+                ✨ ಆಳವಾದ ತತ್ವಜ್ಞಾನ ಮತ್ತು ಸ್ಪೂರ್ತಿಯ ಮಾರ್ಗದರ್ಶಿ
+            </span>
+            <h1 class="heading-font text-3xl sm:text-5xl md:text-6xl font-extrabold text-midnightNavy leading-tight mb-6">
+                ಜೀವನ ಅಂದರೆ ಏನು?
+            </h1>
+            <p class="text-base sm:text-xl text-slate-600 font-light leading-relaxed max-w-2xl mx-auto mb-8">
+                ಜೀವನ ಎನ್ನುವುದು ಕೇವಲ ಉಸಿರಾಡುವುದಲ್ಲ; ಅದು ಪ್ರತಿಯೊಂದು ಕ್ಷಣವನ್ನೂ ಅನುಭವಿಸುತ್ತಾ, ಕಲಿಯುತ್ತಾ ಮತ್ತು ಬೆಳಕಿನತ್ತ ಸಾಗುವ ಒಂದು ಅದ್ಭುತ ಪ್ರಯಾಣ.
+            </p>
+            
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#intro" class="bg-midnightNavy hover:bg-deepNavy text-white px-6 py-3 rounded-xl font-medium shadow-lg hover:shadow-xl transition-all flex items-center gap-2">
+                    <span>ಪ್ರಯಾಣ ಪ್ರಾರಂಭಿಸಿ</span>
+                    <i class="fa-solid fa-arrow-down text-xs"></i>
+                </a>
+                <a href="#reflection" class="bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 px-6 py-3 rounded-xl font-medium shadow-sm transition-all">
+                    ಆತ್ಮಾವಲೋಕನ ಮಾಡಿ
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="intro" class="py-16 max-w-5xl mx-auto px-4">
+        <div class="glass-card rounded-3xl p-6 md:p-12 relative overflow-hidden border border-amberGold/20 shadow-xl">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+                <div class="md:col-span-8">
+                    <div class="flex items-center gap-2 text-amberGold font-semibold text-sm mb-2">
+                        <i class="fa-solid fa-book-open"></i>
+                        <span>ಪೀಠಿಕೆ (Introduction)</span>
+                    </div>
+                    <h2 class="heading-font text-2xl md:text-3xl font-bold text-midnightNavy mb-4">
+                        ಅನುಭವಗಳ ಮತ್ತು ಭಾವನೆಗಳ ಸುಂದರ ಪಯಣ
+                    </h2>
+                    <p class="text-slate-600 leading-relaxed mb-4 text-base md:text-lg">
+                        <strong>ಜೀವನ ಎನ್ನುವುದು ಅನುಭವಗಳ, ಭಾವನೆಗಳ, ಕಲಿಕೆಯ ಒಂದು ಸುಂದರ ಪ್ರಯಾಣ.</strong> ಇದು ಒಂದೇ ಸಮನೆ ಸಾಗುವ ರಸ್ತೆಯಲ್ಲ; ಬದಲಿಗೆ ತಿರುವುಗಳು, ಏಳು-ಬೀಳುಗಳು, ಹಗಲು-ರಾತ್ರಿಗಳ ಸಮಾಗಮ.
+                    </p>
+                    <p class="text-slate-600 leading-relaxed text-sm md:text-base">
+                        ನಾವು ಗಳಿಸುವ ಆಸ್ತಿ ಅಥವಾ ತಲುಪುವ ಎತ್ತರಕ್ಕಿಂತ ಹೆಚ್ಚಾಗಿ, ನಾವು ಕಷ್ಟಗಳಲ್ಲಿ ಹೇಗೆ ಬದುಕುತ್ತೇವೆ, ಇತರರ ಮುಖದಲ್ಲಿ ಹೇಗೆ ನಗು ಮೂಡಿಸುತ್ತೇವೆ ಮತ್ತು ನಾವು ಬೆಳೆಯುತ್ತಾ ಇತರರನ್ನೂ ಹೇಗೆ ಬೆಳೆಸುತ್ತೇವೆ ಎಂಬುದರ ಮೇಲೆಯೇ ಜೀವನದ ನೈಜ ಅರ್ಥ ಅಡಗಿದೆ.
+                    </p>
+                </div>
+                <div class="md:col-span-4 flex justify-center">
+                    <div class="relative w-48 h-48 md:w-56 md:h-56 rounded-full bg-gradient-to-tr from-amberGold/20 to-sunsetAmber/30 flex items-center justify-center p-4 glow-effect">
+                        <div class="w-full h-full rounded-full bg-white flex flex-col items-center justify-center text-center p-4 shadow-inner">
+                            <i class="fa-solid fa-tree text-4xl text-amberGold mb-2"></i>
+                            <span class="heading-font font-bold text-midnightNavy text-sm">ಬೆಳವಣಿಗೆ ಮತ್ತು ಶಾಂತಿ</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pillars" class="py-16 bg-warmSand/40 border-y border-amberGold/10">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-amberGold text-sm font-semibold tracking-wider uppercase">ಜೀವನದ ಆಧಾರಸ್ತಂಭಗಳು</span>
+                <h2 class="heading-font text-3xl md:text-4xl font-bold text-midnightNavy mt-1">
+                    ಜೀವನದ ಮುಖ್ಯ 5 ಸ್ತಂಭಗಳು
+                </h2>
+                <p class="text-slate-600 mt-2 text-sm md:text-base">
+                    ಸಾರ್ಥಕ ಜೀವನವನ್ನು ಕಟ್ಟಿಕೊಳ್ಳಲು ಈ ಐದು ತತ್ವಗಳು ಅತ್ಯಗತ್ಯ.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Pillar 1 -->
+                <div class="glass-card rounded-2xl p-6 transition-all hover:-translate-y-1 hover:shadow-xl">
+                    <div class="w-12 h-12 rounded-xl bg-amber-100 text-amberGold flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="heading-font text-xl font-bold text-midnightNavy mb-2">೧. ಅನುಭವ ಮತ್ತು ಕಲಿವು</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        ಪ್ರತಿ ದಿನವೂ ಒಂದು ಹೊಸ ಪಾಠ. ತಪ್ಪುಗಳು ನಮ್ಮನ್ನು ಕುಗ್ಗಿಸಬಾರದು; ಬದಲಿಗೆ ಪ್ರತಿಯೊಂದು ಅನುಭವವೂ ನಮ್ಮನ್ನು ಹೆಚ್ಚು ಪ್ರಾಮಾಣಿಕ ಹಾಗೂ ಸುಜ್ಞಾನಿಯನ್ನಾಗಿ ಮಾಡುತ್ತದೆ.
+                    </p>
+                </div>
+
+                <!-- Pillar 2 -->
+                <div class="glass-card rounded-2xl p-6 transition-all hover:-translate-y-1 hover:shadow-xl">
+                    <div class="w-12 h-12 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                    <h3 class="heading-font text-xl font-bold text-midnightNavy mb-2">೨. ಸಂಬಂಧಗಳು ಮತ್ತು ಪ್ರೀತಿ</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        ಪ್ರೀತಿ ಮತ್ತು ನಂಬಿಕೆಯ ಆಧಾರದ ಮೇಲೆ ನಿಂತಿರುವ ಸಂಬಂಧಗಳು ಜೀವನದ ದೊಡ್ಡ ಆಸ್ತಿ. ಪ್ರೀತಿಯನ್ನು ಹಂಚಿದಾಗ ಮಾತ್ರ ಬದುಕು ಸುಂದರ ಮತ್ತು ಅರ್ಥಪೂರ್ಣ ಎನಿಸುತ್ತದೆ.
+                    </p>
+                </div>
+
+                <!-- Pillar 3 -->
+                <div class="glass-card rounded-2xl p-6 transition-all hover:-translate-y-1 hover:shadow-xl">
+                    <div class="w-12 h-12 rounded-xl bg-sky-100 text-sky-600 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-scale-balanced"></i>
+                    </div>
+                    <h3 class="heading-font text-xl font-bold text-midnightNavy mb-2">೩. ನಗು ಮತ್ತು ದುಃಖದ ಸಮತೋಲನ</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        ಸಂತೋಷ ಬಂದಾಗ ಹಿಗ್ಗದೆ, ದುಃಖ ಬಂದಾಗ ಕುಗ್ಗದೆ ಎರಡನ್ನೂ ಸಮಾನವಾಗಿ ಸ್ವೀಕರಿಸುವ ಮನಸ್ಥಿತಿಯೇ ನಿಜವಾದ ಆಂತರಿಕ ಶಾಂತಿ ಮತ್ತು ಜೀವನದ ಸಮತೋಲನ.
+                    </p>
+                </div>
+
+                <!-- Pillar 4 -->
+                <div class="glass-card rounded-2xl p-6 transition-all hover:-translate-y-1 hover:shadow-xl">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3 class="heading-font text-xl font-bold text-midnightNavy mb-2">೪. ಕಷ್ಟಗಳನ್ನು ಎದುರಿಸುವ ಧೈರ್ಯ</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        ಸವಾಲುಗಳು ಬಂದಾಗಲೇ ನಮ್ಮ ನಿಜವಾದ ಸಾಮರ್ಥ್ಯ ತಿಳಿಯುವುದು. ಕಷ್ಟಗಳನ್ನು ಎದುರಿಸುವ ಆತ್ಮವಿಶ್ವಾಸವೇ ಸಫಲತೆಯ ಹಾದಿಗೆ ಮುಖ್ಯ ಹೆಜ್ಜೆ.
+                    </p>
+                </div>
+
+                <!-- Pillar 5 -->
+                <div class="glass-card rounded-2xl p-6 transition-all hover:-translate-y-1 hover:shadow-xl md:col-span-2 lg:col-span-1">
+                    <div class="w-12 h-12 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-compass"></i>
+                    </div>
+                    <h3 class="heading-font text-xl font-bold text-midnightNavy mb-2">೫. ಉದ್ದೇಶ ಮತ್ತು ಗುರಿ</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        ಉದ್ದೇಶವಿಲ್ಲದ ಜೀವನ ನಾವಿಕನಿಲ್ಲದ ದೋಣಿಯಂತೆ. ನಿಮ್ಮ ಆಸೆ, ಕನಸು ಹಾಗೂ ಸಮಾಜಕ್ಕೆ ಏನಾದರೂ ಒಳಿತು ಮಾಡುವ ಉದ್ದೇಶವೇ ಜೀವನಕ್ಕೆ ದಾರಿ ತೋರುತ್ತದೆ.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="philosophy" class="py-16 max-w-6xl mx-auto px-4">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+            <span class="text-amberGold text-sm font-semibold tracking-wider uppercase">ಜ್ಞಾನದ ಬೆಳಕು</span>
+            <h2 class="heading-font text-3xl md:text-4xl font-bold text-midnightNavy mt-1">
+                ಆಳವಾದ ತತ್ವಜ್ಞಾನ (Philosophical Insights)
+            </h2>
+        </div>
+
+        <div class="space-y-8">
+            <!-- Insight 1 -->
+            <div class="glass-card rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center gap-6 border-l-4 border-amberGold">
+                <div class="w-16 h-16 rounded-2xl bg-amberGold/10 text-amberGold flex-shrink-0 flex items-center justify-center text-2xl">
+                    <i class="fa-solid fa-palette"></i>
+                </div>
+                <div>
+                    <h3 class="heading-font text-xl md:text-2xl font-bold text-midnightNavy mb-2">
+                        ಖಾಲಿ ಕ್ಯಾನ್ವಾಸ್ (Life as a Blank Canvas)
+                    </h3>
+                    <p class="text-slate-600 leading-relaxed text-sm md:text-base">
+                        ಜೀವನ ಎಂಬುದು ನಿನ್ನ ಕೈಯಲ್ಲಿರುವ ಖಾಲಿ ಕ್ಯಾನ್ವಾಸ್. ಅದಕ್ಕೆ ಪ್ರೀತಿ, ಕರುಣೆ, ಸಾಧನೆ ಮತ್ತು ಸಂತೋಷ ಎಂಬ ಬಣ್ಣಗಳನ್ನು ಬಳಿಯುವುದು ಪೂರ್ತಿಯಾಗಿ ನಿನ್ನ ಕೈಯಲ್ಲೇ ಇದೆ. ನಿನ್ನ ಬದುಕಿನ ಚಿತ್ರಕಲಾವಿದ ನೀನೇ!
+                    </p>
+                </div>
+            </div>
+
+            <!-- Insight 2 -->
+            <div class="glass-card rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center gap-6 border-l-4 border-midnightNavy">
+                <div class="w-16 h-16 rounded-2xl bg-midnightNavy/10 text-midnightNavy flex-shrink-0 flex items-center justify-center text-2xl">
+                    <i class="fa-solid fa-brain"></i>
+                </div>
+                <div>
+                    <h3 class="heading-font text-xl md:text-2xl font-bold text-midnightNavy mb-2">
+                        ನಿನ್ನ ಆಲೋಚನೆಗಳೇ ನಿನ್ನ ಜೀವನ (Your Thoughts Shape Your Life)
+                    </h3>
+                    <p class="text-slate-600 leading-relaxed text-sm md:text-base">
+                        "ಯಾದೃಶಂ ಭಾವಂ ತಾದೃಶಂ ಭವತಿ." ನೀನು ಏನು ಆಲೋಚಿಸುತ್ತೀಯೋ ಅದೇ ಆಗುತ್ತೀಯ. ಸಕಾರಾತ್ಮಕ ಚಿಂತನೆಗಳು ನಿಮ್ಮ ಪ್ರಪಂಚವನ್ನು ಸುಂದರಗೊಳಿಸುತ್ತವೆ. ಒಳ್ಳೆಯ ಆಲೋಚನೆಗಳು ಸುಂದರ ಜೀವನವನ್ನು ಸೃಷ್ಟಿಸುತ್ತವೆ.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Insight 3 -->
+            <div class="glass-card rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center gap-6 border-l-4 border-emerald-600">
+                <div class="w-16 h-16 rounded-2xl bg-emerald-100 text-emerald-600 flex-shrink-0 flex items-center justify-center text-2xl">
+                    <i class="fa-solid fa-hourglass-half"></i>
+                </div>
+                <div>
+                    <h3 class="heading-font text-xl md:text-2xl font-bold text-midnightNavy mb-2">
+                        ವರ್ತಮಾನದಲ್ಲಿ ಜೀವಿಸುವುದು (Living in the Present)
+                    </h3>
+                    <p class="text-slate-600 leading-relaxed text-sm md:text-base">
+                        ನೆನ್ನೆ ಎಂಬುದು ಮುಗಿದುಹೋದ ಇತಿಹಾಸ, ನಾಳೆ ಎಂಬುದು ಅನಿಶ್ಚಿತ ನಿರೀಕ್ಷೆ. ಆದರೆ 'ಇಂದು' ಎಂಬುದು ನಿನ್ನ ಕೈಯಲ್ಲಿರುವ ಸುಂದರ ಉಡುಗೊರೆ (Present). ಈ ಕ್ಷಣವನ್ನು ಪೂರ್ಣವಾಗಿ ಆನಂದಿಸುವುದೇ ಜೀವಿಸುವುದರ ರಹಸ್ಯ.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="quotes" class="py-16 bg-midnightNavy text-white relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amberGold/20 text-sunsetAmber text-xs md:text-sm font-medium mb-6">
+                <i class="fa-solid fa-sparkles"></i>
+                <span>ಆತ್ಮ ಪ್ರೇರಣೆ</span>
+            </div>
+            
+            <h2 class="heading-font text-3xl md:text-4xl font-bold mb-8">
+                ಇಂದಿನ ಜೀವನದ ಪ್ರೇರಣೆ (Daily Inspiration)
+            </h2>
+
+            <div id="quoteCard" class="glass-dark rounded-3xl p-8 md:p-12 mb-8 transition-all duration-300 min-h-[200px] flex flex-col justify-center items-center shadow-2xl">
+                <p id="quoteText" class="heading-font text-xl md:text-2xl lg:text-3xl font-medium leading-relaxed text-amber-100 mb-4">
+                    "ನಿನ್ನ ಶಕ್ತಿಯನ್ನು ನೀನು ನಂಬು, ಜಗತ್ತು ನಿನ್ನ ಕಾಲಡಿಗೆ ಬರುತ್ತದೆ."
+                </p>
+                <span id="quoteAuthor" class="text-amberGold font-semibold text-sm md:text-base">
+                    — ಸ್ವಾಮಿ ವಿವೇಕಾನಂದ
+                </span>
+            </div>
+
+            <button id="generateQuoteBtn" onclick="generateRandomQuote()" class="bg-gradient-to-r from-amberGold to-sunsetAmber hover:from-amber-600 hover:to-amber-500 text-white font-semibold px-8 py-4 rounded-xl shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-3 mx-auto">
+                <i class="fa-solid fa-rotate-right"></i>
+                <span>ಹೊಸ ಪ್ರೇರಣಾ ನುಡಿ ಪಡೆಯಿರಿ</span>
+            </button>
+        </div>
+    </section>
+
+    <section class="py-16 max-w-5xl mx-auto px-4">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+            <span class="text-amberGold text-sm font-semibold tracking-wider uppercase">ಸ್ವಯಂ ಮೌಲ್ಯಮಾಪನ</span>
+            <h2 class="heading-font text-3xl md:text-4xl font-bold text-midnightNavy mt-1">
+                ಜೀವನದ ಮೌಲ್ಯಗಳ ಪರಿಶೀಲನೆ (Life Values Wheel)
+            </h2>
+            <p class="text-slate-600 mt-2 text-sm md:text-base">
+                ಇಂದು ನೀವು ಯಾವ ವಿಷಯಗಳಿಗೆ ಹೆಮ್ಮೆ ಅಥವಾ ಕೃತಜ್ಞತೆ ಸಲ್ಲಿಸುತ್ತೀರಾ? ಆಯ್ಕೆ ಮಾಡಿ ನೋಡಿ.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Value Check 1 -->
+            <label class="glass-card rounded-2xl p-5 flex items-start gap-4 cursor-pointer hover:border-amberGold transition-all">
+                <input type="checkbox" onchange="updateReflectionCount()" class="value-checkbox mt-1 w-5 h-5 rounded border-slate-300 text-amberGold focus:ring-amberGold">
+                <div>
+                    <h4 class="font-bold text-midnightNavy text-base">ಶಾಂತಿ (Peace)</h4>
+                    <p class="text-slate-500 text-xs mt-1">ನನ್ನ ಮನಸ್ಸಿನ ನೆಮ್ಮದಿಗೆ ನಾನು ಮೊದಲ ಆದ್ಯತೆ ನೀಡುತ್ತೇನೆ.</p>
+                </div>
+            </label>
+
+            <!-- Value Check 2 -->
+            <label class="glass-card rounded-2xl p-5 flex items-start gap-4 cursor-pointer hover:border-amberGold transition-all">
+                <input type="checkbox" onchange="updateReflectionCount()" class="value-checkbox mt-1 w-5 h-5 rounded border-slate-300 text-amberGold focus:ring-amberGold">
+                <div>
+                    <h4 class="font-bold text-midnightNavy text-base">ಕೃತಜ್ಞತೆ (Gratitude)</h4>
+                    <p class="text-slate-500 text-xs mt-1">ನನ್ನ ಬಳಿ ಇರುವುದಕ್ಕೆ ನಾನು ಪ್ರತಿದಿನ ಧನ್ಯವಾದ ಅರ್ಪಿಸುತ್ತೇನೆ.</p>
+                </div>
+            </label>
+
+            <!-- Value Check 3 -->
+            <label class="glass-card rounded-2xl p-5 flex items-start gap-4 cursor-pointer hover:border-amberGold transition-all">
+                <input type="checkbox" onchange="updateReflectionCount()" class="value-checkbox mt-1 w-5 h-5 rounded border-slate-300 text-amberGold focus:ring-amberGold">
+                <div>
+                    <h4 class="font-bold text-midnightNavy text-base">ಉದ್ದೇಶ (Purpose)</h4>
+                    <p class="text-slate-500 text-xs mt-1">ನನ್ನ ಜೀವನಕ್ಕೊಂದು ಗುರಿ ಇದೆ, ನಾನು ಅದರತ್ತ ಸಾಗುತ್ತಿದ್ದೇನೆ.</p>
+                </div>
+            </label>
+
+            <!-- Value Check 4 -->
+            <label class="glass-card rounded-2xl p-5 flex items-start gap-4 cursor-pointer hover:border-amberGold transition-all">
+                <input type="checkbox" onchange="updateReflectionCount()" class="value-checkbox mt-1 w-5 h-5 rounded border-slate-300 text-amberGold focus:ring-amberGold">
+                <div>
+                    <h4 class="font-bold text-midnightNavy text-base">ಪ್ರೀತಿ (Love)</h4>
+                    <p class="text-slate-500 text-xs mt-1">ನಾನು ಇತರರನ್ನು ಮತ್ತು ನನ್ನನ್ನು ಬೇರೊಬ್ಬರಿಗಿಂತ ಹೆಚ್ಚು ಪ್ರೀತಿಸುತ್ತೇನೆ.</p>
+                </div>
+            </label>
+
+            <!-- Value Check 5 -->
+            <label class="glass-card rounded-2xl p-5 flex items-start gap-4 cursor-pointer hover:border-amberGold transition-all">
+                <input type="checkbox" onchange="updateReflectionCount()" class="value-checkbox mt-1 w-5 h-5 rounded border-slate-300 text-amberGold focus:ring-amberGold">
+                <div>
+                    <h4 class="font-bold text-midnightNavy text-base">ಆರೋಗ್ಯ (Health)</h4>
+                    <p class="text-slate-500 text-xs mt-1">ಶಾರೀರಿಕ ಹಾಗೂ ಮಾನಸಿಕ ಆರೋಗ್ಯವೇ ನನ್ನ ದೊಡ್ಡ ಸಂಪತ್ತು.</p>
+                </div>
+            </label>
+
+            <!-- Value Check 6 -->
+            <label class="glass-card rounded-2xl p-5 flex items-start gap-4 cursor-pointer hover:border-amberGold transition-all">
+                <input type="checkbox" onchange="updateReflectionCount()" class="value-checkbox mt-1 w-5 h-5 rounded border-slate-300 text-amberGold focus:ring-amberGold">
+                <div>
+                    <h4 class="font-bold text-midnightNavy text-base">ಸಹಾನುಭೂತಿ (Empathy)</h4>
+                    <p class="text-slate-500 text-xs mt-1">ನಾನು ಇತರರ ಕಷ್ಟಗಳನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳಲು ಪ್ರಯತ್ನಿಸುತ್ತೇನೆ.</p>
+                </div>
+            </label>
+        </div>
+
+        <div class="mt-6 text-center">
+            <span id="reflectionStatus" class="inline-block bg-amber-100 text-amber-800 text-xs md:text-sm px-4 py-2 rounded-full font-medium">
+                ನೀವು 0 ಮೌಲ್ಯಗಳನ್ನು ಆಯ್ಕೆ ಮಾಡಿದ್ದೀರಿ. ನಿಮ್ಮ ದಿನವನ್ನು ಸಕಾರಾತ್ಮಕವಾಗಿ ಪ್ರಾರಂಭಿಸಿ!
+            </span>
+        </div>
+    </section>
+
+    <section id="reflection" class="py-16 bg-warmSand/30 border-t border-amberGold/10">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="glass-card rounded-3xl p-6 md:p-10 shadow-xl">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 rounded-xl bg-amberGold text-white flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-pen-nib"></i>
+                    </div>
+                    <div>
+                        <h2 class="heading-font text-2xl md:text-3xl font-bold text-midnightNavy">
+                            ನಿಮ್ಮ ಬದುಕಿನ ಟಿಪ್ಪಣಿ (Your Personal Note)
+                        </h2>
+                        <p class="text-xs md:text-sm text-slate-500">ನಿಮಗೆ ಜೀವನ ಅಂದರೆ ಏನು ಅನಿಸುತ್ತದೆ? ನಿಮ್ಮ ಆಲೋಚನೆಯನ್ನು ಇಲ್ಲಿ ಬರೆದು ಇಟ್ಟುಕೊಳ್ಳಿ.</p>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <textarea id="userReflectionInput" rows="5" class="w-full p-4 rounded-xl border border-slate-200 focus:ring-2 focus:ring-amberGold focus:border-amberGold outline-none transition-all text-slate-700 bg-white" placeholder="ನಿಮ್ಮ ಅನಿಸಿಕೆಗಳನ್ನು ಇಲ್ಲಿ ಬರೆಯಿರಿ (ಉದಾ: ಜೀವನ ನನಗೆ ಕಲಿಸಿದ ದೊಡ್ಡ ಪಾಠವೆಂದರೆ...)"></textarea>
+                </div>
+
+                <div class="flex items-center justify-between">
+                    <button onclick="saveUserNote()" class="bg-amberGold hover:bg-amber-700 text-white font-semibold px-6 py-2.5 rounded-xl text-sm transition-all shadow-md flex items-center gap-2">
+                        <i class="fa-solid fa-bookmark"></i>
+                        <span>ಸೇವ್ ಮಾಡಿ (Save Note)</span>
+                    </button>
+                    <span id="saveAlert" class="text-xs text-emerald-600 font-semibold hidden flex items-center gap-1">
+                        <i class="fa-solid fa-circle-check"></i> ಟಿಪ್ಪಣಿ ಭದ್ರವಾಗಿದೆ!
+                    </span>
+                </div>
+
+                <!-- Saved note preview -->
+                <div id="savedNoteContainer" class="mt-6 pt-6 border-t border-slate-200 hidden">
+                    <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">ನಿಮ್ಮ ಉದಾತ್ತ ಚಿಂತನೆ:</h4>
+                    <p id="savedNoteText" class="text-slate-700 italic bg-white/60 p-4 rounded-xl border border-slate-200/80 text-sm md:text-base leading-relaxed"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-midnightNavy text-slate-400 py-12 border-t border-slate-800">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <div class="heading-font text-2xl font-bold text-white mb-2">
+                ಜೀವನ ದರ್ಶನ
+            </div>
+            <p class="text-xs md:text-sm text-slate-400 max-w-md mx-auto mb-6">
+                "ಬದುಕಿ, ಪ್ರೀತಿಸಿ, ಕಲಿಯಿರಿ ಮತ್ತು ಪ್ರತಿದಿನ ನಗು ಹಂಚಿರಿ."
+            </p>
+            <div class="text-xs text-slate-500 border-t border-slate-800/80 pt-6">
+                © 2026 ಜೀವನ ದರ್ಶನ | Kannada Life Wisdom Guide.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Quotes Data Array in Kannada
+        const kannadaQuotes = [
+            {
+                quote: "ನಿನ್ನ ಶಕ್ತಿಯನ್ನು ನೀನು ನಂಬು, ಜಗತ್ತು ನಿನ್ನ ಕಾಲಡಿಗೆ ಬರುತ್ತದೆ.",
+                author: "ಸ್ವಾಮಿ ವಿವೇಕಾನಂದ"
+            },
+            {
+                quote: "ನಾಳೆಯ ಬಗ್ಗೆ ಚಿಂತಿಸಿ ಇಂದಿನ ಸುಂದರ ಕ್ಷಣವನ್ನು ಹಾಳು ಮಾಡಿಕೊಳ್ಳಬೇಡಿ.",
+                author: "ತತ್ವಜ್ಞಾನಿ ಪ್ರವಚನ"
+            },
+            {
+                quote: "ಜೀವನದಲ್ಲಿ ಸೋಲು ಎನ್ನುವುದು ಅಂತ್ಯವಲ್ಲ, ಅದು ಹೊಸ ಆರಂಭದ ಮೊದಲ ಹೆಜ್ಜೆ.",
+                author: "ಆಬ್ರಹಾಂ ಲಿಂಕನ್"
+            },
+            {
+                quote: "ಸಂತೋಷವು ಎಲ್ಲೋ ಹೊರಗಿಲ್ಲ, ಅದು ನಿಮ್ಮ ಆಲೋಚನೆಗಳಲ್ಲಿ ಅಡಗಿದೆ.",
+                author: "ಗೌತಮ ಬುದ್ಧ"
+            },
+            {
+                quote: "ಬದುಕು ಅನ್ನೋದು ಸುಂದರ ಕಾವ್ಯ, ಅದನ್ನು ಓದುವ ಮತ್ತು ಆನಂದಿಸುವ ಮನಸ್ಸು ನಮಗಿರಬೇಕು.",
+                author: "ಕನ್ನಡ ನುಡಿಮುತ್ತು"
+            },
+            {
+                quote: "ಸಂಕಷ್ಟಗಳು ನಮ್ಮನ್ನು ನಾಶಮಾಡಲು ಬರುವುದಿಲ್ಲ, ನಮ್ಮಲ್ಲಿರುವ ಸುಪ್ತ ಶಕ್ತಿಯನ್ನು ಹೊರತರಲು ಬರುತ್ತವೆ.",
+                author: "ಡಾ. ಎ.ಪಿ.ಜೆ. ಅಬ್ದುಲ್ ಕಲಾಂ"
+            }
+        ];
+
+        // Random Quote Generator Function
+        function generateRandomQuote() {
+            const quoteText = document.getElementById('quoteText');
+            const quoteAuthor = document.getElementById('quoteAuthor');
+            const quoteCard = document.getElementById('quoteCard');
+
+            // Add smooth fade-out effect
+            quoteCard.style.opacity = '0';
+            quoteCard.style.transform = 'scale(0.98)';
+
+            setTimeout(() => {
+                const randomIndex = Math.floor(Math.random() * kannadaQuotes.length);
+                const selected = kannadaQuotes[randomIndex];
+
+                quoteText.textContent = `"${selected.quote}"`;
+                quoteAuthor.textContent = `— ${selected.author}`;
+
+                // Fade back in
+                quoteCard.style.opacity = '1';
+                quoteCard.style.transform = 'scale(1)';
+            }, 200);
+        }
+
+        // Reflection Checklist Counter
+        function updateReflectionCount() {
+            const checkboxes = document.querySelectorAll('.value-checkbox');
+            let checkedCount = 0;
+            checkboxes.forEach(cb => {
+                if(cb.checked) checkedCount++;
+            });
+
+            const statusText = document.getElementById('reflectionStatus');
+            if(checkedCount === 0) {
+                statusText.textContent = "ನೀವು 0 ಮೌಲ್ಯಗಳನ್ನು ಆಯ್ಕೆ ಮಾಡಿದ್ದೀರಿ. ನಿಮ್ಮ ದಿನವನ್ನು ಸಕಾರಾತ್ಮಕವಾಗಿ ಪ್ರಾರಂಭಿಸಿ!";
+            } else if(checkedCount <= 3) {
+                statusText.textContent = `ತುಂಬಾ ಒಳ್ಳೆಯದು! ನೀವು ${checkedCount} ಮುಖ್ಯ ಮೌಲ್ಯಗಳನ್ನು ಗುರುತಿಸಿದ್ದೀರಿ.`;
+            } else {
+                statusText.textContent = `ಅದ್ಭುತ! ನೀವು ${checkedCount} ಮೌಲ್ಯಗಳೊಂದಿಗೆ ಅರ್ಥಪೂರ್ಣ ಜೀವನ ನಡೆಸುತ್ತಿದ್ದೀರಿ! ✨`;
+            }
+        }
+
+        // Save Reflection Note to LocalStorage
+        function saveUserNote() {
+            const input = document.getElementById('userReflectionInput').value.trim();
+            const alertBox = document.getElementById('saveAlert');
+            const container = document.getElementById('savedNoteContainer');
+            const savedText = document.getElementById('savedNoteText');
+
+            if(!input) {
+                return;
+            }
+
+            try {
+                localStorage.setItem('kannada_life_reflection', input);
+                savedText.textContent = input;
+                container.classList.remove('hidden');
+
+                alertBox.classList.remove('hidden');
+                setTimeout(() => {
+                    alertBox.classList.add('hidden');
+                }, 3000);
+            } catch(e) {
+                console.log('LocalStorage unavailable');
+            }
+        }
+
+        // Load saved reflection on startup
+        window.addEventListener('DOMContentLoaded', () => {
+            try {
+                const saved = localStorage.getItem('kannada_life_reflection');
+                if(saved) {
+                    document.getElementById('userReflectionInput').value = saved;
+                    document.getElementById('savedNoteText').textContent = saved;
+                    document.getElementById('savedNoteContainer').classList.remove('hidden');
+                }
+            } catch(e) {
+                console.log('LocalStorage access error');
+            }
+        });
+    </script>
+</body>
+</html>

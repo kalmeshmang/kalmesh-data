@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ಟ್ಯಾಲಿ ಪ್ರೈಮ್‌ - ಲಿಸ್ಟ್ ಆಫ್ ಮಾಸ್ಟರ್ಸ್ ಸಂಪೂರ್ಣ ಮಾರ್ಗದರ್ಶಿ</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Kannada Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        kannada: ['Noto Sans Kannada', 'Segoe UI', 'sans-serif'],
+                    },
+                    colors: {
+                        tallyHeader: '#1E3A8A',
+                        tallyBlue: '#0284C7',
+                        tallyLightBg: '#E0F2FE',
+                        tallyMenuBg: '#EDF5FD',
+                        tallyBorder: '#93C5FD',
+                        tallyYellow: '#FACC15',
+                        tallyDarkText: '#0F172A'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0F172A;
+            font-family: 'Noto Sans Kannada', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #F8FAFC;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1E293B;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #0284C7;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #38BDF8;
+        }
+
+        .tally-menu-item {
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        .tally-menu-item:hover, .tally-menu-item.active {
+            background-color: #0284C7;
+            color: #FFFFFF;
+            font-weight: 600;
+            padding-left: 1.25rem;
+        }
+
+        .tab-btn.active {
+            border-bottom: 3px solid #FACC15;
+            color: #FACC15;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-kannada">
+
+    <!-- Top Navigation Bar -->
+    <header class="bg-gradient-to-r from-blue-900 via-sky-900 to-slate-900 border-b border-sky-600/40 p-4 shadow-xl">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-sky-400 to-blue-600 flex items-center justify-center font-black text-slate-950 text-2xl shadow-lg border border-sky-300">
+                    T
+                </div>
+                <div>
+                    <h1 class="text-xl sm:text-2xl font-bold text-sky-100">ಟ್ಯಾಲಿ ಪ್ರೈಮ್ - ಮಾಸ್ಟರ್ಸ್‌ ಮಾರ್ಗದರ್ಶಿ (List of Masters)</h1>
+                    <p class="text-xs text-sky-300">ಫೋಟೋದಲ್ಲಿರುವ ಪ್ರತಿಯೊಂದು ಆಯ್ಕೆಯ ಸರಳ ಹಾಗೂ ಸಂಪೂರ್ಣ ಕನ್ನಡ ವಿವರಣೆ</p>
+                </div>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="relative w-full md:w-80">
+                <input type="text" id="searchInput" oninput="filterMasters()" placeholder="ಹುಡುಕಿ (ಉದಾ: ಲೆಡ್ಜರ್, ಗೋದಾಮು, GST)..." 
+                    class="w-full bg-slate-950/80 border border-sky-500/50 rounded-xl px-4 py-2.5 text-sm text-sky-100 placeholder-sky-400/60 focus:outline-none focus:border-sky-400 shadow-inner">
+                <i class="fa-solid fa-magnifying-glass absolute right-3 top-3 text-sky-400 text-sm"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+        <!-- Left Menu Column (Simulating Tally UI Screen) -->
+        <div class="lg:col-span-4 bg-slate-900/90 rounded-2xl border border-sky-500/30 overflow-hidden shadow-2xl flex flex-col h-[75vh]">
+            
+            <!-- Tally Menu Header -->
+            <div class="bg-gradient-to-r from-sky-800 to-blue-900 p-3.5 border-b border-sky-500/30 flex items-center justify-between">
+                <span class="font-bold text-sky-100 text-sm tracking-wide flex items-center">
+                    <i class="fa-solid fa-list-ul mr-2 text-yellow-400"></i>List of Masters
+                </span>
+                <div class="flex gap-2 text-xs font-semibold">
+                    <button onclick="selectMaster('Show Less')" class="bg-sky-950 hover:bg-sky-700 text-sky-200 px-2 py-1 rounded border border-sky-400/40 transition">Show Less</button>
+                    <button onclick="selectMaster('Show Inactive')" class="bg-sky-950 hover:bg-sky-700 text-sky-200 px-2 py-1 rounded border border-sky-400/40 transition">Show Inactive</button>
+                </div>
+            </div>
+
+            <!-- Scrollable List of Masters Menu -->
+            <div id="mastersList" class="overflow-y-auto p-2 space-y-4 flex-1 text-sm">
+                
+                <!-- 1. Accounting Masters -->
+                <div>
+                    <h3 class="font-bold text-yellow-400 px-3 py-1 text-xs uppercase tracking-wider bg-slate-950/70 rounded mb-1 border-l-4 border-yellow-400">
+                        Accounting Masters (ಅಕೌಂಟಿಂಗ್ ಮಾಸ್ಟರ್ಸ್)
+                    </h3>
+                    <div class="space-y-0.5 pl-1">
+                        <div onclick="selectMaster('Group')" class="tally-menu-item py-1.5 px-3 rounded text-slate-200">Group (ಗುಂಪುಗಳು)</div>
+                        <div onclick="selectMaster('Ledger')" class="tally-menu-item py-1.5 px-3 rounded text-slate-200">Ledger (ಖಾತೆಗಳು)</div>
+                        <div onclick="selectMaster('Currency')" class="tally-menu-item py-1.5 px-3 rounded text-slate-200">Currency (ನಾಣ್ಯ / ಕರೆನ್ಸಿ)</div>
+                        <div onclick="selectMaster('Budget')" class="tally-menu-item py-1.5 px-3 rounded text-slate-200">Budget (ಬಜೆಟ್)</div>
+                        <div onclick="selectMaster('Scenario')" class="tally-menu-item py-1.5 px-3 rounded text-slate-200">Scenario (ಸನ್ನಿವೇಶ / ಫೋರ್‌ಕಾಸ್ಟಿಂಗ್)</div>
+                        <div onclick="selectMaster('Voucher Type')" class="tally-menu-item py-1.5 px-3 rounded text-slate-200">Voucher Type (ವೌಚರ್ ಪ್ರಕಾರ)</div>
+                        <div onclick="selectMaster('Credit Limits')" class="tally-menu-item py-1.5 px-3 rounded text-slate-200">Credit Limits (ಸಾಲದ ಮಿತಿ)</div>
+                    </div>
+                </div>
+
+                <!-- 2. Inventory Masters -->
+                <div>
+                    <h3 class="font-bold text-emerald-400 px-3 py-1 text-xs uppercase tracking-wider bg-slate-950/70 rounded mb-1 border-l-4 border-emerald-400">
+                        Inventory Masters (ಇನ್ವೆಂಟರಿ ಮಾಸ್ಟರ್ಸ್)
+                    </h3>
+                    <div class="space-y-0.5 pl-1">
+                        <div onclick="selectMaster('Stock Group')" class="tally-menu-item py-1.5 px-3 rounded text-slate-200">Stock Group (ಸ್ಟಾಕ್ ಗ್ರೂಪ್)</div>
+                        <div onclick="selectMaster('Stock Category')" class="tally-menu-item py-1.5 px-3 rounded text-slate-200">Stock Category (ಸ್ಟಾಕ್ ಕ್ಯಾಟಗರಿ)</div>
+                        <div onclick="selectMaster('Stock Item')" class="tally-menu-item py-1.5 px-3 rounded text-slate-200">Stock Item (ಸ್ಟಾಕ್ ಐಟಂ)</div>
+                        <div onclick="selectMaster('Unit')" class="tally-menu-item py-1.5 px-3 rounded text-slate-200">Unit (ಅಳತೆಯ ಯೂನಿಟ್‌ಗಳು)</div>
+                        <div onclick="selectMaster('Godown')" class="tally-menu-item py-1.5 px-3 rounded text-slate-200">Godown (ಗೋದಾಮು / ಉಗ್ರಾಣ)</div>
+                    </div>
+                </div>
+
+                <!-- 3. Statutory Masters -->
+                <div>
+                    <h3 class="font-bold text-amber-400 px-3 py-1 text-xs uppercase tracking-wider bg-slate-950/70 rounded mb-1 border-l-4 border-amber-400">
+                        Statutory Masters (ಶಾಸನಬದ್ಧ ಮಾಸ್ಟರ್ಸ್)
+                    </h3>
+                    <div class="space-y-0.5 pl-1">
+                        <div onclick="selectMaster('GST Registration')" class="tally-menu-item py-1.5 px-3 rounded text-slate-200">GST Registration (ಜಿಎಸ್‌ಟಿ ನೋಂದಣಿ)</div>
+                        <div onclick="selectMaster('GST Classification')" class="tally-menu-item py-1.5 px-3 rounded text-slate-200">GST Classification (ಜಿಎಸ್‌ಟಿ ವರ್ಗೀಕರಣ)</div>
+                    </div>
+                </div>
+
+                <!-- 4. Statutory Details -->
+                <div>
+                    <h3 class="font-bold text-purple-400 px-3 py-1 text-xs uppercase tracking-wider bg-slate-950/70 rounded mb-1 border-l-4 border-purple-400">
+                        Statutory Details (ಶಾಸನಬದ್ಧ ವಿವರಗಳು)
+                    </h3>
+                    <div class="space-y-0.5 pl-1">
+                        <div onclick="selectMaster('Company GST Details')" class="tally-menu-item py-1.5 px-3 rounded text-slate-200">Company GST Details (ಕಂಪನಿ ಜಿಎಸ್‌ಟಿ)</div>
+                        <div onclick="selectMaster('PAN/CIN Details')" class="tally-menu-item py-1.5 px-3 rounded text-slate-200">PAN/CIN Details (ಪ್ಯಾನ್/ಸಿಐಎನ್ ವಿವರ)</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Right Content Column (Explanations, Flowchart & Quiz) -->
+        <div class="lg:col-span-8 flex flex-col gap-6">
+
+            <!-- Navigation Tabs -->
+            <div class="flex border-b border-slate-700 bg-slate-900/60 rounded-xl p-1 gap-2">
+                <button onclick="switchTab('explanation')" id="tabExp" class="tab-btn active px-4 py-2.5 text-sm font-semibold rounded-lg transition flex items-center gap-2 text-slate-300">
+                    <i class="fa-solid fa-book-open text-sky-400"></i>ವಿವರಣೆ (Explanation)
+                </button>
+                <button onclick="switchTab('flowchart')" id="tabFlow" class="tab-btn px-4 py-2.5 text-sm font-semibold rounded-lg transition flex items-center gap-2 text-slate-300">
+                    <i class="fa-solid fa-diagram-project text-emerald-400"></i>ವಹಿವಾಟು ಹರಿವು (Flowchart)
+                </button>
+                <button onclick="switchTab('quiz')" id="tabQuiz" class="tab-btn px-4 py-2.5 text-sm font-semibold rounded-lg transition flex items-center gap-2 text-slate-300">
+                    <i class="fa-solid fa-brain text-yellow-400"></i>ಪರೀಕ್ಷೆ (Quiz)
+                </button>
+            </div>
+
+            <!-- Tab 1: Detailed Explanation Panel -->
+            <div id="explanationView" class="bg-slate-900/90 rounded-2xl border border-sky-500/30 p-6 shadow-2xl flex-1 flex flex-col justify-between">
+                <div>
+                    <!-- Header of Selected Master Item -->
+                    <div class="flex items-center justify-between border-b border-slate-700/80 pb-4 mb-4">
+                        <div class="flex items-center gap-3">
+                            <span id="itemIcon" class="w-12 h-12 rounded-xl bg-sky-500/20 text-sky-400 flex items-center justify-center text-2xl font-bold border border-sky-500/40 shadow-inner">
+                                <i class="fa-solid fa-book"></i>
+                            </span>
+                            <div>
+                                <h2 id="itemTitle" class="text-2xl font-bold text-sky-200">ವಿವರಣೆ ವೀಕ್ಷಿಸಲು ಎಡಭಾಗದ ಪಟ್ಟಿಯಲ್ಲಿ ಕ್ಲಿಕ್ ಮಾಡಿ</h2>
+                                <span id="itemCategory" class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-slate-800 text-sky-400 border border-sky-500/30">
+                                    Tally Prime Master
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dynamic Detailed Kannada Content -->
+                    <div id="itemContent" class="space-y-4 text-slate-200 leading-relaxed text-base">
+                        <p class="text-slate-400 italic">
+                            ಎಡಭಾಗದ (Left Side) 'List of Masters' ಮೆನುವಿನಿಂದ ಯಾವುದೇ ಒಂದನ್ನು ಆಯ್ಕೆ ಮಾಡಿ. ಅದಕ್ಕೆ ಸಂಬಂಧಿಸಿದ ಸುಲಭ ವಿವರಣೆ ಮತ್ತು ಉದಾಹರಣೆಗಳು ಇಲ್ಲಿ ಕಾಣಿಸುತ್ತವೆ.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Practical Business Tip Box -->
+                <div id="practicalTipBox" class="hidden mt-6 bg-amber-950/40 border border-amber-500/40 rounded-xl p-4 text-amber-200 text-sm">
+                    <strong class="text-amber-400 block mb-1 font-bold text-base flex items-center gap-2">
+                        <i class="fa-solid fa-lightbulb text-yellow-400"></i>ವ್ಯಾವಹಾರಿಕ ಸಲಹೆ (Practical Tip):
+                    </strong>
+                    <span id="practicalTipText">ಟಿಪ್ಸ್ ನೋಡಲು ಆಯ್ಕೆಯನ್ನು ಸೆಲೆಕ್ಟ್ ಮಾಡಿ.</span>
+                </div>
+            </div>
+
+            <!-- Tab 2: Flowchart View -->
+            <div id="flowchartView" class="hidden bg-slate-900/90 rounded-2xl border border-sky-500/30 p-6 shadow-2xl space-y-6">
+                <div>
+                    <h3 class="text-xl font-bold text-sky-200 mb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-network-wired text-emerald-400"></i>
+                        ಟ್ಯಾಲಿ ಪ್ರೈಮ್ ವಹಿವಾಟು ಹರಿವು (Tally Accounting Workflow)
+                    </h3>
+                    <p class="text-sm text-slate-400">
+                        ಮಾಸ್ಟರ್ಸ್ (Masters) ಬಳಸಿ ಹೇಗೆ ವಹಿವಾಟು ನಮೂದಿಸಲಾಗುತ್ತದೆ ಮತ್ತು ವರದಿಗಳು (Reports) ಸಿದ್ಧವಾಗುತ್ತವೆ ಎಂಬುದರ ಚಿತ್ರಣ:
+                    </p>
+                </div>
+
+                <!-- Flow Diagram Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 relative">
+                    <!-- Step 1 -->
+                    <div class="bg-slate-950 p-4 rounded-xl border border-yellow-500/40 flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-bold text-yellow-400 bg-yellow-950/80 px-2 py-0.5 rounded border border-yellow-500/30">ಹಂತ ೧</span>
+                            <h4 class="font-bold text-slate-100 mt-2 text-base">ಮಾಸ್ಟರ್‌ಗಳ ಸೃಷ್ಟಿ</h4>
+                            <p class="text-xs text-slate-400 mt-1">Group, Ledger, Stock Item, Unit ಮತ್ತು Godown ಗಳನ್ನು ಮುಂಚಿತವಾಗಿ ಕ್ರಿಯೇಟ್ ಮಾಡಲಾಗುತ್ತದೆ.</p>
+                        </div>
+                        <div class="mt-3 text-right"><i class="fa-solid fa-arrow-right text-yellow-400 hidden md:inline"></i></div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="bg-slate-950 p-4 rounded-xl border border-sky-500/40 flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-bold text-sky-400 bg-sky-950/80 px-2 py-0.5 rounded border border-sky-500/30">ಹಂತ ೨</span>
+                            <h4 class="font-bold text-slate-100 mt-2 text-base">ವೌಚರ್ ನಮೂದು (Voucher Entry)</h4>
+                            <p class="text-xs text-slate-400 mt-1">Sales, Purchase, Payment, Receipt ವೌಚರ್‌ಗಳಲ್ಲಿ ಲೆಡ್ಜರ್ ಹಾಗೂ ಸ್ಟಾಕ್ ಐಟಂಗಳನ್ನು ಸೆಲೆಕ್ಟ್ ಮಾಡಲಾಗುತ್ತದೆ.</p>
+                        </div>
+                        <div class="mt-3 text-right"><i class="fa-solid fa-arrow-right text-sky-400 hidden md:inline"></i></div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="bg-slate-950 p-4 rounded-xl border border-emerald-500/40 flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-bold text-emerald-400 bg-emerald-950/80 px-2 py-0.5 rounded border border-emerald-500/30">ಹಂತ ೩</span>
+                            <h4 class="font-bold text-slate-100 mt-2 text-base">ಸ್ವಯಂಚಾಲಿತ ಲೆಕ್ಕಾಚಾರ</h4>
+                            <p class="text-xs text-slate-400 mt-1">Tally ಅಟೋಮ್ಯಾಟಿಕ್ ಆಗಿ GST, Stock Balance, ಹಾಗೂ Debits/Credits ಲೆಕ್ಕ ಮಾಡುತ್ತದೆ.</p>
+                        </div>
+                        <div class="mt-3 text-right"><i class="fa-solid fa-arrow-right text-emerald-400 hidden md:inline"></i></div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="bg-slate-950 p-4 rounded-xl border border-purple-500/40 flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-bold text-purple-400 bg-purple-950/80 px-2 py-0.5 rounded border border-purple-500/30">ಹಂತ ೪</span>
+                            <h4 class="font-bold text-slate-100 mt-2 text-base">ಅಂತಿಮ ವರದಿಗಳು</h4>
+                            <p class="text-xs text-slate-400 mt-1">Balance Sheet, Profit & Loss A/c, Stock Summary & GST Returns ರೆಡಿಯಾಗುತ್ತದೆ.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-950/80 p-4 rounded-xl border border-slate-700 text-sm text-slate-300">
+                    <h5 class="font-bold text-sky-300 mb-1"><i class="fa-solid fa-circle-info mr-2"></i>ಪ್ರಮುಖ ನಿಯಮ:</h5>
+                    <p>ಯಾವುದೇ ಒಂದು ಬಿಲ್ ಅಥವಾ ಟ್ರಾನ್ಸಾಕ್ಷನ್ ಎಂಟ್ರಿ ಮಾಡುವ ಮೊದಲು ಅದಕ್ಕೆ ಬೇಕಾದ <strong>Ledger</strong> ಮತ್ತು <strong>Stock Item</strong> ಗಳನ್ನು Masters ನಲ್ಲೇ ಸೃಷ್ಟಿಸಿರಬೇಕು.</p>
+                </div>
+            </div>
+
+            <!-- Tab 3: Interactive Kannada Quiz -->
+            <div id="quizView" class="hidden bg-slate-900/90 rounded-2xl border border-sky-500/30 p-6 shadow-2xl space-y-6">
+                <div class="flex justify-between items-center border-b border-slate-700 pb-3">
+                    <div>
+                        <h3 class="text-xl font-bold text-sky-200">ಟ್ಯಾಲಿ ಮಾಸ್ಟರ್ಸ್ ಪರೀಕ್ಷೆ (Tally Masters Quiz)</h3>
+                        <p class="text-xs text-slate-400">ನಿಮ್ಮ ಕಲಿಕೆಯನ್ನು ಪರೀಕ್ಷಿಸಿಕೊಳ್ಳಲು ಪ್ರಶ್ನೆಗಳಿಗೆ ಉತ್ತರಿಸಿ</p>
+                    </div>
+                    <span id="quizScore" class="bg-sky-950 border border-sky-500/40 px-3 py-1 rounded-lg text-sky-300 text-sm font-bold">
+                        ಅಂಕಗಳು: 0
+                    </span>
+                </div>
+
+                <div id="quizContainer" class="space-y-4">
+                    <!-- Dynamic Question Box -->
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 border-t border-slate-800 py-4 text-center text-slate-400 text-xs mt-auto">
+        Tally Prime Learning Guide in Pure Kannada | ಟ್ಯಾಲಿ ಪ್ರೈಮ್ ಕಲಿಯಲು ಸುಲಭ ಮಾರ್ಗದರ್ಶಿ
+    </footer>
+
+    <!-- JavaScript Data and Controller Functions -->
+    <script>
+        // Complete Data Set in Kannada Script
+        const mastersDataKannada = {
+            "Show Less": {
+                category: "ನಿಯಂತ್ರಣ ಆಯ್ಕೆ (Control Option)",
+                icon: "fa-eye-slash",
+                title: "Show Less (ಕಡಿಮೆ ವಿವರ ಪ್ರದರ್ಶಿಸು)",
+                meaning: "ಲಿಸ್ಟ್ ಆಫ್ ಮಾಸ್ಟರ್ಸ್ ಮೆನುವಿನಲ್ಲಿ ಕೇವಲ ಮುಖ್ಯವಾದ (ಮುಖ್ಯವಾಗಿ ಬಳಸಲಾಗುವ) ಆಯ್ಕೆಗಳನ್ನು ಮಾತ್ರ ತೋರಿಸುತ್ತದೆ.",
+                simpleExp: "ಟ್ಯಾಲಿಯಲ್ಲಿ ಉಪ-ಆಯ್ಕೆಗಳು (Sub-options) ಹೆಚ್ಚಿದ್ದಾಗ ಮೆನು ತುಂಬಾ ದೊಡ್ಡದಾಗಿ ಕಾಣಿಸುತ್ತದೆ. ಈ 'Show Less' ಬಟನ್ ಕ್ಲಿಕ್ ಮಾಡಿದಾಗ, ಹೆಚ್ಚು ಬಳಕೆಯಾಗದ ಆಯ್ಕೆಗಳು ಮರೆಯಾಗಿ ಮೆನು ಸರಳವಾಗಿ ಮತ್ತು ಸ್ವಚ್ಛವಾಗಿ ಕಾಣಿಸುತ್ತದೆ.",
+                example: "ಪ್ರತಿದಿನ ಬಳಸದ ಅಪರೂಪದ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಹೈಡ್ (Hide) ಮಾಡಲು ಇದು ನೆರವಾಗುತ್ತದೆ.",
+                tip: "ಕೀಬೋರ್ಡ್ ಶಾರ್ಟ್‌ಕಟ್ ಅಥವಾ ಮೌಸ್ ಬಳಸಿ ಮೆನುವನ್ನು ಸಣ್ಣದಾಗಿ ಇಟ್ಟುಕೊಳ್ಳಲು ಇದನ್ನು ಬಳಸಿ."
+            },
+            "Show Inactive": {
+                category: "ನಿಯಂತ್ರಣ ಆಯ್ಕೆ (Control Option)",
+                icon: "fa-toggle-off",
+                title: "Show Inactive (ನಿಷ್ಕ್ರಿಯಗೊಂಡಿರುವುದನ್ನು ತೋರಿಸು)",
+                meaning: "ಬಳಕೆಯಲ್ಲಿಲ್ಲದ ಅಥವಾ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲಾದ (Deactivated/Unused) ಮಾಸ್ಟರ್‌ಗಳನ್ನು ವೀಕ್ಷಿಸಲು ಮತ್ತು ಸಕ್ರಿಯಗೊಳಿಸಲು ಇದನ್ನು ಬಳಸಲಾಗುತ್ತದೆ.",
+                simpleExp: "ನಾವು ಕೆಲವು ಹಳೆಯ ಬ್ಯಾಂಕ್ ಲೆಡ್ಜರ್ ಅಥವಾ ಮಾರಾಟವಾಗದ ಸ್ಟಾಕ್ ಐಟಂಗಳನ್ನು ಡಿಲೀಟ್ ಮಾಡದೆ ನಿಷ್ಕ್ರಿಯ (Inactive) ಮಾಡಿಟ್ಟಿರುತ್ತೇವೆ. ಅವುಗಳನ್ನು ಮತ್ತೆ ನೋಡಲು ಅಥವಾ ರಿಸ್ಟೋರ್ ಮಾಡಲು ಈ 'Show Inactive' ಆಯ್ಕೆ ಬೇಕಾಗುತ್ತದೆ.",
+                example: "ಹಳೆಯ ಮುಚ್ಚಿದ ಬ್ಯಾಂಕ್ ಖಾತೆ ಅಥವಾ ಹಳೆಯ ಜಿಎಸ್‌ಟಿ ವರ್ಗೀಕರಣವನ್ನು ಹುಡುಕಿ ಆಕ್ಟಿವ್ ಮಾಡಲು ಇದು ಅನುಕೂಲಕರ.",
+                tip: "ಇನಾಕ್ಟಿವ್ ಆಗಿರುವ ಮಾಸ್ಟರ್‌ಗಳು ಬೂದು (Grey) ಬಣ್ಣದಲ್ಲಿ ಕಾಣಿಸುತ್ತವೆ. ಎಂಟರ್ ಹೊಡೆದು ಸಕ್ರಿಯಗೊಳಿಸಬಹುದು."
+            },
+
+            // 1. ACCOUNTING MASTERS
+            "Group": {
+                category: "Accounting Masters (ಅಕೌಂಟಿಂಗ್ ಮಾಸ್ಟರ್ಸ್)",
+                icon: "fa-folder-tree",
+                title: "Group - ಗುಂಪುಗಳು",
+                meaning: "ಸಮಾನ ಸ್ವಭಾವವುಳ್ಳ ಖಾತೆಗಳನ್ನು (Ledgers) ಒಂದೇ ವರ್ಗದಡಿಯಲ್ಲಿ ತರಲು ಬಳಸುವ ಮುಖ್ಯ ವಿಭಾಗ.",
+                simpleExp: "ಟ್ಯಾಲಿಯಲ್ಲಿ ಪೂರ್ವನಿಯೋಜಿತವಾಗಿ (Default) 28 ಗ್ರೂಪ್‌ಗಳಿರುತ್ತವೆ (15 Primary + 13 Sub-groups). ಉದಾಹರಣೆಗೆ, ನಿಮ್ಮ ಬಳಿ ಸಾಲ ಪಡೆದ ಅಥವಾ ವಸ್ತು ಖರೀದಿಸಿದ ಎಲ್ಲಾ ಗ್ರಾಹಕರನ್ನು 'Sundry Debtors' ಎಂಬ ಒಂದೇ ಗ್ರೂಪ್‌ಗೆ ಸೇರಿಸಲಾಗುತ್ತದೆ. ಇದರಿಂದ ಬ್ಯಾಲೆನ್ಸ್ ಶೀಟ್ ಸರಿಯಾಗಿ ತಯಾರಾಗುತ್ತದೆ.",
+                example: "ರಮೇಶ್, ಸುರೇಶ್, ಕೃಷ್ಣ ಎಂಬ ಮೂವರು ಗ್ರಾಹಕರಿದ್ದರೆ, ಇವರೆಲ್ಲರೂ 'Sundry Debtors' ಎಂಬ ಗ್ರೂಪ್ ಕೆಳಗೆ ಬರುತ್ತಾರೆ.",
+                tip: "ಹೊಸ ಲೆಡ್ಜರ್ ಸೃಷ್ಟಿಸುವಾಗ ಸರಿಯಾದ ಗ್ರೂಪ್ ಆಯ್ಕೆ ಮಾಡುವುದು ಟ್ಯಾಲಿ ಲೆಕ್ಕಾಚಾರಕ್ಕೆ ಅತ್ಯಂತ ಮುಖ್ಯ."
+            },
+            "Ledger": {
+                category: "Accounting Masters (ಅಕೌಂಟಿಂಗ್ ಮಾಸ್ಟರ್ಸ್)",
+                icon: "fa-file-invoice-dollar",
+                title: "Ledger - ಖಾತೆಗಳು",
+                meaning: "ವ್ಯಾಪಾರದ ಪ್ರತಿಯೊಂದು ವಹಿವಾಟನ್ನು (Transactions) ದಾಖಲಿಸಲು ಸೃಷ್ಟಿಸುವ ನಿರ್ದಿಷ್ಟ ಖಾತೆ.",
+                simpleExp: "ಲೆಡ್ಜರ್ ಇಲ್ಲದೆ ಟ್ಯಾಲಿಯಲ್ಲಿ ಯಾವುದೇ ಸೇಲ್ಸ್, ಪರ್ಚೇಸ್ ಅಥವಾ ಪೇಮೆಂಟ್ ಎಂಟ್ರಿ ಮಾಡಲು ಸಾಧ್ಯವಿಲ್ಲ. ಟ್ಯಾಲಿಯಲ್ಲಿ ಬೈ-ಡಿಫಾಲ್ಟ್ ಆಗಿ 2 ಲೆಡ್ಜರ್‌ಗಳಿರುತ್ತವೆ: ೧. Cash (ಹಣ) ಮತ್ತು ೨. Profit & Loss A/c. ಬಾಕಿ ಉಳಿದ ಎಲ್ಲಾ ಲೆಡ್ಜರ್‌ಗಳನ್ನು ನಾವೇ ಕ್ರಿಯೇಟ್ ಮಾಡಬೇಕು.",
+                example: "ಬಾಡಿಗೆ ಖಾತೆ (Rent A/c), ಎಸ್‌ಬಿಐ ಬ್ಯಾಂಕ್ ಖಾತೆ (SBI Bank A/c), ಕೆವಿಇಬಿ ವಿದ್ಯುತ್ ಬಿಲ್ ಖಾತೆ.",
+                tip: "ಲೆಡ್ಜರ್ ಕ್ರಿಯೇಟ್ ಮಾಡುವಾಗ ಸರಿಯಾದ ಬ್ಯಾಂಕ್ ಖಾತೆ ಸಂಖ್ಯೆ ಹಾಗೂ GSTIN ಎಂಟ್ರಿ ಮಾಡುವುದನ್ನು ಮರೆಯದಿರಿ."
+            },
+            "Currency": {
+                category: "Accounting Masters (ಅಕೌಂಟಿಂಗ್ ಮಾಸ್ಟರ್ಸ್)",
+                icon: "fa-coins",
+                title: "Currency - ನಾಣ್ಯ / ಕರೆನ್ಸಿ",
+                meaning: "ವಿದೇಶಿ ವ್ಯಾಪಾರ (Import/Export) ಮಾಡಲು ಮತ್ತು ಬಹು-ಕರೆನ್ಸಿ ವಹಿವಾಟು ನಿರ್ವಹಿಸಲು ಇದನ್ನು ಬಳಸಲಾಗುತ್ತದೆ.",
+                simpleExp: "ಭಾರತದಲ್ಲಿ ಟ್ಯಾಲಿಯ ಮೂಲ ಕರೆನ್ಸಿ 'INR (₹)' ಆಗಿರುತ್ತದೆ. ಆದರೆ ನಿಮ್ಮ ಕಂಪನಿಯು ಅಮೆರಿಕ ಅಥವಾ ದುಬೈನೊಂದಿಗೆ ವ್ಯಾಪಾರ ಮಾಡುತ್ತಿದ್ದರೆ ಡಾಲರ್ ($) ಅಥವಾ ಯುರೋ (€) ಕರೆನ್ಸಿಗಳನ್ನು ಇಲ್ಲಿ ಸೇರಿಸಬಹುದು.",
+                example: "USD ($) ಕರೆನ್ಸಿ ಸೃಷ್ಟಿಸಿ, ವಿದೇಶಿ ಕರೆನ್ಸಿ ದರ ಬದಲಾವಣೆಯಿಂದ ಆಗುವ ಲಾಭ-ನಷ್ಟವನ್ನು (Forex Gain/Loss) ಲೆಕ್ಕಹಾಕಬಹುದು.",
+                tip: "ವಿದೇಶಿ ವ್ಯಾಪಾರದ ದಿನದ ವಿನಿಮಯ ದರವನ್ನು (Exchange Rate) ಸರಿಯಾಗಿ ನಮೂದಿಸಿ."
+            },
+            "Budget": {
+                category: "Accounting Masters (ಅಕೌಂಟಿಂಗ್ ಮಾಸ್ಟರ್ಸ್)",
+                icon: "fa-calculator",
+                title: "Budget - ಬಜೆಟ್ (ಆದಾಯ-ವೆಚ್ಚದ ಅಂದಾಜು)",
+                meaning: "ವ್ಯಾಪಾರದ ವೆಚ್ಚಗಳನ್ನು ನಿಯಂತ್ರಿಸಲು ಮತ್ತು ಆರ್ಥಿಕ ಗುರಿಗಳನ್ನು ನಿಗದಿಪಡಿಸಲು ಬಳಸುವ ಆಯವ್ಯಯ ಅಂದಾಜು.",
+                simpleExp: "ಕಂಪನಿಯು ಜಾಹೀರಾತು, ಪ್ರಯಾಣ ಅಥವಾ ಆಫೀಸ್ ಖರ್ಚುಗಳಿಗೆ ಒಂದು ನಿರ್ದಿಷ್ಟ ಹಣದ ಮಿತಿಯನ್ನು (Limit) ನಿಗದಿಪಡಿಸಲು ಬಜೆಟ್ ಬಳಸುತ್ತದೆ. ನಿಜವಾದ ಖರ್ಚು ಈ ಮಿತಿಯನ್ನು ಮೀರಿದರೆ ಟ್ಯಾಲಿ ವರದಿಯಲ್ಲಿ ಎಚ್ಚರಿಕೆ ತೋರಿಸುತ್ತದೆ.",
+                example: "ಮಾರ್ಕೆಟಿಂಗ್ ಖರ್ಚಿಗೆ ₹1,00,000 ಬಜೆಟ್ ನಿಗದಿಪಡಿಸಿ, ನೈಜ ಖರ್ಚು ಎಷ್ಟು ಆಗಿದೆ ಎಂದು ಪರಿಶೀಲಿಸುವುದು.",
+                tip: "ಕಂಪನಿಯ ಅನಗತ್ಯ ಖರ್ಚುಗಳನ್ನು ಕಡಿತಗೊಳಿಸಲು ಬಜೆಟ್ ಮಾಸ್ಟರ್ ತುಂಬಾ ಉಪಯುಕ್ತ."
+            },
+            "Scenario": {
+                category: "Accounting Masters (ಅಕೌಂಟಿಂಗ್ ಮಾಸ್ಟರ್ಸ್)",
+                icon: "fa-chart-line",
+                title: "Scenario - ಸನ್ನಿವೇಶ / ಫೋರ್‌ಕಾಸ್ಟಿಂಗ್",
+                meaning: "ನಿಜವಾದ ಲೆಕ್ಕಪತ್ರಕ್ಕೆ ಹಾನಿಯಾಗದಂತೆ ತಾತ್ಕಾಲಿಕ (Provisional) ವರದಿಗಳನ್ನು ಸಿದ್ಧಪಡಿಸಿ ವಿಶ್ಲೇಷಿಸುವುದು.",
+                simpleExp: "ಒಂದು ವೇಳೆ ಭವಿಷ್ಯದಲ್ಲಿ ನಮಗೆ ಇಷ್ಟೊಂದು ದೊಡ್ಡ ಪ್ರಾಜೆಕ್ಟ್ ಸಿಕ್ಕರೆ ಅಥವಾ ಇಂತಿಷ್ಟು ಖರ್ಚು ಬಂದರೆ ನಮ್ಮ ಕಂಪನಿಯ ಲಾಭ ಎಷ್ಟಾಗಬಹುದು? ಎಂದು ಅಂದಾಜು ವರದಿ (Management Analysis) ತಯಾರಿಸಲು ಸನ್ನಿವೇಶಗಳನ್ನು ಬಳಸಲಾಗುತ್ತದೆ.",
+                example: "ಇನ್ನೂ ಪಾವತಿಯಾಗದ ತಾತ್ಕಾಲಿಕ ಬಿಲ್‌ಗಳನ್ನು ಸೇರಿಸಿ ಆಡಳಿತ ಮಂಡಳಿಯ ನಿರ್ಧಾರಕ್ಕಾಗಿ ವರದಿ ಸಿದ್ಧಪಡಿಸುವುದು.",
+                tip: "ಇದು ಅಸಲಿ Balance Sheet ಮೇಲೆ ಯಾವುದೇ ಪರಿಣಾಮ ಬೀರುವುದಿಲ್ಲ."
+            },
+            "Voucher Type": {
+                category: "Accounting Masters (ಅಕೌಂಟಿಂಗ್ ಮಾಸ್ಟರ್ಸ್)",
+                icon: "fa-receipt",
+                title: "Voucher Type - ವೌಚರ್ ಪ್ರಕಾರ",
+                meaning: "ವಹಿವಾಟುಗಳನ್ನು ನಮೂದಿಸುವ ರಸೀದಿ ಅಥವಾ ಬಿಲ್ಲುಗಳ ಪ್ರಕಾರಗಳನ್ನು ಸೃಷ್ಟಿಸುವುದು ಮತ್ತು ಕಸ್ಟಮೈಸ್ ಮಾಡುವುದು.",
+                simpleExp: "ಟ್ಯಾಲಿಯಲ್ಲಿ Sales, Purchase, Payment, Receipt ನಂತಹ 24 ಡಿಫಾಲ್ಟ್ ವೌಚರ್‌ಗಳಿರುತ್ತವೆ. ನಮಗೆ ಬೇಕಾದಂತೆ ಹೊಸ ಮಾದರಿಯ ವೌಚರ್‌ಗಳನ್ನು (ಉದಾ: POS Sales, GST Tax Invoice, Local Sales) ಕ್ರಿಯೇಟ್ ಮಾಡಿಕೊಳ್ಳಬಹುದು.",
+                example: "ರಿಟೇಲ್ ಸೇಲ್ಸ್‌ಗೆ 'Retail Invoice' ಮತ್ತು ಹೋಲ್‌ಸೇಲ್ ಆಫೀಸ್‌ಗೆ 'Wholesale Invoice' ಎಂದು ಪ್ರತ್ಯೇಕಿಸುವುದು.",
+                tip: "ಆಟೋಮ್ಯಾಟಿಕ್ ಬಿಲ್ ನಂಬರ್ (Voucher Numbering) ಸೆಟ್ ಮಾಡಲು ಇದು ಬೇಕು."
+            },
+            "Credit Limits": {
+                category: "Accounting Masters (ಅಕೌಂಟಿಂಗ್ ಮಾಸ್ಟರ್ಸ್)",
+                icon: "fa-hand-holding-dollar",
+                title: "Credit Limits - ಸಾಲದ ಮಿತಿ",
+                meaning: "ಗ್ರಾಹಕರಿಗೆ ನೀಡುವ ಗರಿಷ್ಠ ಸಾಲದ ಹಣ ಮತ್ತು ಪಾವತಿ ಕಾಲಾವಧಿಯನ್ನು ನಿಗದಿಪಡಿಸುವುದು.",
+                simpleExp: "ಒಬ್ಬ ಗ್ರಾಹಕನಿಗೆ ₹50,000 ಸಾಲದ ಮಿತಿ ಮತ್ತು 30 ದಿನಗಳ ಕಾಲಾವಧಿ ಸೆಟ್ ಮಾಡಿದರೆ, ಆ ಮಿತಿ ಮೀರಿದ ತಕ್ಷಣ ಟ್ಯಾಲಿ ಅವರಿಗೆ ಹೊಸ ಬಿಲ್ ಮಾಡುವುದನ್ನು ತಡೆಯುತ್ತದೆ. ಇದರಿಂದ ಸಾಲದ ಹಣ ಮುಳುಗಿ ಹೋಗುವುದು ತಪ್ಪುತ್ತದೆ.",
+                example: "ಅನಿಲ್ ಎಂಟರ್‌ಪ್ರೈಸಸ್‌ಗೆ ₹1 ಲಕ್ಷ ಲಿಮಿಟ್ ಕೊಟ್ಟರೆ, ಸಾಲ ₹1,00,001 ಆದಾಗ ಟ್ಯಾಲಿ ಬಿಲ್ ಬ್ಲಾಕ್ ಮಾಡುತ್ತದೆ.",
+                tip: "ವ್ಯಾಪಾರದಲ್ಲಿ ಬಾಕಿ ಹಣ (Outstanding Dues) ಸರಿಯಾದ ಸಮಯಕ್ಕೆ ವಸೂಲಿಯಾಗಲು ಇದನ್ನು ತಪ್ಪದೇ ಬಳಸಿ."
+            },
+
+            // 2. INVENTORY MASTERS
+            "Stock Group": {
+                category: "Inventory Masters (ಇನ್ವೆಂಟರಿ ಮಾಸ್ಟರ್ಸ್)",
+                icon: "fa-boxes-stacked",
+                title: "Stock Group - ಸ್ಟಾಕ್ ಗ್ರೂಪ್ (ಸರಕಿನ ವರ್ಗ)",
+                meaning: "ಮಾರಾಟ ಮಾಡುವ ಸರಕುಗಳನ್ನು ಅಥವಾ ಉತ್ಪನ್ನಗಳನ್ನು ಪ್ರಮುಖ ವರ್ಗಗಳಾಗಿ ವಿಂಗಡಿಸುವುದು.",
+                simpleExp: "ನಿಮ್ಮ ಅಂಗಡಿ ಅಥವಾ ಗೋದಾಮಿನಲ್ಲಿರುವ ನೂರಾರು ವಸ್ತುಗಳನ್ನು ಸುಲಭವಾಗಿ ಗುರುತಿಸಲು ಗ್ರೂಪ್ ಮಾಡಲಾಗುತ್ತದೆ. ಉದಾಹರಣೆಗೆ, ಎಲೆಕ್ಟ್ರಾನಿಕ್ಸ್, ದಿನಸಿ, ಸಿದ್ಧ ಉಡುಪುಗಳು ಇತ್ಯಾದಿ.",
+                example: "ಟಿವಿ, ಫ್ರಿಡ್ಜ್ ಮತ್ತು ವಾಷಿಂಗ್ ಮೆಷಿನ್‌ಗಳನ್ನು 'Electronics' ಎಂಬ ಸ್ಟಾಕ್ ಗ್ರೂಪ್‌ಗೆ ಸೇರಿಸುವುದು.",
+                tip: "ಗ್ರೂಪ್ ಮಟ್ಟದಲ್ಲೇ ಜಿಎಸ್‌ಟಿ ದರ (GST Rate) ಸೆಟ್ ಮಾಡಿದರೆ ಕೆಳಗಿನ ಎಲ್ಲಾ ವಸ್ತುಗಳಿಗೂ ಅನ್ವಯವಾಗುತ್ತದೆ."
+            },
+            "Stock Category": {
+                category: "Inventory Masters (ಇನ್ವೆಂಟರಿ ಮಾಸ್ಟರ್ಸ್)",
+                icon: "fa-tags",
+                title: "Stock Category - ಸ್ಟಾಕ್ ಕ್ಯಾಟಗರಿ (ಉಪ-ವರ್ಗೀಕರಣ)",
+                meaning: "ಬ್ರ್ಯಾಂಡ್, ಅಳತೆ ಅಥವಾ ಮಾಡೆಲ್ ಆಧಾರದಲ್ಲಿ ಸರಕುಗಳನ್ನು ಮತ್ತಷ್ಟು ವಿಂಗಡಿಸುವುದು.",
+                simpleExp: "ಸ್ಟಾಕ್ ಗ್ರೂಪ್ 'ಮೋಬೈಲ್ಸ್' ಆಗಿದ್ದರೆ, ಬ್ರ್ಯಾಂಡ್ ಆಧಾರದಲ್ಲಿ 'Samsung', 'Apple', 'Redmi' ಎಂದು ಪ್ರತ್ಯೇಕಿಸಲು ಸ್ಟಾಕ್ ಕ್ಯಾಟಗರಿ ಬಳಸಲಾಗುತ್ತದೆ.",
+                example: "Samsung S23 ಮತ್ತು iPhone 15 ಅನ್ನು ಆಯಾ ಕಂಪನಿ ಕ್ಯಾಟಗರಿಗೆ ಸೇರಿಸುವುದು.",
+                tip: "ಯಾವ ಬ್ರ್ಯಾಂಡ್‌ನ ಸರಕುಗಳು ಎಷ್ಟು ಸ್ಟಾಕ್ ಇವೆ ಎಂದು ತಿಳಿಯಲು ಇದು ಸಹಕಾರಿ."
+            },
+            "Stock Item": {
+                category: "Inventory Masters (ಇನ್ವೆಂಟರಿ ಮಾಸ್ಟರ್ಸ್)",
+                icon: "fa-box-open",
+                title: "Stock Item - ಸ್ಟಾಕ್ ಐಟಂ (ಮಾರಾಟದ ವಸ್ತು)",
+                meaning: "ನೀವು ಕೊಳ್ಳುವ ಮತ್ತು ಮಾರಾಟ ಮಾಡುವ ಪ್ರತಿಯೊಂದು ನಿರ್ದಿಷ್ಟ ವಸ್ತು/ಉತ್ಪನ್ನ.",
+                simpleExp: "ಇನ್ವೆಂಟರಿಯ ಅತ್ಯಂತ ಪ್ರಮುಖ ಭಾಗ ಇದು. ಪ್ರತಿಯೊಂದು ವಸ್ತುವಿನ ಹೆಸರು, HSN ಕೋಡ್, ಜಿಎಸ್‌ಟಿ ದರ, ಆರಾಂಬಿಕ ಸ್ಟಾಕ್ (Opening Stock) ಮತ್ತು ಮಾರಾಟ ಬೆಲೆಯನ್ನು ಇಲ್ಲಿ ನಮೂದಿಸಲಾಗುತ್ತದೆ.",
+                example: "Dell i5 Laptop, Aashirvaad Atta 5kg, Samsung 43 inch LED TV.",
+                tip: "ಸರಿಯಾದ HSN/SAC ಕೋಡ್ ನಮೂದಿಸುವುದು GST ಇನ್‌ವಾಯ್ಸ್‌ಗೆ ಕಡ್ಡಾಯವಾಗಿದೆ."
+            },
+            "Unit": {
+                category: "Inventory Masters (ಇನ್ವೆಂಟರಿ ಮಾಸ್ಟರ್ಸ್)",
+                icon: "fa-scale-balanced",
+                title: "Unit - ಅಳತೆಯ ಯೂನಿಟ್‌ಗಳು",
+                meaning: "ಸರಕುಗಳನ್ನು ಅಳೆಯುವ ಮಾನದಂಡಗಳು (ಉದಾ: Nos, Kgs, Ltrs, Meters, Box).",
+                simpleExp: "ವಸ್ತುವನ್ನು ಹೇಗೆ ಲೆಕ್ಕ ಹಾಕಲಾಗುತ್ತದೆ ಎಂಬುದನ್ನು ಸೃಷ್ಟಿಸುವುದು. ಉದಾಹರಣೆಗೆ, ಹಾಲನ್ನು 'ಲೀಟರ್', ಅಕ್ಕಿಯನ್ನು 'ಕೆಜಿ', ಮೊಬೈಲ್ ಅನ್ನು 'ನಂಬರ್ಸ್ (Nos)' ನಲ್ಲಿ ಅಳೆಯಲಾಗುತ್ತದೆ.",
+                example: "ಸರಳ ಯೂನಿಟ್ (Simple Unit: Nos, Kg) ಹಾಗೂ ಸಂಯುಕ್ತ ಯೂನಿಟ್ (Compound Unit: 1 Box = 12 Nos).",
+                tip: "ಜಿಎಸ್‌ಟಿ ರಿಟರ್ನ್ಸ್‌ಗಾಗಿ UQC (Unit Quantity Code) ಮ್ಯಾಪ್ ಮಾಡುವುದು ಅತ್ಯಗತ್ಯ."
+            },
+            "Godown": {
+                category: "Inventory Masters (ಇನ್ವೆಂಟರಿ ಮಾಸ್ಟರ್ಸ್)",
+                icon: "fa-warehouse",
+                title: "Godown - ಗೋದಾಮು / ಉಗ್ರಾಣ",
+                meaning: "ಸರಕುಗಳನ್ನು ಶೇಖರಿಸಿಡುವ ಸ್ಥಳಗಳು ಅಥವಾ ವಿಭಿನ್ನ ಶಾಖೆಗಳನ್ನು (Locations) ಟ್ರ್ಯಾಕ್ ಮಾಡುವುದು.",
+                simpleExp: "ನಿಮ್ಮ ವ್ಯಾಪಾರಕ್ಕೆ ಒಂದಕ್ಕಿಂತ ಹೆಚ್ಚು ಶಾಖೆಗಳು ಅಥವಾ ಗೋದಾಮುಗಳಿದ್ದರೆ (ಉದಾ: ಮುಖ್ಯ ಅಂಗಡಿ, ಗೋದಾಮು ೧, ಶೋರೂಮ್ ೨), ಯಾವ ಜಾಗದಲ್ಲಿ ಎಷ್ಟು ಸರಕಿದೆ ಎಂದು ತಿಳಿಯಲು ಗೋದಾಮು ಮಾಸ್ಟರ್ ಬಳಸಲಾಗುತ್ತದೆ.",
+                example: "ಗೋದಾಮಿನಿಂದ ಮುಖ್ಯ ಶೋರೂಮ್‌ಗೆ ವಸ್ತುಗಳನ್ನು ವರ್ಗಾವಣೆ (Stock Transfer) ಮಾಡುವುದು.",
+                tip: "ಸ್ಟಾಕ್ ಕೊರತೆ ಅಥವಾ ವ್ಯತ್ಯಾಸಗಳನ್ನು ಕಂಡುಹಿಡಿಯಲು ಗೋದಾಮು ನಿರ್ವಹಣೆ ಸೂಕ್ತ."
+            },
+
+            // 3. STATUTORY MASTERS
+            "GST Registration": {
+                category: "Statutory Masters (ಶಾಸನಬದ್ಧ ಮಾಸ್ಟರ್ಸ್)",
+                icon: "fa-id-card",
+                title: "GST Registration - ಜಿಎಸ್‌ಟಿ ನೋಂದಣಿ",
+                meaning: "ಕಂಪನಿಯ ವಿವಿಧ ರಾಜ್ಯಗಳ ಜಿಎಸ್‌ಟಿ ನೋಂದಣಿ ಸಂಖ್ಯೆಗಳನ್ನು (GSTIN) ನಿರ್ವಹಿಸುವುದು.",
+                simpleExp: "ನಿಮ್ಮ ಕಂಪನಿಯು ಕರ್ನಾಟಕ, ಮಹಾರಾಷ್ಟ್ರ ಹಾಗೂ ತಮಿಳುನಾಡಿನಲ್ಲಿ ಶಾಖೆಗಳನ್ನು ಹೊಂದಿದ್ದರೆ, ಪ್ರತ್ಯೇಕ ಜಿಎಸ್‌ಟಿಐಎನ್ (GSTIN) ವಿವರಗಳನ್ನು ಇಲ್ಲಿ ಸೃಷ್ಟಿಸಿ ಟ್ರ್ಯಾಕ್ ಮಾಡಬಹುದು.",
+                example: "ಕರ್ನಾಟಕದ GSTIN: 29AAAAA0000A1Z5 ಹಾಗೂ ಮಹಾರಾಷ್ಟ್ರದ GSTIN: 27AAAAA0000A1Z5.",
+                tip: "ಮಲ್ಟಿ-ಸ್ಟೇಟ್ ಬಿಸಿನೆಸ್ ಮಾಡುವವರಿಗೆ ಇದು ಅತ್ಯಗತ್ಯ ಸೆಟ್ಟಿಂಗ್."
+            },
+            "GST Classification": {
+                category: "Statutory Masters (ಶಾಸನಬದ್ಧ ಮಾಸ್ಟರ್ಸ್)",
+                icon: "fa-percent",
+                title: "GST Classification - ಜಿಎಸ್‌ಟಿ ವರ್ಗೀಕರಣ",
+                meaning: "ಪೂರ್ವನಿರ್ಧರಿತ ಜಿಎಸ್‌ಟಿ ತೆರಿಗೆ ದರಗಳು (5%, 12%, 18%, 28%) ಮತ್ತು HSN ಕೋಡ್ ಟೆಂಪ್ಲೇಟ್‌ಗಳನ್ನು ಮಾಡುವುದು.",
+                simpleExp: "ಪ್ರತಿಯೊಂದು ವಸ್ತುವಿಗೂ ಪ್ರತ್ಯೇಕವಾಗಿ ತೆರಿಗೆ ದರ ನೀಡುವ ಬದಲು, 18% ಜಿಎಸ್‌ಟಿ ಟೆಂಪ್ಲೇಟ್ ಒಂದನ್ನು ಕ್ರಿಯೇಟ್ ಮಾಡಿ, ನೂರಾರು ಎಲೆಕ್ಟ್ರಾನಿಕ್ ವಸ್ತುಗಳಿಗೆ ಒಂದೇ ಕ್ಲಿಕ್‌ನಲ್ಲಿ ಅನ್ವಯಿಸಬಹುದು.",
+                example: "'Standard Electronics 18%' ಮಾದರಿಯನ್ನು ರಚಿಸಿ ಎಲ್ಲಾ ಎಲೆಕ್ಟ್ರಾನಿಕ್ಸ್ ವಸ್ತುಗಳಿಗೆ ಲಿಂಕ್ ಮಾಡುವುದು.",
+                tip: "ಸರ್ಕಾರ ತೆರಿಗೆ ದರ ಬದಲಾಯಿಸಿದಾಗ ಒಟ್ಟಿಗೆ ಅಪ್‌ಡೇಟ್ ಮಾಡಲು ಇದು ಉಪಯುಕ್ತ."
+            },
+
+            // 4. STATUTORY DETAILS
+            "Company GST Details": {
+                category: "Statutory Details (ಶಾಸನಬದ್ಧ ವಿವರಗಳು)",
+                icon: "fa-building-columns",
+                title: "Company GST Details - ಕಂಪನಿ ಜಿಎಸ್‌ಟಿ ವಿವರಗಳು",
+                meaning: "ನಿಮ್ಮ ಸ್ವಂತ ಕಂಪನಿಯ ಜಿಎಸ್‌ಟಿಐಎನ್, ರಾಜ್ಯ, ನೋಂದಣಿ ಮಾದರಿ ಮತ್ತು ಇ-ವೇ ಬಿಲ್ ಸೆಟ್ಟಿಂಗ್ಸ್ ನಮೂದಿಸುವುದು.",
+                simpleExp: "ಟ್ಯಾಲಿಯಲ್ಲಿ ಆಟೋಮ್ಯಾಟಿಕ್ ತೆರಿಗೆ ಲೆಕ್ಕಾಚಾರ (CGST, SGST, IGST), ಇ-ವೇ ಬಿಲ್ (E-Way Bill) ಮತ್ತು ಇ-ಇನ್‌ವಾಯ್ಸ್ (E-Invoicing) ಸಕ್ರಿಯಗೊಳಿಸಲು ಈ ಸೆಟ್ಟಿಂಗ್ಸ್ ಅತ್ಯಂತ ಪ್ರಮುಖವಾಗಿದೆ.",
+                example: "ರಾಜ್ಯ: ಕರ್ನಾಟಕ, Registration Type: Regular, GSTIN ನಮೂದಿಸುವುದು.",
+                tip: "ಜಿಎಸ್‌ಟಿ ರಿಟರ್ನ್ಸ್ (GSTR-1, GSTR-3B) ಸರಿಯಾಗಿ ಬರಲು ಈ ವಿವರಗಳು ಸರಿಯಾಗಿರಬೇಕು."
+            },
+            "PAN/CIN Details": {
+                category: "Statutory Details (ಶಾಸನಬದ್ಧ ವಿವರಗಳು)",
+                icon: "fa-address-card",
+                title: "PAN/CIN Details - ಪ್ಯಾನ್ ಮತ್ತು ಸಿಐಎನ್ ವಿವರಗಳು",
+                meaning: "ಕಂಪನಿಯ ಪರ್ಮನೆಂಟ್ ಅಕೌಂಟ್ ನಂಬರ್ (PAN) ಮತ್ತು ಕಾರ್ಪೊರೇಟ್ ಐಡೆಂಟಿಟಿ ನಂಬರ್ (CIN) ನಮೂದಿಸುವುದು.",
+                simpleExp: "ಟಿಡಿಎಸ್ (TDS) ಕಡಿತಗೊಳಿಸಲು ಕಂಪನಿಯ ಪ್ಯಾನ್ ಕಾರ್ಡ್ ಸಂಖ್ಯೆ ಮತ್ತು ಪ್ರೈವೇಟ್ ಲಿಮಿಟೆಡ್ ಕಂಪನಿಗಳ ಶಾಸನಬದ್ಧ ಮುದ್ರಣಕ್ಕಾಗಿ ಸಿಐಎನ್ (CIN) ಸಂಖ್ಯೆಯನ್ನು ನಮೂದಿಸಲಾಗುತ್ತದೆ.",
+                example: "PAN: ABCDE1234F, CIN: U12345KA2023PTC123456.",
+                tip: "ಬಿಲ್ಲುಗಳು ಮತ್ತು ಇನ್‌ವಾಯ್ಸ್‌ಗಳ ಕೆಳಭಾಗದಲ್ಲಿ ಕಂಪನಿ ಕಾನೂನುಬದ್ಧ ಸಂಖ್ಯೆ ಪ್ರಿಂಟ್ ಆಗಲು ಇದು ಬೇಕು."
+            }
+        };
+
+        // Quiz Questions Array in Kannada
+        const quizQuestions = [
+            {
+                q: "೧. ಎಲ್ಲಾ ಗ್ರಾಹಕರ (Customers) ಖಾತೆಗಳನ್ನು ಯಾವ Default Group ಕೆಳಗೆ ಸೇರಿಸಲಾಗುತ್ತದೆ?",
+                options: ["Sundry Creditors", "Sundry Debtors", "Direct Expenses", "Duties & Taxes"],
+                correct: 1
+            },
+            {
+                q: "೨. ವ್ಯಾಪಾರದ ನಿರ್ದಿಷ್ಟ ವಸ್ತುವನ್ನು (Product) ಟ್ಯಾಲಿಯಲ್ಲಿ ಏನೆಂದು ಕರೆಯುತ್ತಾರೆ?",
+                options: ["Stock Item", "Stock Group", "Ledger", "Voucher"],
+                correct: 0
+            },
+            {
+                q: "೩. ಸರಕುಗಳನ್ನು ಅಳೆಯುವ ಮಾನದಂಡಗಳನ್ನು (Nos, Kg, Ltr) ಎಲ್ಲಿ ಸೃಷ್ಟಿಸಲಾಗುತ್ತದೆ?",
+                options: ["Godown", "Unit", "Currency", "Budget"],
+                correct: 1
+            },
+            {
+                q: "೪. ಗ್ರಾಹಕರಿಗೆ ನೀಡುವ ಗರಿಷ್ಠ ಸಾಲದ ಹಣವನ್ನು ನಿಯಂತ್ರಿಸಲು ಯಾವುದನ್ನು ಬಳಸಲಾಗುತ್ತದೆ?",
+                options: ["Scenario", "Voucher Type", "Credit Limits", "Stock Category"],
+                correct: 2
+            }
+        ];
+
+        let currentQuizScore = 0;
+
+        // Controller Functions
+        function selectMaster(itemName) {
+            switchTab('explanation');
+            const data = mastersDataKannada[itemName];
+            if (!data) return;
+
+            // Highlight Active Menu Item
+            document.querySelectorAll('.tally-menu-item').forEach(el => {
+                if (el.textContent.includes(itemName)) {
+                    el.classList.add('active');
+                } else {
+                    el.classList.remove('active');
+                }
+            });
+
+            // Update Details
+            document.getElementById('itemTitle').textContent = data.title;
+            document.getElementById('itemCategory').textContent = data.category;
+            document.getElementById('itemIcon').innerHTML = `<i class="fa-solid ${data.icon}"></i>`;
+
+            const contentHTML = `
+                <div class="bg-slate-950/70 p-4 rounded-xl border border-sky-500/30">
+                    <h4 class="text-sky-300 font-bold mb-1 text-sm uppercase tracking-wider flex items-center gap-2">
+                        <i class="fa-solid fa-bookmark text-sky-400"></i>ಅರ್ಥ (Meaning):
+                    </h4>
+                    <p class="text-slate-100 font-medium">${data.meaning}</p>
+                </div>
+
+                <div class="bg-slate-950/40 p-4 rounded-xl border border-slate-800">
+                    <h4 class="text-sky-300 font-bold mb-1 text-sm uppercase tracking-wider flex items-center gap-2">
+                        <i class="fa-solid fa-align-left text-sky-400"></i>ಸರಳ ವಿವರಣೆ (Easy Explanation):
+                    </h4>
+                    <p class="text-slate-300">${data.simpleExp}</p>
+                </div>
+
+                <div class="bg-slate-950/60 p-4 rounded-xl border border-yellow-500/30">
+                    <h4 class="text-yellow-400 font-bold mb-1 text-sm uppercase tracking-wider flex items-center gap-2">
+                        <i class="fa-solid fa-circle-check text-yellow-400"></i>ವ್ಯಾವಹಾರಿಕ ಉದಾಹರಣೆ (Real-Life Example):
+                    </h4>
+                    <p class="text-slate-200 italic text-sm">${data.example}</p>
+                </div>
+            `;
+
+            document.getElementById('itemContent').innerHTML = contentHTML;
+
+            // Update Tip Box
+            document.getElementById('practicalTipText').textContent = data.tip;
+            document.getElementById('practicalTipBox').classList.remove('hidden');
+        }
+
+        function filterMasters() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const menuItems = document.querySelectorAll('.tally-menu-item');
+
+            menuItems.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                if (text.includes(query)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        function switchTab(tabName) {
+            document.getElementById('explanationView').classList.add('hidden');
+            document.getElementById('flowchartView').classList.add('hidden');
+            document.getElementById('quizView').classList.add('hidden');
+
+            document.getElementById('tabExp').classList.remove('active');
+            document.getElementById('tabFlow').classList.remove('active');
+            document.getElementById('tabQuiz').classList.remove('active');
+
+            if (tabName === 'explanation') {
+                document.getElementById('explanationView').classList.remove('hidden');
+                document.getElementById('tabExp').classList.add('active');
+            } else if (tabName === 'flowchart') {
+                document.getElementById('flowchartView').classList.remove('hidden');
+                document.getElementById('tabFlow').classList.add('active');
+            } else if (tabName === 'quiz') {
+                document.getElementById('quizView').classList.remove('hidden');
+                document.getElementById('tabQuiz').classList.add('active');
+                renderQuiz();
+            }
+        }
+
+        function renderQuiz() {
+            const container = document.getElementById('quizContainer');
+            container.innerHTML = '';
+
+            quizQuestions.forEach((item, index) => {
+                const qCard = document.createElement('div');
+                qCard.className = 'bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-3';
+                
+                let optionsHTML = '';
+                item.options.forEach((opt, optIdx) => {
+                    optionsHTML += `
+                        <button onclick="checkAnswer(${index}, ${optIdx}, this)" 
+                            class="w-full text-left bg-slate-900 hover:bg-sky-900/60 border border-slate-700/80 p-2.5 rounded-lg text-sm text-slate-200 transition">
+                            ${opt}
+                        </button>
+                    `;
+                });
+
+                qCard.innerHTML = `
+                    <p class="font-bold text-sky-200 text-sm sm:text-base">${item.q}</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">${optionsHTML}</div>
+                    <div id="quizFeedback-${index}" class="text-xs font-bold hidden"></div>
+                `;
+                container.appendChild(qCard);
+            });
+        }
+
+        function checkAnswer(qIdx, optIdx, btnEl) {
+            const q = quizQuestions[qIdx];
+            const feedbackEl = document.getElementById(`quizFeedback-${qIdx}`);
+            const parent = btnEl.parentElement;
+
+            // Disable all buttons for this question
+            const buttons = parent.querySelectorAll('button');
+            buttons.forEach(b => b.disabled = true);
+
+            if (optIdx === q.correct) {
+                btnEl.classList.add('bg-emerald-600', 'border-emerald-400', 'text-white');
+                feedbackEl.textContent = '✓ ಸರಿಯಾದ ಉತ್ತರ! (Correct)';
+                feedbackEl.className = 'text-xs font-bold text-emerald-400 mt-2';
+                currentQuizScore += 10;
+            } else {
+                btnEl.classList.add('bg-rose-600', 'border-rose-400', 'text-white');
+                buttons[q.correct].classList.add('bg-emerald-600', 'border-emerald-400', 'text-white');
+                feedbackEl.textContent = '✗ ತಪ್ಪಾದ ಉತ್ತರ (Incorrect)';
+                feedbackEl.className = 'text-xs font-bold text-rose-400 mt-2';
+            }
+            feedbackEl.classList.remove('hidden');
+            document.getElementById('quizScore').textContent = `ಅಂಕಗಳು: ${currentQuizScore}`;
+        }
+
+        // Initialize App on Window Load
+        window.onload = function () {
+            selectMaster('Ledger');
+        }
+    </script>
+</body>
+</html>

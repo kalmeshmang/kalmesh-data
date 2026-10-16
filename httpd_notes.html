@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTTPD & DevOps - ಸಂಪೂರ್ಣ ಆಳವಾದ ನೋಟ್ಸ್</title>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 5px rgba(3, 102, 214, 0.2); }
+            50% { box-shadow: 0 0 20px rgba(3, 102, 214, 0.6); }
+            100% { box-shadow: 0 0 5px rgba(3, 102, 214, 0.2); }
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #e2e8f0;
+            margin: 0;
+            padding: 20px;
+            animation: fadeIn 1s ease-in-out;
+        }
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background: #ffffff;
+            color: #1e293b;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            animation: fadeIn 1.2s ease-in-out;
+        }
+        h1 {
+            color: #0f172a;
+            text-align: center;
+            border-bottom: 4px solid #3b82f6;
+            padding-bottom: 15px;
+            font-size: 2.5em;
+        }
+        h2 {
+            color: #2563eb;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 8px;
+            margin-top: 40px;
+        }
+        h3 {
+            color: #0ea5e9;
+        }
+        p, li {
+            font-size: 17px;
+        }
+        code {
+            background-color: #f1f5f9;
+            color: #ef4444;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-weight: bold;
+        }
+        pre {
+            background-color: #090d16;
+            color: #38bdf8;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 6px solid #3b82f6;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .card {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            transition: all 0.4s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            animation: pulseGlow 2s infinite;
+            border-color: #3b82f6;
+        }
+        .highlight {
+            background-color: #fef08a;
+            color: #713f12;
+            padding: 3px 8px;
+            font-weight: bold;
+            border-radius: 4px;
+        }
+        .badge {
+            background-color: #3b82f6;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .footer {
+            text-align: center;
+            color: #64748b;
+            font-size: 15px;
+            margin-top: 50px;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🌐 HTTPD (Apache HTTP Server) & DevOps ಸಂಪೂರ್ಣ ನೋಟ್ಸ್</h1>
+    <p style="text-align: center; color: #475569;">DevOps ಜಗತ್ತಿನಲ್ಲಿ HTTPD ಯ ಮಹತ್ವ, ಕಾರ್ಯವೈಖರಿ ಮತ್ತು ಆಳವಾದ ತಾಂತ್ರಿಕ ವಿವರಣೆ.</p>
+
+    <h2>1. HTTPD ಎಂದರೇನು?</h2>
+    <div class="card">
+        <p><span class="badge">Definition</span> <strong>HTTPD</strong> ಎಂದರೆ <strong>HTTP Daemon</strong> (ಸಾಮಾನ್ಯವಾಗಿ ಇದನ್ನು <strong>Apache HTTP Server</strong> ಎಂದು ಕರೆಯುತ್ತಾರೆ). ಇದು ಇಂಟರ್ನೆಟ್‌ನಲ್ಲಿ ಕ್ಲೈಂಟ್ಸ್ (ಬ್ರೌಸರ್‌ಗಳು) ಕೇಳುವ ವೆಬ್ ಪೇಜ್‌ಗಳನ್ನು (HTML, CSS, Images ಇತ್ಯಾದಿ) HTTP ಪ್ರೊಟೊಕಾಲ್ ಮೂಲಕ ಸರ್ವ್ ಮಾಡುವ ಪ್ರಮುಖ ವೆಬ್ ಸರ್ವರ್ ಸಾಫ್ಟ್‌ವೇರ್ ಆಗಿದೆ.</p>
+        <p>ಇದು ಪ್ರಪಂಚದ ಅತ್ಯಂತ ಹಳೆಯ ಮತ್ತು ನಂಬಿಕಾರ್ಹ ಓಪನ್ ಸೋರ್ಸ್ (Open-source) ವೆಬ್ ಸರ್ವರ್‌ಗಳಲ್ಲಿ ಒಂದಾಗಿದೆ.</p>
+    </div>
+
+    <h2>2. DevOps ನಲ್ಲಿ HTTPD ಯಾವ ರೀತಿ ಕೆಲಸ ಮಾಡುತ್ತದೆ?</h2>
+    <div class="card">
+        <p>DevOps ಇಂಜಿನಿಯರ್‌ಗಳು ಸಿಸ್ಟಮ್ ಆಟೋಮೇಷನ್, ಸಿಐ/ಸಿಡಿ (CI/CD) ಪೈಪ್‌ಲೈನ್ ಮತ್ತು ಇನ್‌ಫ್ರಾಸ್ಟ್ರಕ್ಚರ್ ಮ್ಯಾನೇಜ್‌ಮೆಂಟ್‌ನಲ್ಲಿ HTTPD ಅನ್ನು ಕೆಳಗಿನ ವಿಧಗಳಲ್ಲಿ ಬಳಸುತ್ತಾರೆ:</p>
+        <ul>
+            <li><strong>Reverse Proxy & Load Balancing:</strong> ಬರುವ ಟ್ರಾಫಿಕ್ ಅನ್ನು ವಿಭಿನ್ನ ಬ್ಯಾಕ್‌ಎಂಡ್ ಅಪ್ಲಿಕೇಷನ್ ಸರ್ವರ್‌ಗಳಿಗೆ ಹಂಚಲು (Load Balancing) ಇದನ್ನು ಬಳಸಲಾಗುತ್ತದೆ.</li>
+            <li><strong>Containerization (Docker):</strong> Dockerfile ಬಳಸಿ ಕಂಟೈನರ್ ಒಳಗೆ HTTPD ಇಮೇಜ್ ರನ್ ಮಾಡಲಾಗುತ್ತದೆ. (ಉದಾಹರಣೆಗೆ: <code>httpd:alpine</code>).</li>
+            <li><strong>Configuration as Code:</strong> Ansible ಅಥವಾ Puppet ಬಳಸಿ ನೂರಾರು ಸರ್ವರ್‌ಗಳಲ್ಲಿ HTTPD ಕಾನ್ಫಿಗರೇಶನ್ ಅನ್ನು ಆಟೋಮ್ಯಾಟಿಕ್ ಆಗಿ ಸೆಟಪ್ ಮಾಡಲಾಗುತ್ತದೆ.</li>
+            <li><strong>SSL/TLS Termination:</strong> HTTPS ಸೆಕ್ಯೂರಿಟಿ ಸರ್ಟಿಫಿಕೇಟ್‌ಗಳನ್ನು ಇಲ್ಲಿ ಮ್ಯಾನೇಜ್ ಮಾಡಲಾಗುತ್ತದೆ.</li>
+        </ul>
+    </div>
+
+    <h2>3. HTTPD ಒಳಗೆ ಡೇಟಾ ಹೇಗೆ ಕೆಲಸ ಮಾಡುತ್ತದೆ (Architecture & Workflow)</h2>
+    <div class="card">
+        <p>ಬ್ರೌಸರ್‌ನಿಂದ ರಿಕ್ವೆಸ್ಟ್ ಬಂದಾಗ HTTPD ಒಳಗಡೆ ಹೇಗೆ ಪ್ರಕ್ರಿಯೆ நடೆಯುತ್ತದೆ?</p>
+        <ol>
+            <li><strong>Request Arrival:</strong> ಬಳಕೆದಾರರು URL (ಉದಾ: <code>http://example.com</code>) ಟೈಪ್ ಮಾಡಿದಾಗ, ಪೋರ್ಟ್ 80 (HTTP) ಅಥವಾ 443 (HTTPS) ಮೂಲಕ ರಿಕ್ವೆಸ್ಟ್ HTTPD ಸರ್ವರ್ ತಲುಪುತ್ತದೆ.</li>
+            <li><strong>Multi-Processing Modules (MPMs):</strong> Apache ಮಲ್ಟಿಪಲ್ ರಿಕ್ವೆಸ್ಟ್‌ಗಳನ್ನು ಹ್ಯಾಂಡಲ್ ಮಾಡಲು MPM ಗಳನ್ನು ಬಳಸುತ್ತದೆ:
+                <ul>
+                    <li><code>prefork.c</code>: ಪ್ರತಿಯೊಂದು ರಿಕ್ವೆಸ್ಟ್‌ಗೆ ಪ್ರತ್ಯೇಕ ಪ್ರೊಸೆಸ್ ಸೃಷ್ಟಿಸುತ್ತದೆ.</li>
+                    <li><code>worker.c</code> / <code>event.c</code>: ಥ್ರೆಡ್‌ಗಳನ್ನು ಬಳಸಿ ಏಕಕಾಲಕ್ಕೆ ಲಕ್ಷಾಂತರ ರಿಕ್ವೆಸ್ಟ್‌ಗಳನ್ನು ವೇಗವಾಗಿ ಹ್ಯಾಂಡಲ್ ಮಾಡುತ್ತದೆ.</li>
+                </ul>
+            </li>
+            <li><strong>Virtual Hosting:</strong> ಒಂದೇ ಫಿಸಿಕಲ್ ಸರ್ವರ್‌ನಲ್ಲಿ ಅನೇಕ ವೆಬ್‌ಸೈಟ್‌ಗಳನ್ನು (Multiple Websites) ನಿರ್ವಹಿಸಲು <em>Virtual Hosts</em> ಸಹಾಯ ಮಾಡುತ್ತದೆ.</li>
+            <li><strong>Response:</strong> ಸರ್ವರ್‌ನಲ್ಲಿರುವ ಸ್ಟಾಟಿಕ್ ಫೈಲ್ಸ್ ಅಥವಾ ಡೈನಾಮಿಕ್ ಕಂಟೆಂಟ್ ಅನ್ನು ಬ್ರೌಸರ್‌ಗೆ ವಾಪಸ್ ಕಳುಹಿಸುತ್ತದೆ.</li>
+        </ol>
+    </div>
+
+    <h2>4. HTTPD ಗಿಂತ ಮುಂಚೆ ಅಥವಾ ನಂತರ ಪ್ರಮುಖ ಕಮಾಂಡ್‌ಗಳು</h2>
+    <div class="card">
+        <p>Linux ಸಿಸ್ಟಮ್‌ಗಳಲ್ಲಿ HTTPD (Apache) ಮ್ಯಾನೇಜ್ ಮಾಡಲು ಬಳಸುವ ಪ್ರಮುಖ ಕಮಾಂಡ್‌ಗಳು:</p>
+        <pre>
+# Apache ಇನ್‌ಸ್ಟಾಲ್ ಮಾಡಲು (Ubuntu/Debian)
+sudo apt update && sudo apt install apache2
+
+# Apache ಸ್ಟಾರ್ಟ್ ಮಾಡಲು (CentOS / RHEL)
+sudo systemctl start httpd
+
+# ಕಾನ್ಫಿಗರೇಶನ್ ಫೈಲ್ ಸರಿಯಾಗಿದೆಯಾ ಎಂದು ಚೆಕ್ ಮಾಡಲು
+sudo apachectl configtest
+
+# ಸರ್ವರ್ ರನ್ನಿಂಗ್ ಸ್ಟೇಟಸ್ ನೋಡಲು
+sudo systemctl status httpd
+        </pre>
+    </div>
+
+    <h2>5. DevOps ಅಲ್ಲಿ HTTPD ಎಲ್ಲಿ ಮತ್ತು ಯಾಕೆ ಅತಿ ಹೆಚ್ಚು ಉಪಯೋಗ ಆಗುತ್ತದೆ?</h2>
+    <div class="card">
+        <ul>
+            <li><strong>Static Content Delivery:</strong> ರಿಯಾಕ್ಟ್ (React), ಆಂಗुलर (Angular) ಅಥವಾ ಜಸ್ಟ್ HTML/CSS ಫ್ರಂಟ್‌ಎಂಡ್ ಅಪ್ಲಿಕೇಷನ್‌ಗಳನ್ನು ಅತ್ಯಂತ ವೇಗವಾಗಿ ಹೋಸ್ಟ್ ಮಾಡಲು.</li>
+            <li><strong>Security & Access Control:</strong> <code>.htaccess</code> ಫೈಲ್ಸ್ ಮೂಲಕ ಯಾರೆಲ್ಲ ಸೈಟ್ ವಿಸಿಟ್ ಮಾಡಬಹುದು ಎಂದು ರಕ್ಷಣೆ (IP Restriction, Password Protection) ನೀಡಲು.</li>
+            <li><strong>Microservices Gateway:</strong> ಮೈಕ್ರೋಸರ್ವಿಸಸ್ ಆರ್ಕಿಟೆಕ್ಚರ್‌ನಲ್ಲಿ API ಗೇಟ್‌ವೇ ಅಥವಾ ರಿವರ್ಸ್ ಪ್ರಾಕ್ಸಿಯಾಗಿ ಟ್ರಾಫಿಕ್ ಕಂಟ್ರೋಲ್ ಮಾಡಲು.</li>
+            <li><strong>CI/CD Integration:</strong> ಗಿಟ್‌ಹಬ್ ಆಕ್ಷನ್ಸ್ (GitHub Actions) ಅಥವಾ ಜೆಂಕಿನ್ಸ್ (Jenkins) ಮೂಲಕ ಕೋಡ್ ಬಿಲ್ಡ್ ಆದ ತಕ್ಷಣ ನೇರವಾಗಿ Apache ಸರ್ವರ್‌ನ <code>/var/www/html</code> ಡೈರೆಕ್ಟರಿಗೆ ಡಿಪ್ಲಾಯ್ ಮಾಡಲು.</li>
+        </ul>
+    </div>
+
+    <div class="footer">
+        <p>Happy DevOps Learning! 🚀💻 | Designed for Deep Technical Understanding</p>
+    </div>
+</div>
+
+</body>
+</html>
